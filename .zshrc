@@ -150,6 +150,6 @@ export OP_SESSION_my="k1-mrd0FdcTJHwkIu-vqeD5twcC_AELzZ4QEzzO3XD4"
 alias op-signin="op signin my"
 
 source "$HOME/.cargo/env"
-export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+export PATH="/Users/yuri/scripts:/opt/homebrew/opt/openjdk/bin:$PATH"
 export EDITOR='nvim'
 alias config='/usr/bin/git --git-dir=/Users/yuri/.cfg/ --work-tree=/Users/yuri'
