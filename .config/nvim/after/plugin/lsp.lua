@@ -1,7 +1,6 @@
 local lsp = require('lsp-zero').preset({
- manage_nvim_cmp = {
+  manage_nvim_cmp = {
     set_sources = 'recommended',
-    set_format = true
   }
 })
 
@@ -14,36 +13,21 @@ lsp.ensure_installed({
   'solargraph',
 })
 
--- Fix Undefined global 'vim'
--- lsp.configure('lua-language-server', {
---   settings = {
---     Lua = {
---       diagnostics = {
---         globals = { 'vim' }
---       }
---     }
---   }
--- })
-
-
 local cmp_action = require('lsp-zero').cmp_action()
 local lspkind = require('lspkind')
 
 require("luasnip.loaders.from_vscode").lazy_load()
 require("luasnip.loaders.from_vscode").load({ paths = { "~/.config/snippets" } })
-lsp.set_preferences({
-  suggest_lsp_servers = true,
-  sign_icons = {
-    error = 'E',
-    warn = 'W',
-    hint = 'H',
-    info = 'I'
-  }
-})
-
-
 require("lspsaga").setup({})
 
+local nvim_lsp = require("lspconfig")
+
+-- nvim_lsp.solargraph.setup{
+--  --  cmd = { os.getenv( "HOME" ) .. "/.rbenv/shims/solargraph", 'stdio' },
+--    root_dir = nvim_lsp.util.root_pattern("Gemfile", ".git", "."),
+--    useBundler = true,
+--    filetypes = { "ruby", "thor", "rake", "Gemfile" }
+-- }
 
 lsp.on_attach(function(client, bufnr)
   local opts = { buffer = bufnr, remap = false }
@@ -61,18 +45,22 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set("i", "<c-h>", function() vim.lsp.buf.signature_help() end, opts)
 end)
 
-lsp.setup()
+lsp.setup({})
 
+lsp.set_sign_icons({
+  error = '✘',
+  warn = '▲',
+  hint = '⚑',
+  info = '»'
+})
+--
 vim.diagnostic.config({
   virtual_text = true
 })
 
 local cmp = require('cmp')
+
 cmp.setup({
-  sources = {
-    { name = 'nvim_lsp' },
-    { name = 'luasnip' },
-  },
   mapping = {
     ['<C-f>'] = cmp_action.luasnip_jump_forward(),
     ['<C-b>'] = cmp_action.luasnip_jump_backward(),
@@ -82,8 +70,7 @@ cmp.setup({
     ['<S-Tab>'] = cmp_action.luasnip_shift_supertab(),
   },
   preselect = 'item',
-formatting = {
+  formatting = {
     format = lspkind.cmp_format(),
   },
 })
-

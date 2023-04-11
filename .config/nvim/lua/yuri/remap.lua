@@ -1,4 +1,8 @@
 vim.g.mapleader = " "
+vim.g.nowrap = true
+vim.o.updatetime = 250
+vim.wo.signcolumn = "yes"
+
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -27,4 +31,7 @@ vim.keymap.set("n", "<leader>W", ":wq<CR>")
 
 vim.keymap.set("n", "gf", "<C-w>gF", {noremap = true})
 vim.keymap.set("v", "<leader>gi", "g<C-a>", {noremap = true})
+
+vim.keymap.set("n", "<Leader>m",':call mkdir(expand("%:p:h"), "p")<CR>', {noremap = true})
+
 

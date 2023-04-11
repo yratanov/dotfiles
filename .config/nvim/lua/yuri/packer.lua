@@ -27,6 +27,7 @@ return require('packer').startup(function(use)
   use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
   use 'nvim-treesitter/nvim-treesitter-context'
   use 'windwp/nvim-ts-autotag' -- Automatically close tags
+  use 'RRethy/nvim-treesitter-endwise' -- Automatically close blocks
 
   -- Local History
   use('mbbill/undotree')
@@ -56,15 +57,16 @@ return require('packer').startup(function(use)
     }
   }
   use 'glepnir/lspsaga.nvim'
+
   use 'antosha417/nvim-lsp-file-operations'
   use 'onsails/lspkind-nvim'
 
   -- Code snippets
   use({
-	"L3MON4D3/LuaSnip",
-	tag = "v<CurrentMajor>.*",
-	run = "make install_jsregexp"
-})
+    "L3MON4D3/LuaSnip",
+    tag = "v<CurrentMajor>.*",
+    run = "make install_jsregexp"
+  })
   use { 'saadparwaiz1/cmp_luasnip' }
   use 'rafamadriz/friendly-snippets'
 
@@ -77,9 +79,9 @@ return require('packer').startup(function(use)
   -- Code formatter
   use('jose-elias-alvarez/null-ls.nvim')
   use('MunifTanjim/prettier.nvim')
-  
+
   -- Tabs
-  use {'romgrk/barbar.nvim', requires = 'nvim-web-devicons'}
+  -- use { 'romgrk/barbar.nvim', requires = 'nvim-web-devicons' }
 
   use 'mg979/vim-visual-multi'
   use 'github/copilot.vim'
@@ -87,12 +89,23 @@ return require('packer').startup(function(use)
 
   -- Test runner
   use {
-  "nvim-neotest/neotest",
-  requires = {
-    "nvim-lua/plenary.nvim",
-    "nvim-treesitter/nvim-treesitter",
-    "antoinemadec/FixCursorHold.nvim",
-    'olimorris/neotest-rspec'
+    "nvim-neotest/neotest",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "antoinemadec/FixCursorHold.nvim",
+      'olimorris/neotest-rspec'
+    }
   }
-}
+
+  use {
+    'numToStr/Comment.nvim',
+    config = function()
+      require('Comment').setup()
+    end
+  }
+  use {
+    "LintaoAmons/scratch.nvim",
+    tag= "v0.6.2"
+  }
 end)

@@ -12,22 +12,21 @@ end
 vim.keymap.set('n', '<leader>o', function()
   builtin.find_files({ hidden = true })
 end)
-vim.keymap.set('n', '<leader>ps', function()
-  builtin.grep_string({ search = vim.fn.input("Grep > ") });
-end)
+vim.keymap.set('n', '<leader>fw', builtin.grep_string, {})
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>e', function()
+  builtin.oldfiles({ only_cwd = true })
+end, {})
 vim.keymap.set('n', '<leader>fb', builtin.git_branches, {})
+vim.keymap.set('n', '<leader>fr', builtin.lsp_references, {})
 vim.keymap.set('n', '<leader>fc', function()
-  builtin.find_files({search_file = dasherize(decamelize(vim.fn.expand("<cword>")))})
+  builtin.find_files({ search_file = dasherize(decamelize(vim.fn.expand("<cword>"))) })
 end)
 
 vim.keymap.set('n', '<leader>gf', function()
-  vim.cmd( ':e spec/factories/' .. decamelize(vim.fn.expand("<cword>")) .. 's.rb')
+  vim.cmd(':e spec/factories/' .. decamelize(vim.fn.expand("<cword>")) .. 's.rb')
 end)
-vim.keymap.set('n', '\\\\', function()
-  builtin.buffers()
-end)
-vim.keymap.set('n', ';t', function()
+vim.keymap.set('n', '<leader>fh', function()
   builtin.help_tags()
 end)
 vim.keymap.set('n', ';;', function()
@@ -37,7 +36,6 @@ require("telescope").load_extension "file_browser"
 local file_browser = require "telescope".extensions.file_browser
 file_browser.hidden = true
 vim.keymap.set('n', '<space>fd', function() file_browser.file_browser({ path = "%:p:h", select_buffer = true }) end)
-
 
 
 require('telescope-alternate').setup({
@@ -51,7 +49,7 @@ require('telescope-alternate').setup({
       }
     },
     {
-      'app/components/(.*).[jt]s',
+      'app/components/(.*).[jt]s$',
       {
         { 'app/components/[1].hbs',                   'Component HBS' },
         { 'tests/integration/components/[1]-test.js', 'Component test', true },
@@ -66,40 +64,58 @@ require('telescope-alternate').setup({
       }
     },
     {
-      'app/routes/(.*).[jt]s',
+      'app/routes/(.*).[jt]s$',
       {
         { 'app/controllers/[1].js', 'Controller JS', true },
         { 'app/controllers/[1].ts', 'Controller TS', true },
-        { 'app/templates/[1].hbs',  'Template',   true },
+        { 'app/templates/[1].hbs',  'Template',      true },
       }
     },
     {
-      'app/controllers/(.*).[jt]s',
+      'app/controllers/(.*).[jt]s$',
       {
-        { 'app/routes/[1].js', 'Route JS', true },
-        { 'app/routes/[1].ts', 'Route TS', true },
-        { 'app/templates/[1].hbs',  'Template',   true },
+        { 'app/routes/[1].js',     'Route JS', true },
+        { 'app/routes/[1].ts',     'Route TS', true },
+        { 'app/templates/[1].hbs', 'Template', true },
       }
     },
     {
       'app/templates/(.*).hbs',
       {
-        { 'app/routes/[1].js', 'Route JS', true },
-        { 'app/routes/[1].ts', 'Route TS', true },
+        { 'app/routes/[1].js',      'Route JS',      true },
+        { 'app/routes/[1].ts',      'Route TS',      true },
         { 'app/controllers/[1].js', 'Controller JS', true },
         { 'app/controllers/[1].ts', 'Controller TS', true },
       }
     },
     {
-      'lib/service/(.*).rb',
+      'lib/request/(.*).rb',
       {
-        { 'spec/service/[1]_spec.rb', 'Service test', true },
+        { 'spec/request/[1]_spec.rb', 'Service test', true },
+      }
+    },
+    {
+      'spec/request/(.*)_spec.rb',
+      {
+        { 'lib/request/[1].rb', 'Service', true },
+      }
+    },
+    {
+      'lib/request/(.*).rb',
+      {
+        { 'spec/request/[1]_spec.rb', 'Service test', true },
       }
     },
     {
       'spec/service/(.*)_spec.rb',
       {
         { 'lib/service/[1].rb', 'Service', true },
+      }
+    },
+    {
+      'app/models/(.*).rb',
+      {
+        { 'app/policies/[1]_policy.rb', 'Policy', true },
       }
     }
   },
