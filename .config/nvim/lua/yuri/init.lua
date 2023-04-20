@@ -18,6 +18,15 @@ end
 OpenFileFromSystemClipboard = function()
   local file = vim.fn.getreg('+')
   local path = mysplit(file, ":")
-  vim.cmd('e +' .. path[1].. ' ' .. path[0])
+  local result = ''
+  if vim.fn.filereadable(path[1]) == 1  then
+    if path[2] then
+      vim.cmd('e +' .. path[2].. ' ' .. path[1])
+    else
+      vim.cmd('e ' .. path[1])
+    end
+  end
 end
+
+vim.api.nvim_set_keymap('n', '<leader>b', ':lua OpenFileFromSystemClipboard()<CR>', {noremap = true, silent = true})
 
