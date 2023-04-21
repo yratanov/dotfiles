@@ -98,13 +98,19 @@ require('telescope-alternate').setup({
     {
       'spec/request/(.*)_spec.rb',
       {
-        { 'lib/request/[1].rb', 'Service', true },
+        { 'lib/request/[1].rb', 'Request', true },
       }
     },
     {
       'lib/request/(.*).rb',
       {
-        { 'spec/request/[1]_spec.rb', 'Service test', true },
+        { 'spec/request/[1]_spec.rb', 'Request test', true },
+      }
+    },
+    {
+      'lib/service/(.*).rb',
+      {
+        { 'spec/service/[1]_spec.rb', 'Test', true },
       }
     },
     {
@@ -116,11 +122,84 @@ require('telescope-alternate').setup({
     {
       'app/models/(.*).rb',
       {
-        { 'app/policies/[1]_policy.rb', 'Policy', true },
+        { 'spec/models/[1]_spec.rb', 'Test', true },
+      }
+    },
+    {
+      'spec/models/(.*)_spec.rb',
+      {
+        { 'app/models/[1].rb', 'Model', true },
+      }
+    },
+    {
+      'app/controllers/(.*).rb',
+      {
+        { 'spec/controllers/[1]_spec.rb', 'Test', true },
+      }
+    },
+    {
+      'spec/controllers/(.*)_spec.rb',
+      {
+        { 'app/controllers/[1].rb', 'Model', true },
+      }
+    },
+    {
+      'app/policies/(.*).rb',
+      {
+        { 'spec/policies/[1]_spec.rb', 'Test', true },
+      }
+    },
+    {
+      'spec/policies/(.*)_spec.rb',
+      {
+        { 'app/policies/[1].rb', 'Model', true },
+      }
+    },
+    {
+      'app/serializers/(.*).rb',
+      {
+        { 'spec/serializers/[1]_spec.rb', 'Test', true },
+      }
+    },
+    {
+      'spec/serializers/(.*)_spec.rb',
+      {
+        { 'app/serializers/[1].rb', 'Model', true },
+      }
+    },
+    {
+      'app/jobs/(.*).rb',
+      {
+        { 'spec/jobs/[1]_spec.rb', 'Test', true },
+      }
+    },
+    {
+      'spec/jobs/(.*)_spec.rb',
+      {
+        { 'app/jobs/[1].rb', 'Model', true },
+      }
+    },
+    {
+      'lib/tasks/(.*).thor',
+      {
+        { 'spec/tasks/[1]_spec.rb', 'Test', true },
+      }
+    },
+    {
+      'lib/tasks/(.*).rake',
+      {
+        { 'spec/tasks/[1]_spec.rb', 'Test', true },
+      }
+    },
+    {
+      'spec/tasks/(.*)_spec.rb',
+      {
+        { 'lib/tasks/[1].rake', 'Rake', true },
+        { 'lib/tasks/[1].thor', 'THOR', true },
       }
     }
   },
-  presets = { 'rails', 'rspec', 'nestjs' }, -- Telescope pre-defined mapping presets
+  presets = { 'nestjs' }, -- Telescope pre-defined mapping presets
   transformers = {                          -- custom transformers
     change_to_uppercase = function(w) return my_uppercase_method(w) end
   }

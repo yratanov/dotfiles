@@ -108,4 +108,6 @@ return require('packer').startup(function(use)
     "LintaoAmons/scratch.nvim",
     tag= "v0.6.2"
   }
+
+  use 'tpope/vim-rhubarb'
 end)
