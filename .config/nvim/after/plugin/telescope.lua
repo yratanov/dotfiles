@@ -39,8 +39,44 @@ file_browser.hidden = true
 vim.keymap.set('n', '<space>fd', function() file_browser.file_browser({ path = "%:p:h", select_buffer = true }) end)
 
 
+function mergeArrays(a, b)
+  local z = {}
+  local n = 0
+  for _,v in ipairs(a) do n=n+1; z[n]=v end
+  for _,v in ipairs(b) do n=n+1; z[n]=v end
+  return z
+end
+
+function generate_spec_mapping(base_path, mapping)
+  return {
+    {
+      base_path .. '/' .. mapping .. '/(.*).rb',
+      {
+        { 'spec/' .. mapping .. '/[1]_spec.rb', 'Test', true },
+      }
+    },
+    {
+      'spec/' .. mapping .. '/(.*)_spec.rb',
+      {
+        { base_path .. '/' .. mapping .. '/[1].rb', 'Model', true },
+      }
+    }
+  }
+end
+
+
+local ruby_mappings = {}
+
+for _, mapping in ipairs({ 'controllers', 'models', 'mailers', 'serializers', 'policies', 'jobs' }) do
+  ruby_mappings = mergeArrays(ruby_mappings, generate_spec_mapping('app', mapping))
+end
+
+for _, mapping in ipairs({ 'request', 'service' }) do
+  ruby_mappings = mergeArrays(ruby_mappings, generate_spec_mapping('lib', mapping))
+end
+
 require('telescope-alternate').setup({
-  mappings = {
+  mappings = mergeArrays({
     {
       'app/components/(.*).hbs',
       {
@@ -90,96 +126,6 @@ require('telescope-alternate').setup({
       }
     },
     {
-      'lib/request/(.*).rb',
-      {
-        { 'spec/request/[1]_spec.rb', 'Service test', true },
-      }
-    },
-    {
-      'spec/request/(.*)_spec.rb',
-      {
-        { 'lib/request/[1].rb', 'Request', true },
-      }
-    },
-    {
-      'lib/request/(.*).rb',
-      {
-        { 'spec/request/[1]_spec.rb', 'Request test', true },
-      }
-    },
-    {
-      'lib/service/(.*).rb',
-      {
-        { 'spec/service/[1]_spec.rb', 'Test', true },
-      }
-    },
-    {
-      'spec/service/(.*)_spec.rb',
-      {
-        { 'lib/service/[1].rb', 'Service', true },
-      }
-    },
-    {
-      'app/models/(.*).rb',
-      {
-        { 'spec/models/[1]_spec.rb', 'Test', true },
-      }
-    },
-    {
-      'spec/models/(.*)_spec.rb',
-      {
-        { 'app/models/[1].rb', 'Model', true },
-      }
-    },
-    {
-      'app/controllers/(.*).rb',
-      {
-        { 'spec/controllers/[1]_spec.rb', 'Test', true },
-      }
-    },
-    {
-      'spec/controllers/(.*)_spec.rb',
-      {
-        { 'app/controllers/[1].rb', 'Model', true },
-      }
-    },
-    {
-      'app/policies/(.*).rb',
-      {
-        { 'spec/policies/[1]_spec.rb', 'Test', true },
-      }
-    },
-    {
-      'spec/policies/(.*)_spec.rb',
-      {
-        { 'app/policies/[1].rb', 'Model', true },
-      }
-    },
-    {
-      'app/serializers/(.*).rb',
-      {
-        { 'spec/serializers/[1]_spec.rb', 'Test', true },
-      }
-    },
-    {
-      'spec/serializers/(.*)_spec.rb',
-      {
-        { 'app/serializers/[1].rb', 'Model', true },
-      }
-    },
-    {
-      'app/jobs/(.*).rb',
-      {
-        { 'spec/jobs/[1]_spec.rb', 'Test', true },
-      }
-    },
-    {
-      'spec/jobs/(.*)_spec.rb',
-      {
-        { 'app/jobs/[1].rb', 'Model', true },
-      }
-    },
-    {
       'lib/tasks/(.*).thor',
       {
         { 'spec/tasks/[1]_spec.rb', 'Test', true },
@@ -198,11 +144,8 @@ require('telescope-alternate').setup({
         { 'lib/tasks/[1].thor', 'THOR', true },
       }
     }
-  },
-  presets = { 'nestjs' }, -- Telescope pre-defined mapping presets
-  transformers = {                          -- custom transformers
-    change_to_uppercase = function(w) return my_uppercase_method(w) end
-  }
+  }, ruby_mappings),
+  presets = {}, -- Telescope pre-defined mapping presets
 })
 
 vim.keymap.set('n', '<leader>ll', ':Telescope telescope-alternate alternate_file<Cr>')
