@@ -79,6 +79,7 @@ return require('packer').startup(function(use)
   -- Code formatter
   use('jose-elias-alvarez/null-ls.nvim')
   use('MunifTanjim/prettier.nvim')
+  use({"ckipp01/stylua-nvim", run = "cargo install stylua"})
 
   -- Tabs
   -- use { 'romgrk/barbar.nvim', requires = 'nvim-web-devicons' }

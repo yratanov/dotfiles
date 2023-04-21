@@ -33,6 +33,7 @@ end)
 vim.keymap.set('n', ';;', function()
   builtin.resume()
 end)
+
 require("telescope").load_extension "file_browser"
 local file_browser = require "telescope".extensions.file_browser
 file_browser.hidden = true
