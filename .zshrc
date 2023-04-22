@@ -143,6 +143,8 @@ alias bi="bundle install"
 alias bsq="bundle exec sidekiq -C config/sidekiq.yml"
 alias bsqc="bundle exec sidekiq -C config/sidekiq.sel_calculations.yml"
 alias mux="tmuxinator"
+alias api="mux start api"
+alias frontend="mux start frontend"
 
 # export PATH="/opt/homebrew/opt/node@16/bin:$PATH"
 

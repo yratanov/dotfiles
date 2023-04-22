@@ -57,7 +57,7 @@ require("gitsigns").setup({
 				gs.next_hunk()
 			end)
 			return "<Ignore>"
-		end, { expr = true })
+		end, { expr = true, desc = "[GIT] Next hunk" })
 
 		map("n", "[c", function()
 			if vim.wo.diff then
@@ -67,26 +67,26 @@ require("gitsigns").setup({
 				gs.prev_hunk()
 			end)
 			return "<Ignore>"
-		end, { expr = true })
+		end, { expr = true, desc = "[GIT] Previous hunk" })
 
 		-- Actions
-		map({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>")
-		map({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>")
-		map("n", "<leader>hS", gs.stage_buffer)
-		map("n", "<leader>hu", gs.undo_stage_hunk)
-		map("n", "<leader>hR", gs.reset_buffer)
-		map("n", "<leader>hp", gs.preview_hunk)
+		map({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>", { desc = "[GIT] Stage hunk" })
+		map({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>", { desc = "[GIT] Reset hunk" })
+		map("n", "<leader>hS", gs.stage_buffer, { desc = "[GIT] Stage buffer" })
+		map("n", "<leader>hu", gs.undo_stage_hunk, { desc = "[GIT] Undo stage hunk" })
+		map("n", "<leader>hR", gs.reset_buffer, { desc = "[GIT] Reset buffer" })
+		map("n", "<leader>hp", gs.preview_hunk, { desc = "[GIT] Preview hunk" })
 		map("n", "<leader>hb", function()
 			gs.blame_line({ full = true })
-		end)
-		map("n", "<leader>tb", gs.toggle_current_line_blame)
-		map("n", "<leader>hd", gs.diffthis)
+		end, { desc = "[GIT] Blame line" })
+		map("n", "<leader>tb", gs.toggle_current_line_blame, { desc = "[GIT] Toggle blame line" })
+		map("n", "<leader>hd", gs.diffthis, { desc = "[GIT] Diff this" })
 		map("n", "<leader>hD", function()
 			gs.diffthis("~")
-		end)
+		end, { desc = "[GIT] Diff this (cached)" })
 		--map('n', '<leader>td', gs.toggle_deleted)
 
 		-- Text object
-		map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
+		map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "[GIT] Select hunk" })
 	end,
 })

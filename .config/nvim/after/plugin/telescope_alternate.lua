@@ -116,4 +116,9 @@ require("telescope-alternate").setup({
 	presets = {}, -- Telescope pre-defined mapping presets
 })
 
-vim.keymap.set("n", "<leader>ll", ":Telescope telescope-alternate alternate_file<Cr>")
+vim.keymap.set(
+	"n",
+	"<leader>ll",
+	":Telescope telescope-alternate alternate_file<Cr>",
+	{ desc = "[TELESCOPE] Alternate file" }
+)
