@@ -16,10 +16,12 @@ neotest.setup({
 })
 
 vim.keymap.set("n", "<leader>tl", function()
+	vim.cmd("wa")
 	neotest.run.run()
 end, { desc = "[TESTS] Run tests on line" })
 
 vim.keymap.set("n", "<leader>tf", function()
+	vim.cmd("wa")
 	neotest.run.run(vim.fn.expand("%"))
 end, { desc = "[TESTS] Run all tests in file" })
 

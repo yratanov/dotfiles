@@ -16,22 +16,27 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
-vim.keymap.set("x", "<leader>p", "\"_dP")
-vim.keymap.set("n", "<leader>d", "\"_d")
-vim.keymap.set("v", "<leader>d", "\"_d")
+vim.keymap.set("x", "<leader>p", '"_dP')
+vim.keymap.set("n", "<leader>d", '"_d')
+vim.keymap.set("v", "<leader>d", '"_d')
 
-vim.keymap.set("n", "<leader>y", "\"+y")
-vim.keymap.set("v", "<leader>y", "\"+y")
-vim.keymap.set("n", "<leader>Y", "\"+Y")
+vim.keymap.set("n", "<leader>y", '"+y')
+vim.keymap.set("v", "<leader>y", '"+y')
+vim.keymap.set("n", "<leader>Y", '"+Y')
 
 vim.keymap.set("n", "<leader>q", ":q<CR>")
 vim.keymap.set("n", "<leader>Q", ":qa<CR>")
 vim.keymap.set("n", "<leader>w", ":w<CR>")
 vim.keymap.set("n", "<leader>W", ":wq<CR>")
 
-vim.keymap.set("n", "gf", "<C-w>gF", {noremap = true})
-vim.keymap.set("v", "<leader>gi", "g<C-a>", {noremap = true})
+vim.keymap.set("n", "gf", "<C-w>gF", { noremap = true })
+vim.keymap.set("v", "<leader>gi", "g<C-a>", { noremap = true })
 
-vim.keymap.set("n", "<Leader>m",':call mkdir(expand("%:p:h"), "p")<CR>', {noremap = true})
+vim.keymap.set("n", "<Leader>m", ':call mkdir(expand("%:p:h"), "p")<CR>', { noremap = true })
 
+vim.keymap.set("n", "<C-J>", "<C-w>j", { noremap = true })
+vim.keymap.set("n", "<C-K>", "<C-w>k", { noremap = true })
+vim.keymap.set("n", "<C-L>", "<C-w>l", { noremap = true })
+vim.keymap.set("n", "<C-H>", "<C-w>h", { noremap = true })
 
+vim.keymap.set("n", "<Leader><Leader>", "<C-^>", { noremap = true })

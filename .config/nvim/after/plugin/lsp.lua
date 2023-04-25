@@ -79,7 +79,7 @@ lsp.format_mapping("<leader>ff", {
 		timeout_ms = 10000,
 	},
 	servers = {
-		["null-ls"] = { "javascript", "typescript", "lua", "ruby" },
+		["null-ls"] = { "javascript", "typescript", "lua", "ruby", "handlebars" },
 	},
 })
 
@@ -88,7 +88,7 @@ lsp.format_on_save({
 		timeout_ms = 10000,
 	},
 	servers = {
-		["null-ls"] = { "javascript", "typescript", "lua", "ruby" },
+		["null-ls"] = { "javascript", "typescript", "lua", "ruby", "handlebars" },
 	},
 })
 
@@ -127,7 +127,7 @@ local null_ls = require("null-ls")
 null_ls.setup({
 	sources = {
 		null_ls.builtins.formatting.prettierd.with({
-			filetypes = { "javascript", "typescript", "ruby" },
+			filetypes = { "javascript", "typescript", "ruby", "handlebars" },
 		}),
 		null_ls.builtins.formatting.stylua,
 	},

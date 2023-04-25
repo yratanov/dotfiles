@@ -35,6 +35,7 @@ return require("packer").startup(function(use)
 
 	-- Git
 	use("tpope/vim-fugitive")
+	use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
 	use({ "lewis6991/gitsigns.nvim" })
 
 	-- LSP
@@ -113,4 +114,5 @@ return require("packer").startup(function(use)
 	use("tpope/vim-rhubarb")
 
 	use("rcarriga/nvim-notify")
+	use("lukas-reineke/indent-blankline.nvim")
 end)
