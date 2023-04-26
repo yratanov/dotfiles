@@ -40,3 +40,5 @@ vim.keymap.set("n", "<C-L>", "<C-w>l", { noremap = true })
 vim.keymap.set("n", "<C-H>", "<C-w>h", { noremap = true })
 
 vim.keymap.set("n", "<Leader><Leader>", "<C-^>", { noremap = true })
+
+vim.keymap.set("n", "<Leader>cp", ':let @+ = expand("%")<cr>', { noremap = true })

@@ -60,7 +60,7 @@ return require("packer").startup(function(use)
 	use("glepnir/lspsaga.nvim")
 
 	use("antosha417/nvim-lsp-file-operations")
-	use("onsails/lspkind-nvim")
+	use("onsails/lspkind-nvim") -- LSP icons
 
 	-- Code snippets
 	use({
@@ -81,9 +81,6 @@ return require("packer").startup(function(use)
 	use("jose-elias-alvarez/null-ls.nvim")
 	use("MunifTanjim/prettier.nvim")
 	use({ "ckipp01/stylua-nvim", run = "cargo install stylua" })
-
-	-- Tabs
-	-- use { 'romgrk/barbar.nvim', requires = 'nvim-web-devicons' }
 
 	use("mg979/vim-visual-multi")
 	use("github/copilot.vim")
@@ -115,4 +112,5 @@ return require("packer").startup(function(use)
 
 	use("rcarriga/nvim-notify")
 	use("lukas-reineke/indent-blankline.nvim")
+	use("xiyaowong/transparent.nvim")
 end)

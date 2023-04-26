@@ -13,9 +13,6 @@ lsp.ensure_installed({
 	"solargraph",
 })
 
-local cmp_action = require("lsp-zero").cmp_action()
-local lspkind = require("lspkind")
-
 require("luasnip.loaders.from_vscode").lazy_load()
 require("luasnip.loaders.from_vscode").load({ paths = { "~/.config/snippets" } })
 require("lspsaga").setup({})
@@ -106,6 +103,8 @@ vim.diagnostic.config({
 })
 
 local cmp = require("cmp")
+local cmp_action = require("lsp-zero").cmp_action()
+local lspkind = require("lspkind")
 
 cmp.setup({
 	mapping = {
@@ -116,9 +115,20 @@ cmp.setup({
 		["<C-Space>"] = cmp.mapping.complete(),
 		["<S-Tab>"] = cmp_action.luasnip_shift_supertab(),
 	},
+	sources = {
+		{ name = "nvim_lsp" },
+		{ name = "luasnip" },
+	},
 	preselect = "item",
+	completion = {
+		completeopt = "menu,menuone,noinsert",
+	},
 	formatting = {
 		format = lspkind.cmp_format(),
+	},
+	window = {
+		completion = cmp.config.window.bordered(),
+		documentation = cmp.config.window.bordered(),
 	},
 })
 
