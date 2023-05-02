@@ -26,13 +26,15 @@ vim.keymap.set("n", "<leader>Y", '"+Y')
 
 vim.keymap.set("n", "<leader>q", ":q<CR>")
 vim.keymap.set("n", "<leader>Q", ":qa<CR>")
-vim.keymap.set("n", "<leader>w", ":w<CR>")
+vim.keymap.set("n", "<leader>w", ":wa<CR>")
 vim.keymap.set("n", "<leader>W", ":wq<CR>")
 
 vim.keymap.set("n", "gf", "<C-w>gF", { noremap = true })
 vim.keymap.set("v", "<leader>gi", "g<C-a>", { noremap = true })
 
 vim.keymap.set("n", "<Leader>m", ':call mkdir(expand("%:p:h"), "p")<CR>', { noremap = true })
+
+vim.keymap.set("n", "<leader>rr", ":silent !bundle exec rubocop -a %<CR>", { noremap = true })
 
 vim.keymap.set("n", "<C-J>", "<C-w>j", { noremap = true })
 vim.keymap.set("n", "<C-K>", "<C-w>k", { noremap = true })

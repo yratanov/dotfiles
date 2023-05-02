@@ -48,7 +48,7 @@ windows:
   - editor:
       layout: e0fa,316x74,0,0{195x74,0,0,19,120x74,196,0,23}
       panes:
-        - nvim
+        - nvim .
         - bundle exec rails s
   - console: bundle exec rails c
   - logs: tail -f log/development.log

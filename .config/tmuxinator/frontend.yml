@@ -49,6 +49,6 @@ windows:
   - editor:
       layout: c093,316x74,0,0{221x74,0,0,0,94x74,222,0[94x27,222,0,1,94x46,222,28,2]}
       panes:
-        - nvim
+        - nvim .
         -
         - es

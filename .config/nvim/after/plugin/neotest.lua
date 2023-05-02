@@ -20,6 +20,11 @@ vim.keymap.set("n", "<leader>tl", function()
 	neotest.run.run()
 end, { desc = "[TESTS] Run tests on line" })
 
+vim.keymap.set("n", "<leader>tr", function()
+	vim.cmd("wa")
+	neotest.run.run_last()
+end, { desc = "[TESTS] Rerun" })
+
 vim.keymap.set("n", "<leader>tf", function()
 	vim.cmd("wa")
 	neotest.run.run(vim.fn.expand("%"))

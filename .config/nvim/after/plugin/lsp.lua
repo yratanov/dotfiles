@@ -29,30 +29,37 @@ lsp.on_attach(function(client, bufnr)
 	local opts = { buffer = bufnr, remap = false }
 
 	vim.keymap.set("n", "gd", "<cmd>Lspsaga goto_definition<CR>", opts)
+
 	vim.keymap.set(
 		"n",
 		"<leader>vf",
 		"<Cmd>Lspsaga lsp_finder<CR>",
 		{ buffer = bufnr, remap = false, desc = "[LSP] Finder" }
 	)
+
 	vim.keymap.set(
 		"n",
 		"<leader>vd",
 		"<Cmd>Lspsaga hover_doc<CR>",
 		{ buffer = bufnr, remap = false, desc = "[LSP] Hover doc" }
 	)
+
 	vim.keymap.set("n", "<leader>vws", function()
 		vim.lsp.buf.workspace_symbol()
 	end, { buffer = bufnr, remap = false, desc = "[LSP] Workspace symbol" })
+
 	vim.keymap.set("n", "<leader>vh", function()
 		vim.diagnostic.open_float()
 	end, { buffer = bufnr, remap = false, desc = "[LSP] Open float" })
+
 	vim.keymap.set("n", "[d", function()
 		vim.diagnostic.goto_next()
 	end, { buffer = bufnr, remap = false, desc = "[LSP] Goto next" })
+
 	vim.keymap.set("n", "]d", function()
 		vim.diagnostic.goto_prev()
 	end, { buffer = bufnr, remap = false, desc = "[LSP] Goto prev" })
+
 	vim.keymap.set(
 		"n",
 		"<leader>va",
@@ -62,12 +69,18 @@ lsp.on_attach(function(client, bufnr)
 	vim.keymap.set("n", "<leader>vrr", function()
 		vim.lsp.buf.references()
 	end, { buffer = bufnr, remap = false, desc = "[LSP] References" })
+
 	vim.keymap.set("n", "<leader>vrn", function()
 		vim.lsp.buf.rename()
 	end, { buffer = bufnr, remap = false, desc = "[LSP] Rename" })
+
 	vim.keymap.set("i", "<c-h>", function()
 		vim.lsp.buf.signature_help()
 	end, { buffer = bufnr, remap = false, desc = "[LSP] Signature help" })
+
+	vim.keymap.set("n", "<leader>vo", function()
+		vim.lsp.buf.execute_command({ command = "_typescript.organizeImports", arguments = { vim.fn.expand("%:p") } })
+	end, { buffer = bufnr, remap = false, desc = "[LSP] Organize imports" })
 end)
 
 lsp.format_mapping("<leader>ff", {

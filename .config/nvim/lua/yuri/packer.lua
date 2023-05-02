@@ -16,6 +16,7 @@ return require("packer").startup(function(use)
 		requires = { { "nvim-lua/plenary.nvim" } },
 	})
 	use({ "otavioschwanck/telescope-alternate" }) -- Alternate files
+	use("nvim-telescope/telescope-live-grep-args.nvim")
 
 	-- File browser
 	use({

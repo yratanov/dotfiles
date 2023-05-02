@@ -1,4 +1,8 @@
 local builtin = require("telescope.builtin")
+local telescope = require("telescope")
+
+telescope.load_extension("live_grep_args")
+local telescope_live_grep_args = require("telescope").extensions.live_grep_args
 
 local function dasherize(str)
 	return (string.gsub(str, "%W+", "-"))
@@ -8,18 +12,48 @@ local function decamelize(str)
 	return string.lower((string.gsub(str, "(%l)(%u)", "%1_%2")))
 end
 
+local function singularize(name)
+	local irregulars = {}
+	local out = name:gsub("(%w+)$", irregulars)
+	if out ~= name then
+		return out
+	end
+	out = name:gsub("[iI][eE]([sS])$", {
+		s = "y",
+		S = "Y",
+	}):gsub("([oO])[eE][sS]$", "%1")
+	if out:sub(-4, -1) == "sses" then
+		out = out:gsub("([sS][sS])[eE][sS]$", "%1")
+	else
+		out = out:gsub("[sS]$", "")
+	end
+	return out
+end
+
 vim.keymap.set("n", "<leader>o", function()
 	builtin.find_files({ hidden = true })
 end, { desc = "[TELESCOPE] Find files" })
+
 vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "[TELESCOPE] Grep current word" })
-vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "[TELESCOPE] Grep" })
+
+vim.keymap.set("n", "<leader>fg", telescope_live_grep_args.live_grep_args, { desc = "[TELESCOPE] Grep" })
+
 vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "[TELESCOPE] Keymaps" })
+
 vim.keymap.set("n", "<leader>e", function()
 	builtin.oldfiles({ only_cwd = true })
 end, { desc = "[TELESCOPE] Prev files" })
+
 vim.keymap.set("n", "<leader>fb", builtin.git_branches, { desc = "[TELESCOPE] Git branches" })
+
 vim.keymap.set("n", "<leader>fs", builtin.git_stash, { desc = "[TELESCOPE] Git stashes" })
+
 vim.keymap.set("n", "<leader>fr", builtin.lsp_references, { desc = "[TELESCOPE] LSP references" })
+
+vim.keymap.set("n", "<leader>gm", function()
+	vim.cmd(":e app/models/" .. singularize(vim.fn.expand("<cword>")) .. ".rb")
+end, { desc = "[TELESCOPE] Find file by current word" })
+
 vim.keymap.set("n", "<leader>fc", function()
 	builtin.find_files({ search_file = dasherize(decamelize(vim.fn.expand("<cword>"))) })
 end, { desc = "[TELESCOPE] Find file by current word" })
@@ -27,9 +61,11 @@ end, { desc = "[TELESCOPE] Find file by current word" })
 vim.keymap.set("n", "<leader>gf", function()
 	vim.cmd(":e spec/factories/" .. decamelize(vim.fn.expand("<cword>")) .. "s.rb")
 end, { desc = "[TELESCOPE] Go to ruby factory" })
+
 vim.keymap.set("n", "<leader>fh", function()
 	builtin.help_tags()
 end, { desc = "[TELESCOPE] Help tags" })
+
 vim.keymap.set("n", ";;", function()
 	builtin.resume()
 end, { desc = "[TELESCOPE] Open last search" })
