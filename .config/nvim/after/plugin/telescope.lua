@@ -36,7 +36,7 @@ end, { desc = "[TELESCOPE] Find files" })
 
 vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "[TELESCOPE] Grep current word" })
 
-vim.keymap.set("n", "<leader>fg", telescope_live_grep_args.live_grep_args, { desc = "[TELESCOPE] Grep" })
+vim.keymap.set("n", "<leader>ff", telescope_live_grep_args.live_grep_args, { desc = "[TELESCOPE] Grep" })
 
 vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "[TELESCOPE] Keymaps" })
 
@@ -44,23 +44,47 @@ vim.keymap.set("n", "<leader>e", function()
 	builtin.oldfiles({ only_cwd = true })
 end, { desc = "[TELESCOPE] Prev files" })
 
-vim.keymap.set("n", "<leader>fb", builtin.git_branches, { desc = "[TELESCOPE] Git branches" })
+vim.keymap.set("n", "<leader>fg", builtin.git_branches, { desc = "[TELESCOPE] Git branches" })
 
 vim.keymap.set("n", "<leader>fs", builtin.git_stash, { desc = "[TELESCOPE] Git stashes" })
 
 vim.keymap.set("n", "<leader>fr", builtin.lsp_references, { desc = "[TELESCOPE] LSP references" })
 
 vim.keymap.set("n", "<leader>gm", function()
-	vim.cmd(":e app/models/" .. singularize(vim.fn.expand("<cword>")) .. ".rb")
-end, { desc = "[TELESCOPE] Find file by current word" })
+	local buf = vim.api.nvim_get_current_buf()
+	local ft = vim.api.nvim_buf_get_option(buf, "filetype")
+	if ft == "ruby" then
+		local filepath = "app/models/" .. singularize(vim.fn.expand("<cword>")) .. ".rb"
+		if vim.fn.filereadable(filepath) == 1 then
+			vim.cmd(":e " .. filepath)
+		end
+	elseif ft == "typescript" or ft == "javascript" then
+		local filepath = "app/models/" .. dasherize(decamelize(singularize(vim.fn.expand("<cword>")))) .. ".ts"
+		if vim.fn.filereadable(filepath) == 1 then
+			vim.cmd(":e " .. filepath)
+		end
+	end
+end, { desc = "[TELESCOPE] Open model file" })
 
 vim.keymap.set("n", "<leader>fc", function()
 	builtin.find_files({ search_file = dasherize(decamelize(vim.fn.expand("<cword>"))) })
 end, { desc = "[TELESCOPE] Find file by current word" })
 
 vim.keymap.set("n", "<leader>gf", function()
-	vim.cmd(":e spec/factories/" .. decamelize(vim.fn.expand("<cword>")) .. "s.rb")
-end, { desc = "[TELESCOPE] Go to ruby factory" })
+	local buf = vim.api.nvim_get_current_buf()
+	local ft = vim.api.nvim_buf_get_option(buf, "filetype")
+	if ft == "ruby" then
+		local filepath = "spec/factories/" .. decamelize(vim.fn.expand("<cword>")) .. "s.rb"
+		if vim.fn.filereadable(filepath) == 1 then
+			vim.cmd(":e " .. filepath)
+		end
+	elseif ft == "typescript" or ft == "javascript" then
+		local filepath = "mirage/factories/" .. dasherize(decamelize(singularize(vim.fn.expand("<cword>")))) .. ".js"
+		if vim.fn.filereadable(filepath) == 1 then
+			vim.cmd(":e " .. filepath)
+		end
+	end
+end, { desc = "[TELESCOPE] Go to factory" })
 
 vim.keymap.set("n", "<leader>fh", function()
 	builtin.help_tags()

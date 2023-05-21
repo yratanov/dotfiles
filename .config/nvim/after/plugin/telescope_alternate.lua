@@ -50,14 +50,24 @@ require("telescope-alternate").setup({
 			{
 				{ "app/components/[1].js", "Component JS", true },
 				{ "app/components/[1].ts", "Component TS", true },
+				{ "tests/helpers/page/components/[1]-component.js", "Page", true },
 				{ "tests/integration/components/[1]-test.js", "Component test", true },
 			},
 		},
 		{
 			"app/components/(.*).[jt]s$",
 			{
-				{ "app/components/[1].hbs", "Component HBS" },
+				{ "app/components/[1].hbs", "Component HBS", true },
+				{ "tests/helpers/page/components/[1]-component.js", "Page", true },
 				{ "tests/integration/components/[1]-test.js", "Component test", true },
+			},
+		},
+		{
+			"tests/helpers/page/components/(.*)-component.js",
+			{
+				{ "app/components/[1].hbs", "Component HBS", true },
+				{ "app/components/[1].js", "Component JS", true },
+				{ "app/components/[1].ts", "Component TS", true },
 			},
 		},
 		{

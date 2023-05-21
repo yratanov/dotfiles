@@ -114,4 +114,25 @@ return require("packer").startup(function(use)
 	use("rcarriga/nvim-notify")
 	use("lukas-reineke/indent-blankline.nvim")
 	use("xiyaowong/transparent.nvim")
+
+	use({
+		"max397574/better-escape.nvim",
+		config = function()
+			require("better_escape").setup({
+				mapping = { "jk", "jj" }, -- a table with mappings to use
+				timeout = vim.o.timeoutlen, -- the time in which the keys must be hit in ms. Use option timeoutlen by default
+				clear_empty_lines = false, -- clear line after escaping if there is only whitespace
+				keys = "<Esc>",
+			})
+		end,
+	})
+
+	-- Jump to any word in the current buffer
+	use("phaazon/hop.nvim", {
+		branch = "v2",
+	})
+
+	-- Automatically close brackets
+	use("m4xshen/autoclose.nvim")
+	require("autoclose").setup()
 end)

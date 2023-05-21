@@ -66,11 +66,11 @@ lsp.on_attach(function(client, bufnr)
 		"<cmd>Lspsaga code_action<CR>",
 		{ buffer = bufnr, remap = false, desc = "[LSP] Code action" }
 	)
-	vim.keymap.set("n", "<leader>vrr", function()
+	vim.keymap.set("n", "<leader>ve", function()
 		vim.lsp.buf.references()
 	end, { buffer = bufnr, remap = false, desc = "[LSP] References" })
 
-	vim.keymap.set("n", "<leader>vrn", function()
+	vim.keymap.set("n", "<leader>vr", function()
 		vim.lsp.buf.rename()
 	end, { buffer = bufnr, remap = false, desc = "[LSP] Rename" })
 
@@ -83,13 +83,13 @@ lsp.on_attach(function(client, bufnr)
 	end, { buffer = bufnr, remap = false, desc = "[LSP] Organize imports" })
 end)
 
-lsp.format_mapping("<leader>ff", {
+lsp.format_mapping("<leader>fo", {
 	format_opts = {
 		async = false,
 		timeout_ms = 10000,
 	},
 	servers = {
-		["null-ls"] = { "javascript", "typescript", "lua", "ruby", "handlebars" },
+		["null-ls"] = { "javascript", "typescript", "lua", "ruby", "handlebars", "json" },
 	},
 })
 
@@ -98,7 +98,7 @@ lsp.format_on_save({
 		timeout_ms = 10000,
 	},
 	servers = {
-		["null-ls"] = { "javascript", "typescript", "lua", "ruby", "handlebars" },
+		["null-ls"] = { "javascript", "typescript", "lua", "ruby", "handlebars", "json" },
 	},
 })
 
@@ -119,11 +119,16 @@ local cmp = require("cmp")
 local cmp_action = require("lsp-zero").cmp_action()
 local lspkind = require("lspkind")
 
+nvim_lsp.emmet_ls.setup({
+	filetypes = { "handlebars", "html" },
+})
+
 cmp.setup({
 	mapping = {
 		["<C-f>"] = cmp_action.luasnip_jump_forward(),
 		["<C-b>"] = cmp_action.luasnip_jump_backward(),
-		["<Cr>"] = cmp.mapping.confirm({ select = true }),
+		['<C-e>'] = cmp.mapping.abort(),
+    ["<Cr>"] = cmp.mapping.confirm({ select = true }),
 		["<Tab>"] = cmp_action.luasnip_supertab(),
 		["<C-Space>"] = cmp.mapping.complete(),
 		["<S-Tab>"] = cmp_action.luasnip_shift_supertab(),
@@ -150,7 +155,7 @@ local null_ls = require("null-ls")
 null_ls.setup({
 	sources = {
 		null_ls.builtins.formatting.prettierd.with({
-			filetypes = { "javascript", "typescript", "ruby", "handlebars" },
+			filetypes = { "javascript", "typescript", "ruby", "handlebars", "json" },
 		}),
 		null_ls.builtins.formatting.stylua,
 	},
