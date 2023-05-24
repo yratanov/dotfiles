@@ -135,4 +135,15 @@ return require("packer").startup(function(use)
 	-- Automatically close brackets
 	use("m4xshen/autoclose.nvim")
 	require("autoclose").setup()
+
+	use({
+		"gbprod/substitute.nvim",
+		config = function()
+			require("substitute").setup({
+				-- your configuration comes here
+				-- or leave it empty to use the default settings
+				-- refer to the configuration section below
+			})
+		end,
+	})
 end)

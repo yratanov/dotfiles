@@ -37,6 +37,7 @@ end, { desc = "[TELESCOPE] Find files" })
 vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "[TELESCOPE] Grep current word" })
 
 vim.keymap.set("n", "<leader>ff", telescope_live_grep_args.live_grep_args, { desc = "[TELESCOPE] Grep" })
+vim.keymap.set("n", "<leader>s", builtin.live_grep, { desc = "[TELESCOPE] Grep" })
 
 vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "[TELESCOPE] Keymaps" })
 
