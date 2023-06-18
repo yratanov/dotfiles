@@ -2,16 +2,7 @@ local neotest = require("neotest")
 
 neotest.setup({
 	adapters = {
-		require("neotest-rspec")({
-			rspec_cmd = function()
-				return vim.tbl_flatten({
-					"bundle",
-					"exec",
-					"spring",
-					"rspec",
-				})
-			end,
-		}),
+		require("neotest-rspec")({}),
 	},
 })
 
@@ -20,7 +11,7 @@ vim.keymap.set("n", "<leader>tl", function()
 	neotest.run.run()
 end, { desc = "[TESTS] Run tests on line" })
 
-vim.keymap.set("n", "<leader>tr", function()
+vim.keymap.set("n", "<leader>re", function()
 	vim.cmd("wa")
 	neotest.run.run_last()
 end, { desc = "[TESTS] Rerun" })
@@ -29,7 +20,7 @@ vim.keymap.set("n", "<leader>ts", function()
 	neotest.summary.toggle()
 end, { desc = "[TESTS] Toggle Summary" })
 
-vim.keymap.set("n", "<leader>tt", function()
+vim.keymap.set("n", "<leader>tf", function()
 	vim.cmd("wa")
 	neotest.run.run(vim.fn.expand("%"))
 end, { desc = "[TESTS] Run all tests in file" })

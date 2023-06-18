@@ -1,9 +1,10 @@
-function ColorMyPencils(color)
+function ColorMyPencils(color, variant)
 	color = color or "rose-pine"
+	variant = variant or "main"
 	a = "a"
 	require("rose-pine").setup({
 		--- @usage 'auto'|'main'|'moon'|'dawn'
-		variant = "auto",
+		variant = variant,
 		--- @usage 'main'|'moon'|'dawn'
 		dark_variant = "main",
 		bold_vert_split = false,
@@ -55,6 +56,15 @@ function ColorMyPencils(color)
 			TelescopeResultsNormal = { fg = "subtle", bg = "none" },
 			TelescopeSelection = { fg = "text", bg = "base" },
 			TelescopeSelectionCaret = { fg = "rose", bg = "rose" },
+			NeotestDir = { fg = "iris" },
+			NeotestFile = { fg = "iris" },
+			NeotestFocused = { fg = "rose" },
+			NeotestNamespace = { fg = "gold" },
+			NeotestRunning = { fg = "gold" },
+			NeotestFailed = { fg = "love" },
+			NeotestPassed = { fg = "foam" },
+			NeotestTarget = { fg = "foam" },
+			NeotestTest = { fg = "gold" },
 		},
 	})
 
@@ -63,5 +73,3 @@ function ColorMyPencils(color)
 	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 end
-
-ColorMyPencils()

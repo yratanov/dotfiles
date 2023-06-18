@@ -109,11 +109,12 @@ return require("packer").startup(function(use)
 		tag = "v0.6.2",
 	})
 
+	-- adds open in browser functionality
 	use("tpope/vim-rhubarb")
 
 	use("rcarriga/nvim-notify")
 	use("lukas-reineke/indent-blankline.nvim")
-	use("xiyaowong/transparent.nvim")
+	-- use("xiyaowong/transparent.nvim")
 
 	use({
 		"max397574/better-escape.nvim",
@@ -146,4 +147,6 @@ return require("packer").startup(function(use)
 			})
 		end,
 	})
+
+	use("f-person/auto-dark-mode.nvim")
 end)

@@ -45,7 +45,7 @@ vim.keymap.set("n", "<leader>e", function()
 	builtin.oldfiles({ only_cwd = true })
 end, { desc = "[TELESCOPE] Prev files" })
 
-vim.keymap.set("n", "<leader>fg", builtin.git_branches, { desc = "[TELESCOPE] Git branches" })
+vim.keymap.set("n", "<leader>b", builtin.git_branches, { desc = "[TELESCOPE] Git branches" })
 
 vim.keymap.set("n", "<leader>fs", builtin.git_stash, { desc = "[TELESCOPE] Git stashes" })
 
