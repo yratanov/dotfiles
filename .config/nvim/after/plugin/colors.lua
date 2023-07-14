@@ -1,7 +1,6 @@
 function ColorMyPencils(color, variant)
 	color = color or "rose-pine"
 	variant = variant or "main"
-	a = "a"
 	require("rose-pine").setup({
 		--- @usage 'auto'|'main'|'moon'|'dawn'
 		variant = variant,
@@ -65,10 +64,17 @@ function ColorMyPencils(color, variant)
 			NeotestPassed = { fg = "foam" },
 			NeotestTarget = { fg = "foam" },
 			NeotestTest = { fg = "gold" },
+			NeotestAdapterName = { fg = "love" },
 		},
 	})
 
 	vim.cmd("colorscheme rose-pine")
+
+	if variant == "main" then
+		vim.cmd([[highlight IndentBlanklineIndent1 guifg=#0c3c3c gui=nocombine]])
+	else
+		vim.cmd([[highlight IndentBlanklineIndent1 guifg=#F2E9E1 gui=nocombine]])
+	end
 
 	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })

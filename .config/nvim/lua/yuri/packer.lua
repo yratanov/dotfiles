@@ -149,4 +149,33 @@ return require("packer").startup(function(use)
 	})
 
 	use("f-person/auto-dark-mode.nvim")
+
+	use("tpope/vim-dotenv")
+
+	-- SQL
+	use("tpope/vim-dadbod")
+	use("kristijanhusak/vim-dadbod-ui")
+
+	use({
+		"folke/which-key.nvim",
+		config = function()
+			vim.o.timeout = true
+			vim.o.timeoutlen = 300
+			require("which-key").setup({
+				-- your configuration comes here
+				-- or leave it empty to use the default settings
+				-- refer to the configuration section below
+			})
+		end,
+	})
+
+	use({
+		"rmagatti/auto-session",
+		config = function()
+			require("auto-session").setup({
+				log_level = "error",
+				auto_session_suppress_dirs = { "~/", "~/projects", "~/Downloads", "/" },
+			})
+		end,
+	})
 end)

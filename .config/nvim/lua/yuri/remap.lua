@@ -45,3 +45,9 @@ vim.keymap.set("n", "<C-H>", "<C-w>h", { noremap = true })
 vim.keymap.set("n", "<Leader><Leader>", "<C-^>", { noremap = true })
 
 vim.keymap.set("n", "<Leader>cp", ':let @+ = expand("%")<cr>', { noremap = true })
+
+vim.keymap.set("n", "<Leader>rdm", ":terminal bundle exec rails db:migrate<CR>", { noremap = true })
+vim.keymap.set("n", "<Leader>rdr", ":terminal bundle exec rails db:rollback<CR>", { noremap = true })
+vim.keymap.set("n", "<Leader>rgr", ":terminal bundle exec rails g migration ", { noremap = true })
+vim.keymap.set("n", "<Leader>rgm", ":terminal bundle exec rails g model ", { noremap = true })
+vim.keymap.set("n", "<Leader>rgc", ":terminal bundle exec rails g controller ", { noremap = true })

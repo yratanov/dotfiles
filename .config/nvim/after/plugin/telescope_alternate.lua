@@ -48,10 +48,10 @@ require("telescope-alternate").setup({
 		{
 			"app/components/(.*).hbs",
 			{
+				{ "tests/integration/components/[1]-test.js", "Component test", true },
 				{ "app/components/[1].js", "Component JS", true },
 				{ "app/components/[1].ts", "Component TS", true },
 				{ "tests/helpers/page/components/[1]-component.js", "Page", true },
-				{ "tests/integration/components/[1]-test.js", "Component test", true },
 			},
 		},
 		{

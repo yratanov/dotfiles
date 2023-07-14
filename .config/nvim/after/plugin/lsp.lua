@@ -30,24 +30,14 @@ lsp.on_attach(function(client, bufnr)
 
 	vim.keymap.set("n", "gd", "<cmd>Lspsaga goto_definition<CR>", opts)
 
-	vim.keymap.set(
-		"n",
-		"<leader>vf",
-		"<Cmd>Lspsaga lsp_finder<CR>",
-		{ buffer = bufnr, remap = false, desc = "[LSP] Finder" }
-	)
+	vim.keymap.set("n", "gs", "<Cmd>Lspsaga lsp_finder<CR>", { buffer = bufnr, remap = false, desc = "[LSP] Finder" })
 
-	vim.keymap.set(
-		"n",
-		"<leader>vd",
-		"<Cmd>Lspsaga hover_doc<CR>",
-		{ buffer = bufnr, remap = false, desc = "[LSP] Hover doc" }
-	)
+	vim.keymap.set("n", "gi", "<Cmd>Lspsaga hover_doc<CR>", { buffer = bufnr, remap = false, desc = "[LSP] Hover doc" })
 
 	vim.keymap.set("n", "<leader>vws", function()
 		vim.lsp.buf.workspace_symbol()
 	end, { buffer = bufnr, remap = false, desc = "[LSP] Workspace symbol" })
-
+	vim.keymap.set("n", "<leader>sc", "<cmd>Lspsaga show_cursor_diagnostics<CR>")
 	vim.keymap.set("n", "<leader>vh", function()
 		vim.diagnostic.open_float()
 	end, { buffer = bufnr, remap = false, desc = "[LSP] Open float" })
@@ -70,7 +60,7 @@ lsp.on_attach(function(client, bufnr)
 		vim.lsp.buf.references()
 	end, { buffer = bufnr, remap = false, desc = "[LSP] References" })
 
-	vim.keymap.set("n", "<leader>vr", function()
+	vim.keymap.set("n", "gr", function()
 		vim.lsp.buf.rename()
 	end, { buffer = bufnr, remap = false, desc = "[LSP] Rename" })
 
@@ -89,7 +79,7 @@ lsp.format_mapping("<leader>fo", {
 		timeout_ms = 10000,
 	},
 	servers = {
-		["null-ls"] = { "javascript", "typescript", "lua", "ruby", "handlebars", "json" },
+		["null-ls"] = { "javascript", "typescript", "lua", "ruby", "handlebars", "json", "sql", "erb", "eruby" },
 	},
 })
 
@@ -119,16 +109,16 @@ local cmp = require("cmp")
 local cmp_action = require("lsp-zero").cmp_action()
 local lspkind = require("lspkind")
 
-nvim_lsp.emmet_ls.setup({
-	filetypes = { "handlebars", "html" },
-})
+-- nvim_lsp.emmet_ls.setup({
+-- 	filetypes = { "handlebars", "html" },
+-- })
 
 cmp.setup({
 	mapping = {
 		["<C-f>"] = cmp_action.luasnip_jump_forward(),
 		["<C-b>"] = cmp_action.luasnip_jump_backward(),
-		['<C-e>'] = cmp.mapping.abort(),
-    ["<Cr>"] = cmp.mapping.confirm({ select = true }),
+		["<C-e>"] = cmp.mapping.abort(),
+		["<Cr>"] = cmp.mapping.confirm({ select = true }),
 		["<Tab>"] = cmp_action.luasnip_supertab(),
 		["<C-Space>"] = cmp.mapping.complete(),
 		["<S-Tab>"] = cmp_action.luasnip_shift_supertab(),
@@ -158,5 +148,7 @@ null_ls.setup({
 			filetypes = { "javascript", "typescript", "ruby", "handlebars", "json" },
 		}),
 		null_ls.builtins.formatting.stylua,
+		null_ls.builtins.formatting.erb_lint,
+		null_ls.builtins.formatting.pg_format,
 	},
 })

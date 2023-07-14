@@ -1,6 +1,16 @@
 local builtin = require("telescope.builtin")
 local telescope = require("telescope")
 
+telescope.setup({
+	defaults = {
+		mappings = {
+			i = {
+				["<esc>"] = "close",
+				["<C-c>"] = false,
+			},
+		},
+	},
+})
 telescope.load_extension("live_grep_args")
 local telescope_live_grep_args = require("telescope").extensions.live_grep_args
 
@@ -35,6 +45,8 @@ vim.keymap.set("n", "<leader>o", function()
 end, { desc = "[TELESCOPE] Find files" })
 
 vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "[TELESCOPE] Grep current word" })
+vim.keymap.set("n", "<leader>f/", builtin.current_buffer_fuzzy_find, { desc = "[TELESCOPE] Find current buffer" })
+vim.keymap.set("n", "<leader>fi", builtin.search_history, { desc = "[TELESCOPE] Search history" })
 
 vim.keymap.set("n", "<leader>ff", telescope_live_grep_args.live_grep_args, { desc = "[TELESCOPE] Grep" })
 vim.keymap.set("n", "<leader>s", builtin.live_grep, { desc = "[TELESCOPE] Grep" })

@@ -4,6 +4,9 @@ neotest.setup({
 	adapters = {
 		require("neotest-rspec")({}),
 	},
+	summary = {
+		open = "botright vsplit | vertical resize 75",
+	},
 })
 
 vim.keymap.set("n", "<leader>tl", function()
