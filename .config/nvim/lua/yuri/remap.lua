@@ -51,3 +51,5 @@ vim.keymap.set("n", "<Leader>rdr", ":terminal bundle exec rails db:rollback<CR>"
 vim.keymap.set("n", "<Leader>rgr", ":terminal bundle exec rails g migration ", { noremap = true })
 vim.keymap.set("n", "<Leader>rgm", ":terminal bundle exec rails g model ", { noremap = true })
 vim.keymap.set("n", "<Leader>rgc", ":terminal bundle exec rails g controller ", { noremap = true })
+
+vim.keymap.set("n", "<Leader>db", ":%bd|e#<CR>", { noremap = true })

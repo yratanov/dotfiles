@@ -88,15 +88,7 @@ return require("packer").startup(function(use)
 	use("tpope/vim-surround")
 
 	-- Test runner
-	use({
-		"nvim-neotest/neotest",
-		requires = {
-			"nvim-lua/plenary.nvim",
-			"nvim-treesitter/nvim-treesitter",
-			"antoinemadec/FixCursorHold.nvim",
-			"olimorris/neotest-rspec",
-		},
-	})
+	use("klen/nvim-test")
 
 	use({
 		"numToStr/Comment.nvim",
@@ -152,7 +144,7 @@ return require("packer").startup(function(use)
 
 	use("tpope/vim-dotenv")
 
-	-- SQL
+	-- SQL GUI client
 	use("tpope/vim-dadbod")
 	use("kristijanhusak/vim-dadbod-ui")
 
