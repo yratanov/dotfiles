@@ -108,10 +108,22 @@ vim.diagnostic.config({
 local cmp = require("cmp")
 local cmp_action = require("lsp-zero").cmp_action()
 local lspkind = require("lspkind")
+local ls = require("luasnip")
 
 -- nvim_lsp.emmet_ls.setup({
 -- 	filetypes = { "handlebars", "html" },
 -- })
+--
+vim.keymap.set({ "i" }, "<Tab>", function()
+	if ls.expand_or_jumpable() then
+    ls.expand()
+  else
+    ls.jump(1)
+  end
+end)
+vim.keymap.set({ "i", "s" }, "<S-Tab>", function()
+	ls.jump(-1)
+end, { silent = true })
 
 cmp.setup({
 	mapping = {
@@ -119,9 +131,9 @@ cmp.setup({
 		["<C-b>"] = cmp_action.luasnip_jump_backward(),
 		["<C-e>"] = cmp.mapping.abort(),
 		["<Cr>"] = cmp.mapping.confirm({ select = true }),
-		["<Tab>"] = cmp_action.luasnip_supertab(),
+		-- ["<Tab>"] = cmp_action.luasnip_supertab(),
 		["<C-Space>"] = cmp.mapping.complete(),
-		["<S-Tab>"] = cmp_action.luasnip_shift_supertab(),
+		-- ["<S-Tab>"] = cmp_action.luasnip_shift_supertab(),
 	},
 	sources = {
 		{ name = "nvim_lsp" },

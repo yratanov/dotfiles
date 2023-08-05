@@ -107,6 +107,10 @@ vim.keymap.set("n", ";;", function()
 	builtin.resume()
 end, { desc = "[TELESCOPE] Open last search" })
 
+vim.keymap.set("n", "<C-p>", function()
+	require("telescope").extensions.neoclip.default()
+end, { desc = "[TELESCOPE] Clipboard history" })
+
 require("telescope").load_extension("file_browser")
 local file_browser = require("telescope").extensions.file_browser
 file_browser.hidden = true

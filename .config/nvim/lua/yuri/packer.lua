@@ -83,9 +83,19 @@ return require("packer").startup(function(use)
 	use("MunifTanjim/prettier.nvim")
 	use({ "ckipp01/stylua-nvim", run = "cargo install stylua" })
 
+	-- Utils
 	use("mg979/vim-visual-multi")
 	use("github/copilot.vim")
-	use("tpope/vim-surround")
+
+	use({
+		"kylechui/nvim-surround",
+		tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+		config = function()
+			require("nvim-surround").setup({
+				-- Configuration here, or leave empty to use defaults
+			})
+		end,
+	})
 
 	-- Test runner
 	use("klen/nvim-test")
@@ -163,11 +173,21 @@ return require("packer").startup(function(use)
 
 	use({
 		"rmagatti/auto-session",
+		requires = {
+			{ "nvim-telescope/telescope.nvim" },
+		},
 		config = function()
 			require("auto-session").setup({
 				log_level = "error",
 				auto_session_suppress_dirs = { "~/", "~/projects", "~/Downloads", "/" },
 			})
+		end,
+	})
+
+	use({
+		"AckslD/nvim-neoclip.lua",
+		config = function()
+			require("neoclip").setup()
 		end,
 	})
 end)
