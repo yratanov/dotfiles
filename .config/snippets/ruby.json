@@ -1,0 +1,43 @@
+{
+  "initialize": {
+    "prefix": "init",
+    "body": [
+      "${1/([^,:]+)([,:\\s]*|)/# @return [...]\nattr_reader :$1\n/g}",
+      "${1/([^,:]+)([,:\\s]*|)/# @param $1 [...]${2:+\n}/g}",
+      "def initialize($1)",
+      "${1/([^,:]+)([,:\\s]*|)/\t@$1 = $1${2:+\n}/g}",
+      "end"
+    ]
+  },
+
+
+  "yard func param": {
+    "prefix": "yp",
+    "body": ["# @param $1 [$2]"]
+  },
+  "yard return": {
+    "prefix": "yr",
+    "body": ["# @return [$2]"]
+  },
+
+  "let": {
+    "prefix": "let",
+    "body": ["let(:$1) { $0 }"]
+  },
+  "instance double": {
+    "prefix": "id",
+    "body": ["instance_double"]
+  },
+  "describe": {
+    "prefix": "desc",
+    "body": ["describe '#$1' do", "$0", "end"]
+  },
+  "context": {
+    "prefix": "con",
+    "body": ["context 'when $1' do", "$0", "end"]
+  },
+  "expect": {
+    "prefix": "exp",
+    "body": ["expect($1).to $2"]
+  }
+}

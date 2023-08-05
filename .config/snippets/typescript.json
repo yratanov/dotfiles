@@ -1,0 +1,152 @@
+{
+  "pause Test": {
+    "prefix": "pt",
+    "body": ["await this.pauseTest();"]
+  },
+  "log": {
+    "prefix": "pp",
+    "body": ["console.log($1);"]
+  },
+  "qtest": {
+    "prefix": "qtest",
+    "body": ["test('$1', async function(assert) {", "$0", "});"]
+  },
+  "server create": {
+    "prefix": "scr",
+    "body": ["server.create('$1', { $2 });"]
+  },
+  "assert po": {
+    "prefix": "apo",
+    "body": ["assert.po($1)$2;"]
+  },
+  "import env": {
+    "prefix": "ien",
+    "body": ["import ENV from 'pulse-front-end/config/environment';"]
+  },
+  "ember data": {
+    "prefix": "ids",
+    "body": ["import DS from 'ember-data';"]
+  },
+  "ember data / store": {
+    "prefix": "idst",
+    "body": ["import Store from '@ember-data/store';"]
+  },
+  "ember data / model": {
+    "prefix": "idsm",
+    "body": ["import Model from '@ember-data/model';"]
+  },
+  "service inject": {
+    "prefix": "iser",
+    "body": ["import { inject as service } from '@ember/service';"]
+  },
+  "@service": {
+    "prefix": "ss",
+    "body": ["@service declare $1: $2;"]
+  },
+  "qunit module": {
+    "prefix": "qmod",
+    "body": [
+      "module('$1', function (hooks) {",
+      "  hooks.beforeEach(function () {",
+      "    $2",
+      "  });",
+      "  test('$3', async function(assert) {",
+      "    $0",
+      "  });",
+      "});"
+    ]
+  },
+  "component": {
+    "prefix": "ecomp",
+    "body": [
+        "import Component from '@glimmer/component';",
+        "",
+        "export interface ${1:${RELATIVE_FILEPATH/^(app\\/components\\/)(\\w)(.+).ts/${2:/upcase}${3:/camelcase}/}}Signature {",
+          "Element: HTMLDivElement;",
+          "Args: {",
+            "$3",
+          "};",
+          "Blocks: {",
+            "default?: [];",
+          "};",
+        "}",
+        "",
+        "export default class ${1} extends Component<${1}Signature> {",
+          "$0",
+        "}",
+        "",
+        "declare module '@glint/environment-ember-loose/registry' {",
+          "export default interface Registry {",
+            "'${RELATIVE_FILEPATH/^(app\\/components\\/)(.+).ts/$2}': typeof ${1};",
+          "}",
+        "}"
+    ]
+  },
+
+  "component signature": {
+    "prefix": "csig",
+    "body": [
+      "export interface ${1}Signature {",
+      "Element: ${2:HTMLDivElement};",
+      "Args: {",
+      "$3",
+      "};",
+      "Yields: {",
+      "default?: [$4];",
+      "};",
+      "}"
+    ]
+  },
+  "declare belongs to": {
+    "prefix": "dbel",
+    "body": ["declare $1: DS.PromiseObject<$2>;"]
+  },
+  "declare has many to": {
+    "prefix": "dman",
+    "body": ["declare $1s: DS.PromiseManyArray<$2>;"]
+  },
+  "model signature": {
+    "prefix": "mreg",
+    "body": [
+      "declare module 'ember-data/types/registries/model' {",
+      "  export default interface ModelRegistry {",
+      "    $1: $2;",
+      "  }",
+      "}"
+    ]
+  },
+  "component registry": {
+    "prefix": "creg",
+    "body": [
+      "declare module '@glint/environment-ember-loose/registry' {",
+      "  export default interface Registry {",
+      "    $1: typeof $1;",
+      "  }",
+      "}"
+    ]
+  },
+  "import helper glint": {
+    "prefix": "ihelp",
+    "body": [
+      "import { helper } from '@glint/environment-ember-loose/ember-component/helper';"
+    ]
+  },
+  "import component glint": {
+    "prefix": "icomp",
+    "body": [
+      "import Component from '@glint/environment-ember-loose/glimmer-component';"
+    ]
+  },
+  "import template only component glint": {
+    "prefix": "itemp",
+    "body": [
+      "import templateOnlyComponent from '@glint/environment-ember-loose/ember-component/template-only';"
+    ]
+  },
+  "import component with bound args from glint": {
+    "prefix": "icarg",
+    "body": [
+      "import { ComponentWithBoundArgs } from '@glint/environment-ember-loose';"
+    ]
+  }
+}

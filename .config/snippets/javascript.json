@@ -1,0 +1,39 @@
+{
+  "pause Test": {
+    "prefix": "pt",
+    "body": ["await this.pauseTest();"]
+  },
+  "log": {
+    "prefix": "log",
+    "body": ["console.log($1);"]
+  },
+  "qtest": {
+    "prefix": "qtest",
+    "body": ["test('$1', async function(assert) {", "$0", "});"]
+  },
+  "server create": {
+    "prefix": "scr",
+    "body": ["server.create('$1', { $2 });"]
+  },
+  "assert po": {
+    "prefix": "apo",
+    "body": ["assert.po($1).$2;"]
+  },
+  "ember data": {
+    "prefix": "ids",
+    "body": ["import DS from 'ember-data';"]
+  },
+  "qunit module": {
+    "prefix": "qmod",
+    "body": [
+      "module('$1', function (hooks) {",
+      "  hooks.beforeEach(function () {",
+      "    $2",
+      "  });",
+      "  test('$3', async function(assert) {",
+      "    $0",
+      "  });",
+      "});"
+    ]
+  }
+}
