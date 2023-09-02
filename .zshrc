@@ -149,6 +149,8 @@ alias mux="tmuxinator"
 alias api="mux start api"
 alias frontend="mux start frontend"
 alias dotf="mux start nvim"
+alias nv="nvim"
+alias merge_qa="~/.config/nvim/scripts/git_merge_current_to_qa.sh"
 
 # export PATH="/opt/homebrew/opt/node@16/bin:$PATH"
 
@@ -158,7 +160,7 @@ alias op-signin="op signin my"
 source "$HOME/.cargo/env"
 export PATH="/Users/yuri/scripts:/opt/homebrew/opt/openjdk/bin:$PATH"
 export EDITOR='nvim'
-alias config='/usr/bin/git --git-dir=/Users/yuri/.cfg/ --work-tree=/Users/yuri'
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 
 
