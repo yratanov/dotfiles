@@ -6,6 +6,7 @@ return require("packer").startup(function(use)
 
 	-- Theme
 	use({ "rose-pine/neovim", as = "rose-pine" })
+	use({ "catppuccin/nvim", as = "catppuccin" })
 	use("nvim-tree/nvim-web-devicons")
 	use("NvChad/nvim-colorizer.lua") -- CSS color highlight
 
@@ -17,6 +18,10 @@ return require("packer").startup(function(use)
 	})
 	use({ "otavioschwanck/telescope-alternate" }) -- Alternate files
 	use("nvim-telescope/telescope-live-grep-args.nvim")
+	use({
+		"nvim-telescope/telescope-fzf-native.nvim",
+		run = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+	})
 
 	-- File browser
 	use({
@@ -27,6 +32,7 @@ return require("packer").startup(function(use)
 	-- Code highlight
 	use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
 	use("nvim-treesitter/nvim-treesitter-context")
+	use("nvim-treesitter/nvim-treesitter-textobjects")
 	use("windwp/nvim-ts-autotag") -- Automatically close tags
 	use("RRethy/nvim-treesitter-endwise") -- Automatically close blocks
 
@@ -58,7 +64,7 @@ return require("packer").startup(function(use)
 			{ "hrsh7th/cmp-nvim-lsp" }, -- Required
 		},
 	})
-	use("glepnir/lspsaga.nvim")
+	-- use("glepnir/lspsaga.nvim")
 
 	use("antosha417/nvim-lsp-file-operations")
 	use("onsails/lspkind-nvim") -- LSP icons
@@ -150,7 +156,7 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	use("f-person/auto-dark-mode.nvim")
+	-- use("f-person/auto-dark-mode.nvim")
 
 	use("tpope/vim-dotenv")
 
@@ -186,8 +192,7 @@ return require("packer").startup(function(use)
 
 	use({
 		"AckslD/nvim-neoclip.lua",
-		config = function()
-			require("neoclip").setup()
-		end,
 	})
+
+	use({ "stevearc/dressing.nvim" })
 end)

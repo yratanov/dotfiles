@@ -17,11 +17,11 @@
   },
   "span": {
     "prefix": "span",
-    "body": ["<span class=\"$1\">", "$2", "</span>"]
+    "body": ["<span class=\"$1\">", "$0", "</span>"]
   },
   "div": {
     "prefix": "div",
-    "body": ["<div class=\"$1\">", "$2", "</div>"]
+    "body": ["<div class=\"$1\">", "$0", "</div>"]
   },
   "cl": {
     "prefix": "cl",
@@ -29,7 +29,7 @@
   },
   "unless": {
     "prefix": "unless",
-    "body": ["{{#unless $1}}", "$2", "{{/unless}}"]
+    "body": ["{{#unless $1}}", "$0", "{{/unless}}"]
   },
   "each": {
     "prefix": "each",

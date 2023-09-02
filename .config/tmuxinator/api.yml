@@ -47,7 +47,7 @@ root: ~/projects/pulse-app/api
 windows:
   - editor: nvim
   - server: bundle exec rails s
-  - logs: tail -f log/development.log
+  - console: bundle exec rails c
   - sidekiq:
       layout: even-horizontal
       panes:

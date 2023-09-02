@@ -30,10 +30,15 @@
       "  hooks.beforeEach(function () {",
       "    $2",
       "  });",
+      "",
       "  test('$3', async function(assert) {",
       "    $0",
       "  });",
       "});"
     ]
+  },
+  "service inject": {
+    "prefix": "iser",
+    "body": ["import { inject as service } from '@ember/service';"]
   }
 }

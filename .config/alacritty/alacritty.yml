@@ -11,7 +11,7 @@
 #import:
 #  - /path/to/alacritty.yml
 import:
- - ~/.config/alacritty/themes/themes/rose-pine-dawn.yaml
+   - ~/.config/alacritty/catppuccin/catppuccin-frappe.yml
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty itself.
@@ -467,7 +467,7 @@ cursor:
 # Offer IPC using `alacritty msg` (unix only)
 #ipc_socket: true
 
-#mouse:
+mouse:
   # Click settings
   #
   # The `double_click` and `triple_click` settings control the time
@@ -477,7 +477,7 @@ cursor:
   #triple_click: { threshold: 300 }
 
   # If this is `true`, the cursor is temporarily hidden when typing.
-  #hide_when_typing: false
+  hide_when_typing: true
 
 # Hints
 #
