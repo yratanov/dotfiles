@@ -15,7 +15,6 @@ lsp.ensure_installed({
 
 require("luasnip.loaders.from_vscode").lazy_load()
 require("luasnip.loaders.from_vscode").load({ paths = { "~/.config/snippets" } })
-require("lspsaga").setup({})
 
 local nvim_lsp = require("lspconfig")
 
@@ -116,10 +115,10 @@ local ls = require("luasnip")
 --
 vim.keymap.set({ "i" }, "<Tab>", function()
 	if ls.expand_or_jumpable() then
-    ls.expand()
-  else
-    ls.jump(1)
-  end
+		ls.expand()
+	else
+		ls.jump(1)
+	end
 end)
 vim.keymap.set({ "i", "s" }, "<S-Tab>", function()
 	ls.jump(-1)
