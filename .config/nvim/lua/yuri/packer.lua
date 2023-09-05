@@ -5,7 +5,7 @@ return require("packer").startup(function(use)
 	use("wbthomason/packer.nvim")
 
 	-- Theme
-	use({ "rose-pine/neovim", as = "rose-pine" })
+	-- use({ "rose-pine/neovim", as = "rose-pine" })
 	use({ "catppuccin/nvim", as = "catppuccin" })
 	use("nvim-tree/nvim-web-devicons")
 	use("NvChad/nvim-colorizer.lua") -- CSS color highlight
@@ -104,7 +104,16 @@ return require("packer").startup(function(use)
 	})
 
 	-- Test runner
-	use("klen/nvim-test")
+	-- use("klen/nvim-test")
+	use({
+		"nvim-neotest/neotest",
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+			"antoinemadec/FixCursorHold.nvim",
+			"olimorris/neotest-rspec",
+		},
+	})
 
 	use({
 		"numToStr/Comment.nvim",
@@ -142,8 +151,8 @@ return require("packer").startup(function(use)
 	})
 
 	-- Automatically close brackets
-	use("m4xshen/autoclose.nvim")
-	require("autoclose").setup()
+	-- use("m4xshen/autoclose.nvim")
+	-- require("autoclose").setup()
 
 	use({
 		"gbprod/substitute.nvim",
@@ -195,4 +204,12 @@ return require("packer").startup(function(use)
 	})
 
 	use({ "stevearc/dressing.nvim" })
+
+	use({
+		"ThePrimeagen/refactoring.nvim",
+		requires = {
+			{ "nvim-lua/plenary.nvim" },
+			{ "nvim-treesitter/nvim-treesitter" },
+		},
+	})
 end)

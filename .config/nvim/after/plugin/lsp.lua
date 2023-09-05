@@ -18,25 +18,39 @@ require("luasnip.loaders.from_vscode").load({ paths = { "~/.config/snippets" } }
 
 local nvim_lsp = require("lspconfig")
 
+require("lspconfig").lua_ls.setup({
+	settings = {
+		Lua = {
+			diagnostics = {
+				-- Get the language server to recognize the `vim` global
+				globals = { "vim" },
+			},
+		},
+	},
+})
+
 nvim_lsp.solargraph.setup({
 	cmd = { os.getenv("HOME") .. "/.rbenv/shims/solargraph", "stdio" },
-	--   root_dir = nvim_lsp.util.root_pattern("Gemfile", ".git", "."),
 	filetypes = { "ruby", "thor", "rake", "Gemfile" },
 })
 
 lsp.on_attach(function(client, bufnr)
 	local opts = { buffer = bufnr, remap = false }
 
-	vim.keymap.set("n", "gd", "<cmd>Lspsaga goto_definition<CR>", opts)
+	vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+	vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+	vim.keymap.set("n", "gs", vim.lsp.buf.references, { buffer = bufnr, remap = false, desc = "[LSP] Finder" })
 
-	vim.keymap.set("n", "gs", "<Cmd>Lspsaga lsp_finder<CR>", { buffer = bufnr, remap = false, desc = "[LSP] Finder" })
-
-	vim.keymap.set("n", "gi", "<Cmd>Lspsaga hover_doc<CR>", { buffer = bufnr, remap = false, desc = "[LSP] Hover doc" })
-
+	vim.keymap.set("n", "gi", vim.lsp.buf.type_definition, { buffer = bufnr, remap = false, desc = "[LSP] Hover doc" })
+	vim.keymap.set(
+		{ "n", "v" },
+		"<leader>va",
+		vim.lsp.buf.code_action,
+		{ buffer = bufnr, remap = false, desc = "[LSP] Code actions" }
+	)
 	vim.keymap.set("n", "<leader>vws", function()
 		vim.lsp.buf.workspace_symbol()
 	end, { buffer = bufnr, remap = false, desc = "[LSP] Workspace symbol" })
-	vim.keymap.set("n", "<leader>sc", "<cmd>Lspsaga show_cursor_diagnostics<CR>")
 	vim.keymap.set("n", "<leader>vh", function()
 		vim.diagnostic.open_float()
 	end, { buffer = bufnr, remap = false, desc = "[LSP] Open float" })
@@ -49,12 +63,6 @@ lsp.on_attach(function(client, bufnr)
 		vim.diagnostic.goto_prev()
 	end, { buffer = bufnr, remap = false, desc = "[LSP] Goto prev" })
 
-	vim.keymap.set(
-		"n",
-		"<leader>va",
-		"<cmd>Lspsaga code_action<CR>",
-		{ buffer = bufnr, remap = false, desc = "[LSP] Code action" }
-	)
 	vim.keymap.set("n", "<leader>ve", function()
 		vim.lsp.buf.references()
 	end, { buffer = bufnr, remap = false, desc = "[LSP] References" })
@@ -114,12 +122,15 @@ local ls = require("luasnip")
 -- })
 --
 vim.keymap.set({ "i" }, "<Tab>", function()
-	if ls.expand_or_jumpable() then
+	if ls.expandable() then
 		ls.expand()
-	else
+	elseif ls.jumpable() then
 		ls.jump(1)
+	else
+		vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, true, true), "n", true)
 	end
 end)
+
 vim.keymap.set({ "i", "s" }, "<S-Tab>", function()
 	ls.jump(-1)
 end, { silent = true })

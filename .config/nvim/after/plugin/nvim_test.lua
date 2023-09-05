@@ -1,34 +1,37 @@
-require("nvim-test").setup({
-	run = true, -- run tests (using for debug)
-	commands_create = true, -- create commands (TestFile, TestLast, ...)
-	filename_modifier = ":.", -- modify filenames before tests run(:h filename-modifiers)
-	silent = false, -- less notifications
-	term = "terminal", -- a terminal to run ("terminal"|"toggleterm")
-	termOpts = {
-		direction = "vertical", -- terminal's direction ("horizontal"|"vertical"|"float")
-		width = 96, -- terminal's width (for vertical|float)
-		height = 24, -- terminal's height (for horizontal|float)
-		go_back = true, -- return focus to original window after executing
-		stopinsert = "auto", -- exit from insert mode (true|false|"auto")
-		keep_one = true, -- keep only one terminal for testing
+local neotest = require("neotest")
+
+neotest.setup({
+	adapters = {
+		require("neotest-rspec")({}),
 	},
-	runners = { -- setup tests runners
-		-- cs = "nvim-test.runners.dotnet",
-		-- go = "nvim-test.runners.go-test",
-		-- haskell = "nvim-test.runners.hspec",
-		-- javascriptreact = "nvim-test.runners.jest",
-		-- javascript = "nvim-test.runners.jest",
-		-- lua = "nvim-test.runners.busted",
-		-- python = "nvim-test.runners.pytest",
-		ruby = "nvim-test.runners.rspec",
-		-- rust = "nvim-test.runners.cargo-test",
-		-- typescript = "nvim-test.runners.jest",
-		-- typescriptreact = "nvim-test.runners.jest",
+	summary = {
+		open = "botright vsplit | vertical resize 75",
 	},
 })
 
-vim.keymap.set("n", "<leader>tl", "<Cmd>TestNearest<Cr>", { desc = "[TESTS] Run tests on line" })
+vim.keymap.set("n", "<leader>tl", function()
+	vim.cmd("wa")
+	neotest.run.run()
+end, { desc = "[TESTS] Run tests on line" })
 
-vim.keymap.set("n", "<leader>re", "<Cmd>TestLast<Cr>", { desc = "[TESTS] Rerun" })
+vim.keymap.set("n", "<leader>re", function()
+	vim.cmd("wa")
+	neotest.run.run_last()
+end, { desc = "[TESTS] Rerun" })
 
-vim.keymap.set("n", "<leader>tf", "<Cmd>TestFile<Cr>", { desc = "[TESTS] Run all tests in file" })
+vim.keymap.set("n", "<leader>ts", function()
+	neotest.summary.toggle()
+end, { desc = "[TESTS] Toggle Summary" })
+
+vim.keymap.set("n", "<leader>tf", function()
+	vim.cmd("wa")
+	neotest.run.run(vim.fn.expand("%"))
+end, { desc = "[TESTS] Run all tests in file" })
+
+vim.keymap.set("n", "<leader>td", function()
+	neotest.output.open({ enter = true })
+end, { desc = "[TESTS] Open test output" })
+
+vim.keymap.set("n", "<leader>to", function()
+	neotest.output_panel.toggle()
+end, { desc = "[TESTS] toggle test output panel" })

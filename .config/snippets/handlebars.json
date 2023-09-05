@@ -42,5 +42,17 @@
   "Stack": {
     "prefix": "stk",
     "body": ["<Stack as |Item|>", "<Item>$1</Item>", "</Stack>"]
+  },
+  "did-insert": {
+    "prefix": "di",
+    "body": ["{{did-insert $1}}"]
+  },
+  "did-update": {
+    "prefix": "du",
+    "body": ["{{did-update $1}}"]
+  },
+  "perform": {
+    "prefix": "pf",
+    "body": ["(perform $1)"]
   }
 }

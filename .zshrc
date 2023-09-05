@@ -151,6 +151,7 @@ alias frontend="mux start frontend"
 alias dotf="mux start nvim"
 alias nv="nvim"
 alias merge_qa="~/.config/nvim/scripts/git_merge_current_to_qa.sh"
+alias tt="~/.config/scripts/new-tmux-session.sh"
 
 # export PATH="/opt/homebrew/opt/node@16/bin:$PATH"
 
@@ -162,6 +163,9 @@ export PATH="/Users/yuri/scripts:/opt/homebrew/opt/openjdk/bin:$PATH"
 export EDITOR='nvim'
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
-
+export FZF_DEFAULT_OPTS=" \
+--color=bg+:#414559,bg:#303446,spinner:#f2d5cf,hl:#e78284 \
+--color=fg:#c6d0f5,header:#e78284,info:#ca9ee6,pointer:#f2d5cf \
+--color=marker:#f2d5cf,fg+:#c6d0f5,prompt:#ca9ee6,hl+:#e78284"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
