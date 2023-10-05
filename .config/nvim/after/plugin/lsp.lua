@@ -31,7 +31,17 @@ require("lspconfig").lua_ls.setup({
 
 nvim_lsp.solargraph.setup({
 	cmd = { os.getenv("HOME") .. "/.rbenv/shims/solargraph", "stdio" },
-	filetypes = { "ruby", "thor", "rake", "Gemfile" },
+	filetypes = { "ruby", "thor", "rake" },
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "ruby",
+	callback = function()
+		vim.lsp.start({
+			name = "rubocop",
+			cmd = { os.getenv("HOME") .. "/.rbenv/shims/rubocop", "--lsp" },
+		})
+	end,
 })
 
 lsp.on_attach(function(client, bufnr)

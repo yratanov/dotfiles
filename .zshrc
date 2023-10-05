@@ -83,6 +83,7 @@ plugins=(
   git 
   rbenv
   nvm
+  gh
   zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
@@ -135,6 +136,8 @@ alias qa="ssh -i ~/.ssh/id_ed25519 pulse-rw@bastionqa.satchel.cloud"
 alias prod="ssh -i ~/.ssh/id_ed25519 pulse-rw@bastionprod.satchel.cloud"
 alias ukprod="ssh -i ~/.ssh/id_ed25519 pulse-uk-rw@bastionprod.satchel.cloud"
 alias ukqa="ssh -i ~/.ssh/id_ed25519 pulse-uk-rw@bastionqa.satchel.cloud"
+alias caprod="ssh -i ~/.ssh/id_ed25519 pulse-ca-rw@bastionprod.satchel.cloud"
+alias caqa="ssh -i ~/.ssh/id_ed25519 pulse-ca-rw@bastionqa.satchel.cloud"
 alias exam="ember exam --split=10 --parallel > log/test.log"
 alias rc="rails console"
 alias rdm="rake db:migrate"
@@ -145,6 +148,7 @@ alias src="spring rails c"
 alias bi="bundle install"
 alias bsq="bundle exec sidekiq -C config/sidekiq.yml"
 alias bsqc="bundle exec sidekiq -C config/sidekiq.sel_calculations.yml"
+alias ber="bundle exec rspec"
 alias mux="tmuxinator"
 alias api="mux start api"
 alias frontend="mux start frontend"
@@ -152,6 +156,7 @@ alias dotf="mux start nvim"
 alias nv="nvim"
 alias merge_qa="~/.config/nvim/scripts/git_merge_current_to_qa.sh"
 alias tt="~/.config/scripts/new-tmux-session.sh"
+alias nb="~/.config/scripts/feature-branch.sh"
 
 # export PATH="/opt/homebrew/opt/node@16/bin:$PATH"
 
@@ -169,3 +174,17 @@ export FZF_DEFAULT_OPTS=" \
 --color=marker:#f2d5cf,fg+:#c6d0f5,prompt:#ca9ee6,hl+:#e78284"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# pnpm
+export PNPM_HOME="/Users/yuri/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+# bun completions
+[ -s "/Users/yuri/.bun/_bun" ] && source "/Users/yuri/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

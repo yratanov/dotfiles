@@ -23,7 +23,7 @@ vim.keymap.set("n", "<leader>ts", function()
 	neotest.summary.toggle()
 end, { desc = "[TESTS] Toggle Summary" })
 
-vim.keymap.set("n", "<leader>tf", function()
+vim.keymap.set("n", "<leader>te", function()
 	vim.cmd("wa")
 	neotest.run.run(vim.fn.expand("%"))
 end, { desc = "[TESTS] Run all tests in file" })

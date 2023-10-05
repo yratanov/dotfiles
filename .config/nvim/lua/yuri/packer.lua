@@ -91,7 +91,37 @@ return require("packer").startup(function(use)
 
 	-- Utils
 	use("mg979/vim-visual-multi")
-	use("github/copilot.vim")
+	use({
+		"zbirenbaum/copilot.lua",
+		cmd = "Copilot",
+		event = "InsertEnter",
+		config = function()
+			require("copilot").setup({
+				suggestion = {
+					enabled = true,
+					auto_trigger = true,
+					debounce = 75,
+					keymap = {
+						accept = "<C-j>",
+						accept_word = false,
+						accept_line = false,
+						next = "<M-]>",
+						prev = "<M-[>",
+						dismiss = "<C-]>",
+					},
+				},
+				filetypes = {
+					help = false,
+					gitcommit = false,
+					gitrebase = false,
+					hgcommit = false,
+					svn = false,
+					cvs = false,
+					["."] = false,
+				},
+			})
+		end,
+	})
 
 	use({
 		"kylechui/nvim-surround",
@@ -186,18 +216,18 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	use({
-		"rmagatti/auto-session",
-		requires = {
-			{ "nvim-telescope/telescope.nvim" },
-		},
-		config = function()
-			require("auto-session").setup({
-				log_level = "error",
-				auto_session_suppress_dirs = { "~/", "~/projects", "~/Downloads", "/" },
-			})
-		end,
-	})
+	-- use({
+	-- 	"rmagatti/auto-session",
+	-- 	requires = {
+	-- 		{ "nvim-telescope/telescope.nvim" },
+	-- 	},
+	-- 	config = function()
+	-- 		require("auto-session").setup({
+	-- 			log_level = "error",
+	-- 			auto_session_suppress_dirs = { "~/", "~/projects", "~/Downloads", "/" },
+	-- 		})
+	-- 	end,
+	-- })
 
 	use({
 		"AckslD/nvim-neoclip.lua",

@@ -10,7 +10,6 @@
     ]
   },
 
-
   "yard func param": {
     "prefix": "yp",
     "body": ["# @param $1 [$2]"]
@@ -31,6 +30,18 @@
   "describe": {
     "prefix": "desc",
     "body": ["describe '#$1' do", "$0", "end"]
+  },
+  "create_list": {
+    "prefix": "cl",
+    "body": ["create_list(:$1, $2)"]
+  },
+  "create": {
+    "prefix": "cr",
+    "body": ["create(:$0)"]
+  },
+  "build_stubbed": {
+    "prefix": "bs",
+    "body": ["build_stubbed(:$1)"]
   },
   "context": {
     "prefix": "con",

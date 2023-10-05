@@ -11,12 +11,12 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 	desc = "Auto inject yard doc",
 })
 
-vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-	pattern = { "*.erb" },
-	callback = function()
-		local file_path = vim.fn.expand("%:p")
-
-		vim.cmd("silent !" .. "/Users/yuri/.rbenv/shims/erb-format" .. " " .. file_path .. " --write")
-	end,
-	desc = "Auto format erb files",
-})
+-- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+-- 	pattern = { "*.erb" },
+-- 	callback = function()
+-- 		local file_path = vim.fn.expand("%:p")
+--
+-- 		vim.cmd("silent !" .. "/Users/yuri/.rbenv/shims/erb-format" .. " " .. file_path .. " --write")
+-- 	end,
+-- 	desc = "Auto format erb files",
+-- })

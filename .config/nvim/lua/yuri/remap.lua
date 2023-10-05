@@ -57,3 +57,7 @@ vim.keymap.set("n", "<Leader>rgc", ":terminal bundle exec rails g controller ", 
 vim.keymap.set("n", "<Leader>db", ":%bd|e#<CR>", { noremap = true })
 
 vim.keymap.set("n", "<Leader>gqa", ":terminal ~/.config/nvim/scripts/git_merge_current_to_qa.sh", { noremap = true })
+
+vim.keymap.set("n", "<Leader>jt", ":%!sh ~/.config/scripts/jira-from-branch.sh<CR>", { noremap = true, silent = true })
+
+vim.keymap.set("n", "<Leader>tp", "/PL<CR>yt/ggpA ")
