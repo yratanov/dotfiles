@@ -10,10 +10,11 @@ TMUXINATORS=$(tmuxinator list | tail -n 1 | tr -s "[:space:]" "\n" | awk '{print
 
 SELECTED=$(printf "$PROJECTS\n$TMUXINATORS" | fzf-tmux)
 
-if [[ $SELECTED == *"TMUXINATOR"* ]]; then
+
+if [[ $SELECTED == *""* ]]; then
   tmuxinator $(echo $SELECTED | awk '{print $2}')
 else
-  SELECTED=$(echo $SELECTED | awk '{print $1}')
+  SELECTED=$(echo $SELECTED | awk '{print $2}')
 
   if [ $TMUX ]; then
     tmux new-session -d -s $SELECTED -c "$PROJECTS_DIR/$SELECTED"

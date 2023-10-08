@@ -48,14 +48,6 @@ vim.keymap.set("n", "<Leader><Leader>", "<C-^>", { noremap = true })
 
 vim.keymap.set("n", "<Leader>cp", ':let @+ = expand("%")<cr>', { noremap = true })
 
-vim.keymap.set("n", "<Leader>rdm", ":terminal bundle exec rails db:migrate<CR>", { noremap = true })
-vim.keymap.set("n", "<Leader>rdr", ":terminal bundle exec rails db:rollback<CR>", { noremap = true })
-vim.keymap.set("n", "<Leader>rgr", ":terminal bundle exec rails g migration ", { noremap = true })
-vim.keymap.set("n", "<Leader>rgm", ":terminal bundle exec rails g model ", { noremap = true })
-vim.keymap.set("n", "<Leader>rgc", ":terminal bundle exec rails g controller ", { noremap = true })
-
-vim.keymap.set("n", "<Leader>db", ":%bd|e#<CR>", { noremap = true })
-
 vim.keymap.set("n", "<Leader>gqa", ":terminal ~/.config/nvim/scripts/git_merge_current_to_qa.sh", { noremap = true })
 
 vim.keymap.set("n", "<Leader>jt", ":%!sh ~/.config/scripts/jira-from-branch.sh<CR>", { noremap = true, silent = true })
