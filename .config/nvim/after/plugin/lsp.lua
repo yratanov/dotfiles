@@ -10,10 +10,9 @@ lsp.ensure_installed({
 	"tailwindcss",
 	"ember",
 	"rust_analyzer",
-	"solargraph",
 })
 
-require("luasnip.loaders.from_vscode").lazy_load()
+require("luasnip.loaders.from_vscode").lazy_load({ exclude = { "ruby" } })
 require("luasnip.loaders.from_vscode").load({ paths = { "~/.config/snippets" } })
 
 local nvim_lsp = require("lspconfig")
@@ -29,10 +28,10 @@ require("lspconfig").lua_ls.setup({
 	},
 })
 
-nvim_lsp.solargraph.setup({
-	cmd = { os.getenv("HOME") .. "/.rbenv/shims/solargraph", "stdio" },
-	filetypes = { "ruby", "thor", "rake" },
-})
+-- nvim_lsp.solargraph.setup({
+-- 	cmd = { os.getenv("HOME") .. "/.rbenv/shims/solargraph", "stdio" },
+-- 	filetypes = { "ruby", "thor", "rake" },
+-- })
 
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "ruby",

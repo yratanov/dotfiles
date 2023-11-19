@@ -157,6 +157,7 @@ alias nv="nvim"
 alias merge_qa="~/.config/nvim/scripts/git_merge_current_to_qa.sh"
 alias tt="~/.config/scripts/new-tmux-session.sh"
 alias nb="~/.config/scripts/feature-branch.sh"
+alias gpr="gh pr create"
 
 # export PATH="/opt/homebrew/opt/node@16/bin:$PATH"
 

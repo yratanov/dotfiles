@@ -4,11 +4,11 @@ local conf = require("telescope.config").values
 local actions = require("telescope.actions")
 local action_state = require("telescope.actions.state")
 
-local rake = function(opts)
+local rails = function(opts)
 	opts = opts or {}
 	pickers
 		.new(opts, {
-			prompt_title = "rake",
+			prompt_title = "rails",
 			finder = finders.new_table({
 				results = { "db:migrate", "db:rollback", "g migration", "g model", "g controller" },
 			}),
@@ -35,5 +35,5 @@ local rake = function(opts)
 end
 
 vim.keymap.set("n", "<leader>ra", function()
-	rake(require("telescope.themes").get_dropdown({}))
-end, { desc = "[TELESCOPE] Rake commands" })
+	rails(require("telescope.themes").get_dropdown({}))
+end, { desc = "[TELESCOPE] Rails commands" })
