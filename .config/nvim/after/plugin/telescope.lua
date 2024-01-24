@@ -1,5 +1,6 @@
 local builtin = require("telescope.builtin")
 local telescope = require("telescope")
+local lga_actions = require("telescope-live-grep-args.actions")
 
 telescope.setup({
 	defaults = {
@@ -11,6 +12,20 @@ telescope.setup({
 		},
 	},
 	extensions = {
+		live_grep_args = {
+			auto_quoting = true, -- enable/disable auto-quoting
+			-- define mappings, e.g.
+			mappings = { -- extend mappings
+				i = {
+					["<C-k>"] = lga_actions.quote_prompt(),
+					["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+				},
+			},
+			-- ... also accepts theme settings, for example:
+			-- theme = "dropdown", -- use dropdown theme
+			-- theme = { }, -- use own theme spec
+			-- layout_config = { mirror=true }, -- mirror preview pane
+		},
 		fzf = {
 			fuzzy = true, -- false will only do exact matching
 			override_generic_sorter = true, -- override the generic sorter
@@ -50,11 +65,28 @@ local function singularize(name)
 	return out
 end
 
+function vim.getVisualSelection()
+	vim.cmd('noau normal! "vy"')
+	local text = vim.fn.getreg("v")
+	vim.fn.setreg("v", {})
+
+	text = string.gsub(text, "\n", "")
+	if #text > 0 then
+		return text
+	else
+		return ""
+	end
+end
+
 vim.keymap.set("n", "<leader>o", function()
 	builtin.find_files({ hidden = true })
 end, { desc = "[TELESCOPE] Find files" })
 
 vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "[TELESCOPE] Grep current word" })
+vim.keymap.set("v", "<leader>f", function()
+	local text = vim.getVisualSelection()
+	builtin.live_grep({ default_text = text })
+end, { desc = "[TELESCOPE] Grep current word" })
 vim.keymap.set("n", "<leader>f/", builtin.current_buffer_fuzzy_find, { desc = "[TELESCOPE] Find current buffer" })
 vim.keymap.set("n", "<leader>fi", builtin.search_history, { desc = "[TELESCOPE] Search history" })
 

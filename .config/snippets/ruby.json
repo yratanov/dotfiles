@@ -23,6 +23,10 @@
     "prefix": "let",
     "body": ["let(:$1) { $0 }"]
   },
+  "let!": {
+    "prefix": "let!",
+    "body": ["let!(:$1) { $0 }"]
+  },
   "instance double": {
     "prefix": "id",
     "body": ["instance_double"]
@@ -46,6 +50,10 @@
   "context": {
     "prefix": "con",
     "body": ["context 'when $1' do", "$0", "end"]
+  },
+  "it": {
+    "prefix": "it",
+    "body": ["it '$1' do", "$0", "end"]
   },
   "expect": {
     "prefix": "exp",
