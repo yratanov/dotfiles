@@ -13,7 +13,7 @@ return require("packer").startup(function(use)
 	-- Fuzzy search
 	use({
 		"nvim-telescope/telescope.nvim",
-		tag = "0.1.1",
+		tag = "0.1.x",
 		requires = { { "nvim-lua/plenary.nvim" } },
 	})
 	use({ "otavioschwanck/telescope-alternate" }) -- Alternate files

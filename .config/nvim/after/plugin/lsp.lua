@@ -33,16 +33,16 @@ require("lspconfig").lua_ls.setup({
 -- 	filetypes = { "ruby", "thor", "rake" },
 -- })
 
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "ruby",
-	callback = function()
-		vim.lsp.start({
-			name = "rubocop",
-			cmd = { os.getenv("HOME") .. "/.rbenv/shims/rubocop", "--lsp" },
-		})
-	end,
-})
-
+-- vim.api.nvim_create_autocmd("FileType", {
+-- 	pattern = "ruby",
+-- 	callback = function()
+-- 		vim.lsp.start({
+-- 			name = "rubocop",
+-- 			cmd = { os.getenv("HOME") .. "/.rbenv/shims/rubocop", "--lsp" },
+-- 		})
+-- 	end,
+-- })
+--
 lsp.on_attach(function(client, bufnr)
 	local opts = { buffer = bufnr, remap = false }
 
