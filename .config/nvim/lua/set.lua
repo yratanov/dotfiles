@@ -28,3 +28,4 @@ vim.opt.colorcolumn = "80"
 vim.opt.spell = true
 vim.opt.spelloptions = "camel"
 vim.opt.spelllang = "en_us"
+

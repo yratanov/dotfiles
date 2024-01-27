@@ -1,0 +1,72 @@
+import = ["/Users/yuri/.config/alacritty/catppuccin/catppuccin-frappe.toml"]
+
+[cursor]
+thickness = 0.3
+
+[cursor.style]
+shape = "Block"
+
+[font]
+size = 15.0
+
+[font.italic]
+family = "JetBrainsMono Nerd Font"
+style = "Italic"
+
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+
+[hints]
+alphabet = "jfkdls;ahgurieowpq"
+
+[[hints.enabled]]
+command = "open"
+hyperlinks = true
+post_processing = true
+regex = "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)[^\u0000-\u001F\u007F-<>\"\\s{-}\\^⟨⟩`]+"
+
+[hints.enabled.binding]
+key = "U"
+mods = "Control|Shift"
+
+[hints.enabled.mouse]
+enabled = true
+mods = "None"
+
+[[keyboard.bindings]]
+chars = "\u00011"
+key = "Key1"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u00012"
+key = "Key2"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u00013"
+key = "Key3"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u00014"
+key = "Key4"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u00015"
+key = "Key5"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u0001S"
+key = "O"
+mods = "Command"
+
+[mouse]
+hide_when_typing = true
+
+[window]
+decorations = "buttonless"
+option_as_alt = "Both"
+startup_mode = "Maximized"
