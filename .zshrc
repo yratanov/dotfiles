@@ -11,7 +11,7 @@ fi
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/yuri/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -127,7 +127,7 @@ export CPPFLAGS="-I/opt/homebrew/opt/postgresql@12/include"
 
 # PATH=$(npm bin):$PATH
 
-# export NODE_OPTIONS="--require /Users/yuri/node-15-for-ember-monkeypatching.js"
+# export NODE_OPTIONS="--require $HOME/node-15-for-ember-monkeypatching.js"
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#878ede"
 
@@ -165,7 +165,7 @@ export OP_SESSION_my="k1-mrd0FdcTJHwkIu-vqeD5twcC_AELzZ4QEzzO3XD4"
 alias op-signin="op signin my"
 
 source "$HOME/.cargo/env"
-export PATH="/Users/yuri/scripts:/opt/homebrew/opt/openjdk/bin:$PATH"
+export PATH="$HOME/scripts:/opt/homebrew/opt/openjdk/bin:$PATH"
 export EDITOR='nvim'
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
@@ -177,14 +177,14 @@ export FZF_DEFAULT_OPTS=" \
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # pnpm
-export PNPM_HOME="/Users/yuri/Library/pnpm"
+export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
 # bun completions
-[ -s "/Users/yuri/.bun/_bun" ] && source "/Users/yuri/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
