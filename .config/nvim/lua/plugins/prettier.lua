@@ -20,7 +20,6 @@ return {
 					"typescript",
 					"typescriptreact",
 					"yaml",
-
 					"ruby",
 				},
 				["null-ls"] = {

@@ -96,10 +96,6 @@ return {
 						vim.lsp.buf.rename()
 					end, { buffer = bufnr, remap = false, desc = "[LSP] Rename" })
 
-					vim.keymap.set("n", "<leader>fo", function()
-						vim.lsp.buf.format()
-					end, { buffer = bufnr, remap = false, desc = "[LSP] Format" })
-
 					vim.keymap.set("i", "<c-h>", function()
 						vim.lsp.buf.signature_help()
 					end, { buffer = bufnr, remap = false, desc = "[LSP] Signature help" })
@@ -120,6 +116,19 @@ return {
 			--         info = "»",
 			-- })
 			--
+			--
+			--
+			local signs = {
+				Error = " ",
+				Warn = " ",
+				Hint = " ",
+				Info = " ",
+			}
+
+			for type, icon in pairs(signs) do
+				local hl = "DiagnosticSign" .. type
+				vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+			end
 			vim.diagnostic.config({
 				virtual_text = true,
 			})
@@ -143,11 +152,11 @@ return {
 			end, { silent = true })
 
 			cmp.setup({
-        snippet = {
-          expand = function(args)
-            require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
-          end,
-        },
+				snippet = {
+					expand = function(args)
+						require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
+					end,
+				},
 				mapping = cmp.mapping.preset.insert({
 					["<C-f>"] = function()
 						ls.jump(1)
@@ -180,6 +189,9 @@ return {
 			})
 
 			local null_ls = require("null-ls")
+			local group = vim.api.nvim_create_augroup("lsp_format_on_save", { clear = false })
+			local event = "BufWritePre" -- or "BufWritePost"
+			local async = event == "BufWritePost"
 
 			null_ls.setup({
 				sources = {
@@ -190,6 +202,38 @@ return {
 					null_ls.builtins.formatting.erb_lint,
 					null_ls.builtins.formatting.pg_format,
 				},
+				on_attach = function(client, bufnr)
+					if client.supports_method("textDocument/formatting") then
+						vim.keymap.set("n", "<Leader>fo", function()
+							vim.lsp.buf.format({
+								bufnr = vim.api.nvim_get_current_buf(),
+								filter = function(cl)
+									-- By default, ignore any formatters provider by other LSPs
+									-- (such as those managed via lspconfig or mason)
+									-- Also "eslint as a formatter" doesn't work :(
+									return cl.name == "null-ls"
+								end,
+							})
+						end, { buffer = bufnr, desc = "[lsp] format" })
+
+						-- format on save
+						vim.api.nvim_clear_autocmds({ buffer = bufnr, group = group })
+						vim.api.nvim_create_autocmd(event, {
+							buffer = bufnr,
+							group = group,
+							callback = function()
+								vim.lsp.buf.format({ bufnr = bufnr, async = async })
+							end,
+							desc = "[lsp] format on save",
+						})
+					end
+
+					if client.supports_method("textDocument/rangeFormatting") then
+						vim.keymap.set("x", "<Leader>f", function()
+							vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
+						end, { buffer = bufnr, desc = "[lsp] format" })
+					end
+				end,
 			})
 		end,
 	},

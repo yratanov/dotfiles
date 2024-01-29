@@ -1,7 +1,10 @@
 require("remap")
 require("set")
+require("helpers/auto_inject_yard")
+require("helpers/highlight_yank")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
     "git",
