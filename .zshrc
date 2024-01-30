@@ -167,7 +167,7 @@ alias op-signin="op signin my"
 source "$HOME/.cargo/env"
 export PATH="$HOME/scripts:/opt/homebrew/opt/openjdk/bin:$PATH"
 export EDITOR='nvim'
-alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias dfl='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 export FZF_DEFAULT_OPTS=" \
 --color=bg+:#414559,bg:#303446,spinner:#f2d5cf,hl:#e78284 \

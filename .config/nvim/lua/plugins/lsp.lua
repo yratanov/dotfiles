@@ -1,17 +1,6 @@
 return {
-	{ "onsails/lspkind-nvim" },
-	{ "nvimtools/none-ls.nvim" },
-	{ "ckipp01/stylua-nvim", build = "cargo install stylua" },
 	{ "williamboman/mason.nvim" },
 	{ "williamboman/mason-lspconfig.nvim" },
-	{ "hrsh7th/nvim-cmp" },
-	{ "hrsh7th/cmp-buffer" },
-	{ "hrsh7th/cmp-nvim-lsp" },
-	{
-		"L3MON4D3/LuaSnip",
-		version = "v2.*",
-		build = "make install_jsregexp",
-	},
 	{
 		"neovim/nvim-lspconfig",
 		init = function()
@@ -33,9 +22,6 @@ return {
 			nvim_lsp.ember.setup({})
 			nvim_lsp.lua_ls.setup({})
 			nvim_lsp.tailwindcss.setup({})
-
-			require("luasnip.loaders.from_vscode").lazy_load({ exclude = { "ruby" } })
-			require("luasnip.loaders.from_vscode").load({ paths = { "~/.config/snippets" } })
 
 			nvim_lsp.lua_ls.setup({
 				settings = {
@@ -109,15 +95,6 @@ return {
 				end,
 			})
 
-			-- lsp.set_sign_icons({
-			--         error = "✘",
-			--         warn = "▲",
-			--         hint = "⚑",
-			--         info = "»",
-			-- })
-			--
-			--
-			--
 			local signs = {
 				Error = " ",
 				Warn = " ",
@@ -131,109 +108,6 @@ return {
 			end
 			vim.diagnostic.config({
 				virtual_text = true,
-			})
-
-			local cmp = require("cmp")
-			local lspkind = require("lspkind")
-			local ls = require("luasnip")
-
-			vim.keymap.set({ "i" }, "<Tab>", function()
-				if ls.expandable() then
-					ls.expand()
-				elseif ls.jumpable() then
-					ls.jump(1)
-				else
-					vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, true, true), "n", true)
-				end
-			end)
-
-			vim.keymap.set({ "i", "s" }, "<S-Tab>", function()
-				ls.jump(-1)
-			end, { silent = true })
-
-			cmp.setup({
-				snippet = {
-					expand = function(args)
-						require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
-					end,
-				},
-				mapping = cmp.mapping.preset.insert({
-					["<C-f>"] = function()
-						ls.jump(1)
-					end,
-					["<C-b>"] = function()
-						ls.jump(-1)
-					end,
-					["<C-e>"] = cmp.mapping.abort(),
-					["<Cr>"] = cmp.mapping.confirm({ select = true }),
-					-- ["<Tab>"] = cmp_action.luasnip_supertab(),
-					["<C-Space>"] = cmp.mapping.complete(),
-					-- ["<S-Tab>"] = cmp_action.luasnip_shift_supertab(),
-				}),
-				sources = {
-					{ name = "nvim_lsp" },
-					{ name = "luasnip" },
-					{ name = "buffer" },
-				},
-				preselect = "item",
-				completion = {
-					completeopt = "menu,menuone,noinsert",
-				},
-				formatting = {
-					format = lspkind.cmp_format(),
-				},
-				window = {
-					completion = cmp.config.window.bordered(),
-					documentation = cmp.config.window.bordered(),
-				},
-			})
-
-			local null_ls = require("null-ls")
-			local group = vim.api.nvim_create_augroup("lsp_format_on_save", { clear = false })
-			local event = "BufWritePre" -- or "BufWritePost"
-			local async = event == "BufWritePost"
-
-			null_ls.setup({
-				sources = {
-					null_ls.builtins.formatting.prettierd.with({
-						filetypes = { "javascript", "typescript", "ruby", "handlebars", "json" },
-					}),
-					null_ls.builtins.formatting.stylua,
-					null_ls.builtins.formatting.erb_lint,
-					null_ls.builtins.formatting.pg_format,
-				},
-				on_attach = function(client, bufnr)
-					if client.supports_method("textDocument/formatting") then
-						vim.keymap.set("n", "<Leader>fo", function()
-							vim.lsp.buf.format({
-								bufnr = vim.api.nvim_get_current_buf(),
-								filter = function(cl)
-									-- By default, ignore any formatters provider by other LSPs
-									-- (such as those managed via lspconfig or mason)
-									-- Also "eslint as a formatter" doesn't work :(
-									return cl.name == "null-ls"
-								end,
-							})
-						end, { buffer = bufnr, desc = "[lsp] format" })
-
-						-- format on save
-						vim.api.nvim_clear_autocmds({ buffer = bufnr, group = group })
-						vim.api.nvim_create_autocmd(event, {
-							buffer = bufnr,
-							group = group,
-							callback = function()
-								vim.lsp.buf.format({ bufnr = bufnr, async = async })
-							end,
-							desc = "[lsp] format on save",
-						})
-					end
-
-					if client.supports_method("textDocument/rangeFormatting") then
-						vim.keymap.set("x", "<Leader>f", function()
-							vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
-						end, { buffer = bufnr, desc = "[lsp] format" })
-					end
-				end,
 			})
 		end,
 	},

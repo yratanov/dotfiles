@@ -102,7 +102,6 @@ return {
 			vim.keymap.set("n", "<leader>fi", builtin.search_history, { desc = "[TELESCOPE] Search history" })
 
 			vim.keymap.set("n", "<leader>ff", telescope_live_grep_args.live_grep_args, { desc = "[TELESCOPE] Grep" })
-			vim.keymap.set("n", "<leader>s", builtin.live_grep, { desc = "[TELESCOPE] Grep" })
 
 			vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "[TELESCOPE] Keymaps" })
 
