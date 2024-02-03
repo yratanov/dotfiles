@@ -28,26 +28,14 @@ return {
 							})
 						end, { buffer = bufnr, desc = "[lsp] format" })
 
-						-- format on save
-						-- vim.api.nvim_clear_autocmds({ buffer = bufnr, group = group })
-						-- vim.api.nvim_create_autocmd(event, {
-						-- 	buffer = bufnr,
-						-- 	group = group,
-						-- 	callback = function()
-						-- 		vim.lsp.buf.format({ bufnr = bufnr, async = async })
-						-- 	end,
-						-- 	desc = "[lsp] format on save",
-						-- })
-						if client.supports_method("textDocument/formatting") then
-							vim.api.nvim_clear_autocmds({ group = group, buffer = bufnr })
-							vim.api.nvim_create_autocmd("BufWritePre", {
-								group = group,
-								buffer = bufnr,
-								callback = function()
-									vim.lsp.buf.format()
-								end,
-							})
-						end
+						vim.api.nvim_clear_autocmds({ group = group, buffer = bufnr })
+						vim.api.nvim_create_autocmd("BufWritePre", {
+							group = group,
+							buffer = bufnr,
+							callback = function()
+								vim.lsp.buf.format()
+							end,
+						})
 					end
 
 					if client.supports_method("textDocument/rangeFormatting") then
