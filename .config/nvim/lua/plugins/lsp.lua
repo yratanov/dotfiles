@@ -14,14 +14,21 @@ return {
 					"rust_analyzer",
 					"lua_ls",
 					"solargraph",
+					"emmet-ls",
 				},
 			})
 			local nvim_lsp = require("lspconfig")
+			local capabilities = vim.lsp.protocol.make_client_capabilities()
+			capabilities.textDocument.completion.completionItem.snippetSupport = true
 			nvim_lsp.tsserver.setup({})
 			nvim_lsp.solargraph.setup({})
 			nvim_lsp.ember.setup({})
 			nvim_lsp.lua_ls.setup({})
 			nvim_lsp.tailwindcss.setup({})
+			nvim_lsp.emmet_ls.setup({
+				filetypes = { "html", "glimmer", "handlebars" },
+				capabilities = capabilities,
+			})
 
 			nvim_lsp.lua_ls.setup({
 				settings = {

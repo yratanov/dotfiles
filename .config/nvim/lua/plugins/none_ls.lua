@@ -33,7 +33,14 @@ return {
 							group = group,
 							buffer = bufnr,
 							callback = function()
-								vim.lsp.buf.format()
+								vim.lsp.buf.format({
+									bufnr = vim.api.nvim_get_current_buf(),
+									filter = function(cl)
+										-- By default, ignore any formatters provider by other LSPs
+										-- (such as those managed via lspconfig or mason)
+										return cl.name == "null-ls"
+									end,
+								})
 							end,
 						})
 					end
