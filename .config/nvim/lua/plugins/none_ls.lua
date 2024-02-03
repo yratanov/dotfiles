@@ -5,8 +5,6 @@ return {
 		init = function()
 			local null_ls = require("null-ls")
 			local group = vim.api.nvim_create_augroup("lsp_format_on_save", { clear = false })
-			local event = "BufWritePre" -- or "BufWritePost"
-			local async = event == "BufWritePost"
 
 			null_ls.setup({
 				sources = {
@@ -40,6 +38,16 @@ return {
 						-- 	end,
 						-- 	desc = "[lsp] format on save",
 						-- })
+						if client.supports_method("textDocument/formatting") then
+							vim.api.nvim_clear_autocmds({ group = group, buffer = bufnr })
+							vim.api.nvim_create_autocmd("BufWritePre", {
+								group = group,
+								buffer = bufnr,
+								callback = function()
+									vim.lsp.buf.format()
+								end,
+							})
+						end
 					end
 
 					if client.supports_method("textDocument/rangeFormatting") then
