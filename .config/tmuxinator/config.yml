@@ -1,7 +1,7 @@
 # ~/.tmuxinator/sample.yml
 
 name: configs
-root: ~/.config/nvim
+root: ~/projects/dotfiles
 
 # Optional tmux socket
 # socket_name: foo
