@@ -70,3 +70,5 @@ hide_when_typing = true
 decorations = "buttonless"
 option_as_alt = "Both"
 startup_mode = "Maximized"
+opacity = 0.60
+blur = true
