@@ -34,32 +34,32 @@ enabled = true
 mods = "None"
 
 [[keyboard.bindings]]
-chars = "\u00011"
+chars = "\u00131"
 key = "Key1"
 mods = "Control"
 
 [[keyboard.bindings]]
-chars = "\u00012"
+chars = "\u00132"
 key = "Key2"
 mods = "Control"
 
 [[keyboard.bindings]]
-chars = "\u00013"
+chars = "\u00133"
 key = "Key3"
 mods = "Control"
 
 [[keyboard.bindings]]
-chars = "\u00014"
+chars = "\u00134"
 key = "Key4"
 mods = "Control"
 
 [[keyboard.bindings]]
-chars = "\u00015"
+chars = "\u00135"
 key = "Key5"
 mods = "Control"
 
 [[keyboard.bindings]]
-chars = "\u0001S"
+chars = "\u0013S"
 key = "O"
 mods = "Command"
 
