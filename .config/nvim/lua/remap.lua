@@ -44,6 +44,7 @@ vim.keymap.set("n", "<leader>rr", ":silent !bundle exec rubocop -a %<CR>", { nor
 vim.keymap.set("n", "<C-J>", ":cn<Cr>", { noremap = true })
 vim.keymap.set("n", "<C-K>", ":cN<Cr>", { noremap = true })
 vim.keymap.set("n", "ga", "gg<S-v>G")
+vim.keymap.set("n", "<C-a>", "gg<S-v>G")
 
 vim.keymap.set("n", "<Leader><Leader>", "<C-^>", { noremap = true })
 

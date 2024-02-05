@@ -8,8 +8,19 @@ tmux_switch_to_session() {
     fi
 }
 
+CURRENT_SESSION=$(tmux display-message -p '#S')
+PREV_SESSION=$(cat /tmp/.prev-session)
+
 choice=$(sort -rfu <<< "$tmuxsessions" \
-    | fzf-tmux \
+    | grep -v "^$CURRENT_SESSION$" \
+    | fzf-tmux -p \
     | tr -d '\n')
+
+if [ -z "$choice" ]; then
+    exit 0
+fi
+echo $CURRENT_SESSION > /tmp/.prev-session
+
 tmux_switch_to_session "$choice"
+
 

@@ -63,6 +63,26 @@ chars = "\u0013S"
 key = "O"
 mods = "Command"
 
+[[keyboard.bindings]]
+chars = "\u0013|"
+key = "]"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0013-"
+key = "["
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0013["
+key = "S"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0013T"
+key = "Tab"
+mods = "Shift"
+
 [mouse]
 hide_when_typing = true
 
@@ -70,5 +90,5 @@ hide_when_typing = true
 decorations = "buttonless"
 option_as_alt = "Both"
 startup_mode = "Maximized"
-opacity = 0.60
+opacity = 0.65
 blur = true
