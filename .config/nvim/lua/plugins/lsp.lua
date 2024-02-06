@@ -14,7 +14,7 @@ return {
 					"rust_analyzer",
 					"lua_ls",
 					"solargraph",
-					"emmet-ls",
+					"emmet_ls",
 				},
 			})
 			local nvim_lsp = require("lspconfig")
