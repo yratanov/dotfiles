@@ -81,7 +81,7 @@ mods = "Command"
 [[keyboard.bindings]]
 chars = "\u0013T"
 key = "Tab"
-mods = "Shift"
+mods = "Control"
 
 [mouse]
 hide_when_typing = true
@@ -90,5 +90,5 @@ hide_when_typing = true
 decorations = "buttonless"
 option_as_alt = "Both"
 startup_mode = "Maximized"
-opacity = 0.65
+opacity = 0.68
 blur = true
