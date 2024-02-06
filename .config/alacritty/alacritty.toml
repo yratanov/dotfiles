@@ -83,6 +83,11 @@ chars = "\u0013T"
 key = "Tab"
 mods = "Control"
 
+[[keyboard.bindings]]
+chars = "\u0013c"
+key = "T"
+mods = "Command"
+
 [mouse]
 hide_when_typing = true
 
