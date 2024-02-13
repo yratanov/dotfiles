@@ -1,0 +1,9 @@
+[user]
+	email = organium@gmail.com
+	name = Yuri Ratanov
+[core]
+	excludesFile = ~/.gitignore
+[push]
+	autoSetupRemote = true
+[pull]
+	rebase = true

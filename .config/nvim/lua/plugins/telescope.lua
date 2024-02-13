@@ -17,6 +17,12 @@ return {
 						},
 					},
 				},
+				pickers = {
+					find_files = {
+						-- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
+						find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
+					},
+				},
 				extensions = {
 					live_grep_args = {
 						auto_quoting = true, -- enable/disable auto-quoting
@@ -85,7 +91,7 @@ return {
 			end
 
 			vim.keymap.set("n", "<leader>o", function()
-				builtin.find_files({ hidden = false })
+				builtin.find_files({ hidden = true })
 			end, { desc = "[TELESCOPE] Find files" })
 
 			vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "[TELESCOPE] Grep current word" })
