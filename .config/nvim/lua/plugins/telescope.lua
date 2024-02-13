@@ -85,7 +85,7 @@ return {
 			end
 
 			vim.keymap.set("n", "<leader>o", function()
-				builtin.find_files({ hidden = true })
+				builtin.find_files({ hidden = false })
 			end, { desc = "[TELESCOPE] Find files" })
 
 			vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "[TELESCOPE] Grep current word" })
