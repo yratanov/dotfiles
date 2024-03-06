@@ -22,7 +22,7 @@ vim.keymap.set("v", "<leader>d", '"_d')
 vim.keymap.set("n", "<leader>y", '"+y')
 vim.keymap.set("v", "<leader>y", '"+y')
 vim.keymap.set("n", "<leader>Y", '"+Y')
-vim.keymap.set("n", "''", "\"+yi'")
+vim.keymap.set("n", "''", "\"+yi'", { desc = "Yank content betwee ' ' to system clipboard" })
 
 vim.keymap.set("n", "<leader>q", ":q<CR>")
 vim.keymap.set("n", "<leader>Q", ":qa<CR>")
@@ -30,25 +30,32 @@ vim.keymap.set("n", "<leader>w", ":wa<CR>")
 vim.keymap.set("n", "<leader>W", ":wq<CR>")
 
 -- vim.keymap.set("n", "gf", "<C-w>gF", { noremap = true })
-vim.keymap.set("v", "<leader>gi", "g<C-a>", { noremap = true })
+vim.keymap.set("v", "<leader>gi", "g<C-a>", { noremap = true, desc = "Increment numbers" })
 
-vim.keymap.set("n", "<Leader>m", ':call mkdir(expand("%:p:h"), "p")<CR>', { noremap = true })
+vim.keymap.set("n", "<Leader>m", ':call mkdir(expand("%:p:h"), "p")<CR>', { noremap = true, desc = "Create directory" })
 
-vim.keymap.set("n", "<leader>rr", ":silent !bundle exec rubocop -a %<CR>", { noremap = true })
+vim.keymap.set(
+	"n",
+	"<leader>rr",
+	":silent !bundle exec rubocop -a %<CR>",
+	{ noremap = true, desc = "Rubocop auto-correct" }
+)
 
 -- vim.keymap.set("n", "<C-J>", "<C-w>j", { noremap = true })
 -- vim.keymap.set("n", "<C-K>", "<C-w>k", { noremap = true })
 -- vim.keymap.set("n", "<C-L>", "<C-w>l", { noremap = true })
 -- vim.keymap.set("n", "<C-H>", "<C-w>h", { noremap = true })
 --
-vim.keymap.set("n", "<C-[>", ":cn<Cr>", { noremap = true })
-vim.keymap.set("n", "<C-]>", ":cN<Cr>", { noremap = true })
+vim.keymap.set("n", "<C-]>", ":cn<Cr>")
+vim.keymap.set("n", "<C-[>", ":cN<Cr>")
 vim.keymap.set("n", "ga", "gg<S-v>G")
 vim.keymap.set("n", "<C-a>", "gg<S-v>G")
 
-vim.keymap.set("n", "<Leader><Leader>", "<C-^>", { noremap = true })
+vim.keymap.set("n", "<Leader>rab", ":%bd|e#", { noremap = true, desc = "Remove all buffers except current" })
 
-vim.keymap.set("n", "<Leader>cp", ':let @+ = expand("%")<cr>', { noremap = true })
+vim.keymap.set("n", "<Leader><Leader>", "<C-^>", { noremap = true, desc = "Switch between last two buffers" })
+
+vim.keymap.set("n", "<Leader>cp", ':let @+ = expand("%")<cr>', { noremap = true, desc = "Copy current file path" })
 
 vim.keymap.set("n", "<Leader>rdm", ":terminal bundle exec rails db:migrate<CR>", { noremap = true })
 vim.keymap.set("n", "<Leader>rdr", ":terminal bundle exec rails db:rollback<CR>", { noremap = true })

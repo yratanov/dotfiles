@@ -4,7 +4,7 @@
     "body": ["await this.pauseTest();"]
   },
   "log": {
-    "prefix": "pp",
+    "prefix": "log",
     "body": ["console.log($1);"]
   },
   "qtest": {
@@ -59,27 +59,27 @@
   "component": {
     "prefix": "ecomp",
     "body": [
-        "import Component from '@glimmer/component';",
-        "",
-        "export interface ${1:${RELATIVE_FILEPATH/^(app\\/components\\/)(\\w)(.+).ts/${2:/upcase}${3:/camelcase}/}}Signature {",
-          "Element: HTMLDivElement;",
-          "Args: {",
-            "$3",
-          "};",
-          "Blocks: {",
-            "default?: [];",
-          "};",
-        "}",
-        "",
-        "export default class ${1} extends Component<${1}Signature> {",
-          "$0",
-        "}",
-        "",
-        "declare module '@glint/environment-ember-loose/registry' {",
-          "export default interface Registry {",
-            "'${RELATIVE_FILEPATH/^(app\\/components\\/)(.+).ts/$2}': typeof ${1};",
-          "}",
-        "}"
+      "import Component from '@glimmer/component';",
+      "",
+      "export interface ${1:${RELATIVE_FILEPATH/^(app\\/components\\/)(\\w)(.+).ts/${2:/upcase}${3:/camelcase}/}}Signature {",
+      "Element: HTMLDivElement;",
+      "Args: {",
+      "$3",
+      "};",
+      "Blocks: {",
+      "default?: [];",
+      "};",
+      "}",
+      "",
+      "export default class ${1} extends Component<${1}Signature> {",
+      "$0",
+      "}",
+      "",
+      "declare module '@glint/environment-ember-loose/registry' {",
+      "export default interface Registry {",
+      "'${RELATIVE_FILEPATH/^(app\\/components\\/)(.+).ts/$2}': typeof ${1};",
+      "}",
+      "}"
     ]
   },
 

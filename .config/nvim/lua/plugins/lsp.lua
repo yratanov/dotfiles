@@ -25,10 +25,7 @@ return {
 			nvim_lsp.ember.setup({})
 			nvim_lsp.lua_ls.setup({})
 			nvim_lsp.tailwindcss.setup({})
-			nvim_lsp.emmet_ls.setup({
-				filetypes = { "html", "glimmer", "handlebars", "react", "typescriptreact" },
-				capabilities = capabilities,
-			})
+			nvim_lsp.eslint.setup({})
 
 			nvim_lsp.lua_ls.setup({
 				settings = {
