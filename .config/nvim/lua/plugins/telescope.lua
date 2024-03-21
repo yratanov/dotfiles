@@ -16,6 +16,9 @@ return {
 							["<C-c>"] = false,
 						},
 					},
+					preview = {
+						treesitter = false,
+					},
 				},
 				pickers = {
 					find_files = {
@@ -186,9 +189,5 @@ return {
 		dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
 	},
 	"nvim-telescope/telescope-live-grep-args.nvim",
-	{
-		"nvim-telescope/telescope-file-browser.nvim",
-		dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
-	},
 	{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 }
