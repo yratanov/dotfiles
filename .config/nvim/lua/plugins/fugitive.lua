@@ -7,8 +7,6 @@ return {
 			vim.keymap.set("n", "<leader>gc", ":Git checkout", { desc = "[GIT] Git checkout" })
 			vim.keymap.set("n", "<leader>go", ":.GBrowse<CR>", { desc = "[GIT] Open on Github" })
 			vim.keymap.set("n", "<leader>gt", ":Git pull<CR>", { desc = "[GIT] Git pull" })
-			vim.keymap.set("n", "<leader>gj", "<cmd>diffget //2<CR>", { desc = "[GIT] Diff select left" })
-			vim.keymap.set("n", "<leader>gf", "<cmd>diffget //3<CR>", { desc = "[GIT] Diff select right" })
 		end,
 	},
 }
