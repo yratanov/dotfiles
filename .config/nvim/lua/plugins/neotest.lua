@@ -6,6 +6,7 @@ return {
 			"nvim-treesitter/nvim-treesitter",
 			"antoinemadec/FixCursorHold.nvim",
 			"olimorris/neotest-rspec",
+      "nvim-neotest/nvim-nio"
 		},
 
 		init = function()
