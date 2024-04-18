@@ -1,4 +1,4 @@
-import = ["/Users/yuri/.config/alacritty/catppuccin/catppuccin-frappe.toml"]
+import = ["/Users/yuri/.config/alacritty/catppuccin/catppuccin-mocha.toml"]
 
 [cursor]
 thickness = 0.3
@@ -95,5 +95,3 @@ hide_when_typing = true
 decorations = "buttonless"
 option_as_alt = "Both"
 startup_mode = "Maximized"
-opacity = 0.68
-blur = true
