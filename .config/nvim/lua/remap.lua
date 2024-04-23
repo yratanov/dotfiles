@@ -48,8 +48,8 @@ vim.keymap.set(
 -- vim.keymap.set("n", "<C-L>", "<C-w>l", { noremap = true })
 -- vim.keymap.set("n", "<C-H>", "<C-w>h", { noremap = true })
 --
-vim.keymap.set("n", "<C-]>", ":cn<Cr>")
-vim.keymap.set("n", "<C-[>", ":cN<Cr>")
+vim.keymap.set("n", "]b", ":cn<Cr>")
+vim.keymap.set("n", "[b", ":cN<Cr>")
 vim.keymap.set("n", "ga", "gg<S-v>G")
 vim.keymap.set("n", "<C-a>", "gg<S-v>G")
 

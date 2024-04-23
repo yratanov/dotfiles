@@ -42,20 +42,19 @@ return {
 						ls.lsp_expand(args.body)
 					end,
 				},
-				mapping = {
+				mapping = cmp.mapping.preset.insert({
 					["<C-f>"] = function()
 						ls.jump(1)
 					end,
 					["<C-b>"] = function()
 						ls.jump(-1)
 					end,
-
 					["<C-e>"] = cmp.mapping.abort(),
 					["<C-y>"] = cmp.mapping.confirm({ select = true }),
 					-- ["<Tab>"] = cmp_action.luasnip_supertab(),
 					["<C-Space>"] = cmp.mapping.complete(),
 					-- ["<S-Tab>"] = cmp_action.luasnip_shift_supertab(),
-				},
+				}),
 				sources = {
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" },

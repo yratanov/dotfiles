@@ -16,9 +16,9 @@ return {
 							["<C-c>"] = false,
 						},
 					},
-					preview = {
-						treesitter = false,
-					},
+					-- 	preview = {
+					-- 		treesitter = false,
+					-- 	},
 				},
 				pickers = {
 					find_files = {
