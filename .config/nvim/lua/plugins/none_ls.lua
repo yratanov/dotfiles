@@ -14,6 +14,7 @@ return {
 					null_ls.builtins.formatting.stylua,
 					null_ls.builtins.formatting.erb_lint,
 					null_ls.builtins.formatting.pg_format,
+					null_ls.builtins.formatting.gofmt,
 				},
 				on_attach = function(client, bufnr)
 					if client.supports_method("textDocument/formatting") then

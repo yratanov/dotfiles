@@ -15,6 +15,8 @@ return {
 					"lua_ls",
 					"solargraph",
 					"emmet_ls",
+					"elixirls",
+					"gopls",
 				},
 			})
 			local nvim_lsp = require("lspconfig")
@@ -26,6 +28,8 @@ return {
 			nvim_lsp.lua_ls.setup({})
 			nvim_lsp.tailwindcss.setup({})
 			nvim_lsp.eslint.setup({})
+			nvim_lsp.elixirls.setup({})
+			nvim_lsp.gopls.setup({})
 
 			nvim_lsp.lua_ls.setup({
 				settings = {

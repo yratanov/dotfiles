@@ -114,3 +114,10 @@ ctrl + shift - u: open -a ~/Applications/Chrome\ Apps.localized/YouTube\ Music.a
 ctrl + shift - f: open -a /System/Library/CoreServices/Finder.app
 ctrl + shift - p: open -a /Applications/TablePlus.app
 
+# remap CMD+' to `
+cmd - 0x27 : skhd -k "0x32"
+
+# remap CMD+; to ~
+cmd - 0x29 : skhd -k "shift - 0x32"
+
+
