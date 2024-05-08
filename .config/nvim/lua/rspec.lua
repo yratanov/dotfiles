@@ -7,6 +7,7 @@ local global_options = {
 -- file = vim.fn.expand('%')
 -- line = vim.fn.line('.')
 local function run(command)
+	vim.api.nvim_command("wa")
 	local terminal_cmd = "! $HOME/.config/nvim/scripts/run_tests.sh  '" .. command .. "' 2"
 	vim.api.nvim_command(terminal_cmd)
 end
