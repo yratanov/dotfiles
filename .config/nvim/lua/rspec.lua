@@ -6,22 +6,27 @@ local global_options = {
 
 -- file = vim.fn.expand('%')
 -- line = vim.fn.line('.')
-local function run(command)
+local function run(file)
 	vim.api.nvim_command("wa")
-	local terminal_cmd = "! $HOME/.config/nvim/scripts/run_tests.sh  '" .. command .. "' 2"
+	local terminal_cmd = "! $HOME/.config/nvim/scripts/run_tests.sh  'bundle exec rspec " .. file .. "' 2"
 	vim.api.nvim_command(terminal_cmd)
 end
 
 local function run_file()
-	local command = vim.fn.expand("%")
-	global_options.cache.last_run = command
-	run(command)
+	local file = vim.fn.expand("%")
+	if file:sub(-8) == "_spec.rb" then
+		global_options.cache.last_run = file
+		run(file)
+	end
 end
 
 local function run_line()
-	local command = vim.fn.expand("%") .. ":" .. vim.fn.line(".")
-	global_options.cache.last_run = command
-	run(command)
+	local file = vim.fn.expand("%")
+	if file:sub(-8) == "_spec.rb" then
+		file = file .. ":" .. vim.fn.line(".")
+		global_options.cache.last_run = file
+		run(file)
+	end
 end
 
 local function run_last()

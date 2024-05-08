@@ -7,5 +7,5 @@ fi
 tmux send -t "$2" C-c
 tmux send -t "$2" -X cancel
 tmux send -t "$2" clear Enter
-tmux send -t "$2" "bundle exec rspec $1" Enter
+tmux send -t "$2" "$1" Enter
 
