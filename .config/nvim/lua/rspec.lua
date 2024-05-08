@@ -30,7 +30,9 @@ local function run_line()
 end
 
 local function run_last()
-	run(global_options.cache.last_run)
+	if global_options.cache.last_run then
+		run(global_options.cache.last_run)
+	end
 end
 
 vim.keymap.set("n", "<leader>te", run_file, { desc = "[TESTS] run spec file" })
