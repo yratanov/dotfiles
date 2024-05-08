@@ -7,8 +7,7 @@ local global_options = {
 -- file = vim.fn.expand('%')
 -- line = vim.fn.line('.')
 local function run(command)
-	local terminal_cmd = "!tmux send -t 2 'bundle exec rspec " .. command .. "' Enter"
-	vim.api.nvim_command("!tmux send -t 2 -X cancel")
+	local terminal_cmd = "! $HOME/.config/nvim/scripts/run_tests.sh  " .. command
 	vim.api.nvim_command(terminal_cmd)
 end
 
