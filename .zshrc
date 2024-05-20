@@ -117,17 +117,10 @@ source $ZSH/oh-my-zsh.sh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 export PATH="/opt/homebrew/opt/postgresql@12/bin:$PATH"
 export LDFLAGS="-L/opt/homebrew/opt/postgresql@12/lib"
 export PKG_CONFIG_PATH="/opt/homebrew/opt/postgresql@12/lib/pkgconfig"
 export CPPFLAGS="-I/opt/homebrew/opt/postgresql@12/include"
-
-# PATH=$(npm bin):$PATH
-
-# export NODE_OPTIONS="--require $HOME/node-15-for-ember-monkeypatching.js"
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#878ede"
 
@@ -160,11 +153,6 @@ alias nb="~/.config/scripts/feature-branch.sh"
 alias gpr="gh pr create -f -r drosam,cannyedge34"
 alias sp="bundle exec rspec"
 
-# export PATH="/opt/homebrew/opt/node@16/bin:$PATH"
-
-export OP_SESSION_my="k1-mrd0FdcTJHwkIu-vqeD5twcC_AELzZ4QEzzO3XD4"
-alias op-signin="op signin my"
-
 source "$HOME/.cargo/env"
 export PATH="$HOME/scripts:/opt/homebrew/opt/openjdk/bin:$PATH"
 export EDITOR='nvim'
@@ -177,16 +165,3 @@ export FZF_DEFAULT_OPTS=" \
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# pnpm
-export PNPM_HOME="$HOME/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
-# bun completions
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"

@@ -1,4 +1,4 @@
-import = ["/Users/yuri/.config/alacritty/catppuccin/catppuccin-mocha.toml"]
+import = ["~/.config/alacritty/catppuccin/catppuccin-mocha.toml"]
 
 [cursor]
 thickness = 0.3
