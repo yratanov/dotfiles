@@ -18,9 +18,6 @@ vim.keymap.set("n", "N", "Nzzzv")
 
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
-vim.keymap.set("n", "<leader>d", '"_d')
-vim.keymap.set("v", "<leader>d", '"_d')
-
 vim.keymap.set("n", "<leader>y", '"+y')
 vim.keymap.set("v", "<leader>y", '"+y')
 vim.keymap.set("n", "<leader>Y", '"+Y')
@@ -29,7 +26,7 @@ vim.keymap.set("n", "<leader>q", ":q<CR>")
 vim.keymap.set("n", "<leader>Q", ":qa<CR>")
 vim.keymap.set("n", "<leader>w", ":wa<CR>")
 vim.keymap.set("n", "<leader>W", ":wq<CR>")
-vim.keymap.set("n", "yyp", ":co.<CR>")
+vim.keymap.set("n", "<leader>k", ":co.<CR>")
 
 -- vim.keymap.set("n", "gf", "<C-w>gF", { noremap = true })
 vim.keymap.set("v", "<leader>gi", "g<C-a>", { noremap = true, desc = "Increment numbers" })
@@ -48,8 +45,8 @@ vim.keymap.set(
 -- vim.keymap.set("n", "<C-L>", "<C-w>l", { noremap = true })
 -- vim.keymap.set("n", "<C-H>", "<C-w>h", { noremap = true })
 --
-vim.keymap.set("n", "]b", ":cn<Cr>")
-vim.keymap.set("n", "[b", ":cN<Cr>")
+vim.keymap.set("n", "]]", ":cn<Cr>")
+vim.keymap.set("n", "[[", ":cN<Cr>")
 vim.keymap.set("n", "ga", "gg<S-v>G")
 vim.keymap.set("n", "<C-a>", "gg<S-v>G")
 
