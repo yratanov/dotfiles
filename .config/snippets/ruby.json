@@ -9,6 +9,14 @@
       "end"
     ]
   },
+  "call": {
+    "prefix": "call",
+    "body": [
+      "${1/([^,:]+)([,:\\s]*|)/# @param $1 [...]${2:+\n}/g}",
+      "def call($1)",
+      "end"
+    ]
+  },
 
   "yard func param": {
     "prefix": "yp",
