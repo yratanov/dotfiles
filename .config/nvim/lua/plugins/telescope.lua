@@ -41,10 +41,6 @@ return {
 						-- theme = { }, -- use own theme spec
 						-- layout_config = { mirror=true }, -- mirror preview pane
 					},
-					smart_open = {
-						match_algorithm = "fzf",
-						disable_devicons = false,
-					},
 					fzf = {
 						fuzzy = true, -- false will only do exact matching
 						override_generic_sorter = true, -- override the generic sorter
@@ -98,9 +94,7 @@ return {
 			end
 
 			vim.keymap.set("n", "<leader>o", function()
-				require("telescope").extensions.smart_open.smart_open({
-					cwd_only = true,
-				})
+				builtin.find_files({ hidden = true })
 			end, { desc = "[TELESCOPE] Find files" })
 
 			vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "[TELESCOPE] Grep current word" })
@@ -120,9 +114,9 @@ return {
 
 			vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "[TELESCOPE] Keymaps" })
 
-			-- vim.keymap.set("n", "<leader>e", function()
-			-- 	builtin.oldfiles({ only_cwd = true })
-			-- end, { desc = "[TELESCOPE] Prev files" })
+			vim.keymap.set("n", "<leader>e", function()
+				builtin.oldfiles({ only_cwd = true })
+			end, { desc = "[TELESCOPE] Prev files" })
 
 			vim.keymap.set("n", "<leader>b", builtin.git_branches, { desc = "[TELESCOPE] Git branches" })
 
