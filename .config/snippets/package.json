@@ -4,7 +4,7 @@
     "vscode": "^1.11.0"
   },
   "contributes": {
-   "snippets": [
+    "snippets": [
       {
         "language": "javascript",
         "path": "./javascript.json"
@@ -20,6 +20,10 @@
       {
         "language": "ruby",
         "path": "./ruby.json"
+      },
+      {
+        "language": "eruby",
+        "path": "./erb.json"
       }
     ]
   }
