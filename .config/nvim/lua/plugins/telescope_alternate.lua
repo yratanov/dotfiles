@@ -39,7 +39,15 @@ return {
 
 			local ruby_mappings = {}
 
-			for _, mapping in ipairs({ "controllers", "models", "mailers", "serializers", "policies", "jobs" }) do
+			for _, mapping in ipairs({
+				"controllers",
+				"models",
+				"mailers",
+				"serializers",
+				"policies",
+				"jobs",
+				"helpers",
+			}) do
 				ruby_mappings = mergeArrays(ruby_mappings, generate_spec_mapping("app", mapping))
 			end
 

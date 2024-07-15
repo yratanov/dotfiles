@@ -60,5 +60,21 @@
     "prefix": ["er", "%"],
     "body": ["<% $1 %>"],
     "description": "erb exec block"
+  },
+  "span": {
+    "prefix": "span",
+    "body": ["<span class=\"$1\">", "$0", "</span>"]
+  },
+  "div": {
+    "prefix": "div",
+    "body": ["<div class=\"$1\">", "$0", "</div>"]
+  },
+  "cl": {
+    "prefix": "cl",
+    "body": ["class=\"$1\""]
+  },
+  "t": {
+    "prefix": "tr",
+    "body": ["<%= t '$1' %>"]
   }
 }
