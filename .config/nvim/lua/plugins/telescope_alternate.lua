@@ -41,7 +41,6 @@ return {
 
 			for _, mapping in ipairs({
 				"models",
-				"mailers",
 				"serializers",
 				"policies",
 				"jobs",
@@ -74,9 +73,23 @@ return {
 						},
 					},
 					{
+						"app/mailers(.*)/(.*)_mailer.rb",
+						{
+							{ "app/views/[1][2]_mailer/*.html.erb", "View", true },
+							{ "spec/mailers[1]/[2]_mailer_spec.rb", "Test", true },
+						},
+					},
+					{
+						"spec/mailers(.*)/(.*)_spec.rb",
+						{
+							{ "app/mailers[1]/[2].rb", "Mailer" },
+						},
+					},
+					{
 						"app/views/(.*)/(.*).html.(.*)",
 						{
 							{ "app/controllers/**/*[1]_controller.rb", "Controller" },
+							{ "app/mailers/**/*[1].rb", "Mailer" },
 							{ "app/models/[1:singularize].rb", "Model" },
 							{ "app/helpers/**/*[1]_helper.rb", "Helper" },
 						},

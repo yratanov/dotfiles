@@ -37,6 +37,14 @@
       "});"
     ]
   },
+  "if": {
+    "prefix": "if",
+    "body": ["if ($1) {", "  $0", "}"]
+  },
+  "ife": {
+    "prefix": "ife",
+    "body": ["if ($1) {", "  $2", "} else {", "  $0", "}"]
+  },
   "service inject": {
     "prefix": "iser",
     "body": ["import { inject as service } from '@ember/service';"]
