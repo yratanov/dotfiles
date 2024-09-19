@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if ! tmux list-panes -F '#{pane_index}' | grep -q "$2"; then
-  tmux split-window -dh -p 40
+  tmux split-window -dh -l 40%
 fi
 
 tmux send -t "$2" C-c

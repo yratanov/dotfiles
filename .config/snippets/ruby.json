@@ -27,6 +27,14 @@
     "body": ["# @return [$2]"]
   },
 
+  "subject": {
+    "prefix": "sub",
+    "body": ["subject(:$1) { described_class.new$2 }", "$0"]
+  },
+  "binding.pry": {
+    "prefix": "bp",
+    "body": ["binding.pry"]
+  },
   "let": {
     "prefix": "let",
     "body": ["let(:$1) { $0 }"]

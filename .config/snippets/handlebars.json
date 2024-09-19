@@ -19,9 +19,13 @@
     "prefix": "span",
     "body": ["<span class=\"$1\">", "$0", "</span>"]
   },
+  "dic": {
+    "prefix": "dic",
+    "body": ["<div class=\"$1\">", "$0", "</div>"]
+  },
   "div": {
     "prefix": "div",
-    "body": ["<div class=\"$1\">", "$0", "</div>"]
+    "body": ["<div>", "$0", "</div>"]
   },
   "cl": {
     "prefix": "cl",
