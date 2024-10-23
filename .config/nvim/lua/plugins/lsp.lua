@@ -7,7 +7,7 @@ return {
 			require("mason").setup({})
 			require("mason-lspconfig").setup({
 				ensure_installed = {
-					"tsserver",
+					"ts_ls",
 					"eslint",
 					"tailwindcss",
 					"ember",
@@ -22,7 +22,7 @@ return {
 			local nvim_lsp = require("lspconfig")
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities.textDocument.completion.completionItem.snippetSupport = true
-			nvim_lsp.tsserver.setup({})
+			nvim_lsp.ts_ls.setup({})
 			nvim_lsp.solargraph.setup({})
 			nvim_lsp.ember.setup({})
 			nvim_lsp.lua_ls.setup({})

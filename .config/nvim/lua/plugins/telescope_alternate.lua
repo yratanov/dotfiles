@@ -67,6 +67,18 @@ return {
 						},
 					},
 					{
+						"app/components(.*)/(.*)_component.rb",
+						{
+							{ "app/components[1][2]/*_component.html.erb", "View" },
+						},
+					},
+					{
+						"app/components(.*)/(.*)_component.html.rb",
+						{
+							{ "app/components[1][2]/*_component.rb", "Component" },
+						},
+					},
+					{
 						"spec/controllers(.*)/(.*)_spec.rb",
 						{
 							{ "app/controllers[1]/[2].rb", "Controller" },
