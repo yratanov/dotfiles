@@ -25,6 +25,25 @@ return {
 				return false
 			end
 
+			--
+			-- TELESCOPE ALTERNATE
+			--
+
+			local function append_project_root(paths)
+				local project_root = vim.fn.expand("$HOME/projects")
+				local new_paths = {}
+				for _, path in ipairs(paths) do
+					table.insert(new_paths, project_root .. "/" .. path)
+				end
+				return new_paths
+			end
+
+			local ruby_api_projects = append_project_root({ "pulse-app/api" })
+			local ruby_fs_projects = append_project_root({ "satchel-thrive" })
+			local ember_projects = append_project_root({ "pulse-app/frontend" })
+
+			local ruby_mappings = {}
+
 			local function generate_spec_mapping(base_path, mapping)
 				return {
 					{
@@ -42,12 +61,6 @@ return {
 				}
 			end
 
-			--
-			-- TELESCOPE ALTERNATE
-			--
-
-			local ruby_mappings = {}
-
 			for _, mapping in ipairs({
 				"models",
 				"serializers",
@@ -61,19 +74,6 @@ return {
 			for _, mapping in ipairs({ "request", "service" }) do
 				ruby_mappings = mergeArrays(ruby_mappings, generate_spec_mapping("lib", mapping))
 			end
-
-			local function append_project_root(paths)
-				local project_root = vim.fn.expand("$HOME/projects")
-				local new_paths = {}
-				for _, path in ipairs(paths) do
-					table.insert(new_paths, project_root .. "/" .. path)
-				end
-				return new_paths
-			end
-
-			local ruby_api_projects = append_project_root({ "pulse-app/api" })
-			local ruby_fs_projects = append_project_root({ "satchel-thrive" })
-			local ember_projects = append_project_root({ "pulse-app/frontend" })
 
 			local ruby_api_mappings = mergeArrays({
 				{
@@ -158,6 +158,13 @@ return {
 					{
 						{ "app/components[1]/[2]_component.rb", "Component" },
 						{ "app/components[1]/[2]_component_controller.js", "JS" },
+					},
+				},
+				{
+					"app/components(.*)/(.*)_component_controller.js",
+					{
+						{ "app/components[1]/[2]_component.rb", "Component" },
+						{ "app/components[1]/[2]_component.html.erb", "View" },
 					},
 				},
 				{
