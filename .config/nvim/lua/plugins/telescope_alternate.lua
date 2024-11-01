@@ -143,6 +143,7 @@ return {
 						{ "app/serializers/[2:singularize]_serializer.rb", "Serializer", true },
 						{ "spec/controllers[1]/[2]_controller_spec.rb", "Test", true },
 						{ "spec/requests[1]/[2]_spec.rb", "Request", true },
+						{ "app/views[1]/[2]/*.turbo_stream.erb", "TS View", true },
 						{ "app/views[1]/[2]/*.html.erb", "View", true },
 					},
 				},
@@ -193,6 +194,12 @@ return {
 						{ "app/mailers/**/*[1].rb", "Mailer" },
 						{ "app/models/[1:singularize].rb", "Model" },
 						{ "app/helpers/**/*[1]_helper.rb", "Helper" },
+					},
+				},
+				{
+					"app/views/(.*)/(.*).turbo_stream.(.*)",
+					{
+						{ "app/controllers/**/*[1]_controller.rb", "Controller" },
 					},
 				},
 				{
