@@ -122,6 +122,39 @@ return {
 
 			vim.keymap.set("n", "<leader>fs", builtin.git_stash, { desc = "[TELESCOPE] Git stashes" })
 			vim.keymap.set("n", "<leader>gs", builtin.git_status, { desc = "[TELESCOPE] Git changes" })
+			vim.keymap.set("n", "<leader>gb", function()
+				local previewers = require("telescope.previewers")
+				local pickers = require("telescope.pickers")
+				local sorters = require("telescope.sorters")
+				local finders = require("telescope.finders")
+
+				pickers
+					.new({
+						results_title = "Modified on current branch",
+						finder = finders.new_oneshot_job({
+							"git",
+							"diff",
+							"--name-only",
+							"--diff-filter=ACMR",
+							"--relative",
+							"master",
+						}),
+						sorter = sorters.get_fuzzy_file(),
+						previewer = previewers.new_termopen_previewer({
+							get_command = function(entry)
+								return {
+									"git",
+									"diff",
+									"--diff-filter=ACMR",
+									"--relative",
+									"master",
+									entry.value,
+								}
+							end,
+						}),
+					})
+					:find()
+			end, { desc = "[TELESCOPE] Git branch modified" })
 
 			vim.keymap.set("n", "<leader>fr", builtin.lsp_references, { desc = "[TELESCOPE] LSP references" })
 

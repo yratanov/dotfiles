@@ -10,7 +10,7 @@
 [include]
 	path = ~/.config/delta/catppuccin.gitconfig
 [delta]
-	features = catppuccin-frappe
+	features = catppuccin-mocha
 [core]
     pager = delta
 [interactive]
