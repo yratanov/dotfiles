@@ -121,6 +121,7 @@ return {
 			vim.keymap.set("n", "<leader>b", builtin.git_branches, { desc = "[TELESCOPE] Git branches" })
 
 			vim.keymap.set("n", "<leader>fs", builtin.git_stash, { desc = "[TELESCOPE] Git stashes" })
+			vim.keymap.set("n", "<leader>gs", builtin.git_status, { desc = "[TELESCOPE] Git changes" })
 
 			vim.keymap.set("n", "<leader>fr", builtin.lsp_references, { desc = "[TELESCOPE] LSP references" })
 
