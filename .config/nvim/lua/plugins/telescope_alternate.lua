@@ -148,6 +148,18 @@ return {
 					},
 				},
 				{
+					"app/services/(.*).rb",
+					{
+						{ "spec/services/[1]_spec.rb", "Test", true },
+					},
+				},
+				{
+					"spec/services/(.*)_spec.rb",
+					{
+						{ "app/services/[1].rb", "Service", true },
+					},
+				},
+				{
 					"app/components(.*)/(.*)_component.rb",
 					{
 						{ "app/components[1]/[2]_component.html.erb", "View" },

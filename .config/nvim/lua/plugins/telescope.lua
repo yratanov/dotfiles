@@ -202,7 +202,7 @@ return {
 				builtin.help_tags()
 			end, { desc = "[TELESCOPE] Help tags" })
 
-			vim.keymap.set("n", ";;", function()
+			vim.keymap.set("n", "fl", function()
 				builtin.resume()
 			end, { desc = "[TELESCOPE] Open last search" })
 

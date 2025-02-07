@@ -25,6 +25,7 @@ return {
 					hgcommit = false,
 					svn = false,
 					cvs = false,
+					yaml = true,
 					["."] = false,
 				},
 			})

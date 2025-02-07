@@ -23,6 +23,10 @@
     "prefix": "dic",
     "body": ["<div class=\"$1\">", "$0", "</div>"]
   },
+  "flex": {
+    "prefix": "flex",
+    "body": ["<div class=\"flex$1\">", "$0", "</div>"]
+  },
   "div": {
     "prefix": "div",
     "body": ["<div>", "$0", "</div>"]
@@ -39,13 +43,13 @@
     "prefix": "each",
     "body": ["{{#each $1 as |$2|}}", "$3", "{{/each}}"]
   },
+  "else": {
+    "prefix": "else",
+    "body": ["{{else}}"]
+  },
   "let": {
     "prefix": "let",
     "body": ["{{#let $1 as |$2|}}\n$3\n{{/let}}"]
-  },
-  "Stack": {
-    "prefix": "stk",
-    "body": ["<Stack as |Item|>", "<Item>$1</Item>", "</Stack>"]
   },
   "did-insert": {
     "prefix": "di",

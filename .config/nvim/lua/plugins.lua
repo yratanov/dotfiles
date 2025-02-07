@@ -6,9 +6,13 @@ return {
 		"mg979/vim-visual-multi",
 		lazy = false,
 		init = function()
-			vim.g.VM_maps = {
-				["I BS"] = "",
-			}
+			vim.schedule(function()
+				vim.g.VM_maps = {
+					["I BS"] = "",
+					["Goto Next"] = "",
+					["Goto Prev"] = "",
+				}
+			end)
 		end,
 	},
 	{ "kylechui/nvim-surround", config = true },
