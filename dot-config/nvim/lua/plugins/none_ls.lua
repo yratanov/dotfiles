@@ -37,20 +37,20 @@ return {
 						end, { buffer = bufnr, desc = "[lsp] format" })
 
 						vim.api.nvim_clear_autocmds({ group = group, buffer = bufnr })
-						vim.api.nvim_create_autocmd("BufWritePre", {
-							group = group,
-							buffer = bufnr,
-							callback = function()
-								vim.lsp.buf.format({
-									bufnr = vim.api.nvim_get_current_buf(),
-									filter = function(cl)
-										-- By default, ignore any formatters provider by other LSPs
-										-- (such as those managed via lspconfig or mason)
-										return cl.name == "null-ls"
-									end,
-								})
-							end,
-						})
+						-- vim.api.nvim_create_autocmd("BufWritePre", {
+						-- 	group = group,
+						-- 	buffer = bufnr,
+						-- 	callback = function()
+						-- 		vim.lsp.buf.format({
+						-- 			bufnr = vim.api.nvim_get_current_buf(),
+						-- 			filter = function(cl)
+						-- 				-- By default, ignore any formatters provider by other LSPs
+						-- 				-- (such as those managed via lspconfig or mason)
+						-- 				return cl.name == "null-ls"
+						-- 			end,
+						-- 		})
+						-- 	end,
+						-- })
 					end
 				end,
 			})

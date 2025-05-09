@@ -39,7 +39,7 @@ return {
 			end
 
 			local ruby_api_projects = append_project_root({ "pulse-app/api" })
-			local ruby_fs_projects = append_project_root({ "satchel-thrive" })
+			local ruby_fs_projects = append_project_root({ "satchel-thrive", "workout_bro" })
 			local ember_projects = append_project_root({ "pulse-app/frontend" })
 
 			local ruby_mappings = {}

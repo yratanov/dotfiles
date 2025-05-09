@@ -94,7 +94,10 @@ return {
 			end
 
 			vim.keymap.set("n", "<leader>o", function()
-				builtin.find_files({ hidden = true })
+				builtin.find_files({
+					hidden = true,
+					file_ignore_patterns = { "%.woff", "%.ttf", "%.eot", "%.png", "%.jpg", "%.jpeg", "%.gif", "%.pdf" },
+				})
 			end, { desc = "[TELESCOPE] Find files" })
 
 			vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "[TELESCOPE] Grep current word" })
