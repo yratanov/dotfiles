@@ -22,14 +22,6 @@ return {
 			local nvim_lsp = require("lspconfig")
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities.textDocument.completion.completionItem.snippetSupport = true
-			nvim_lsp.ts_ls.setup({})
-			nvim_lsp.solargraph.setup({})
-			nvim_lsp.ember.setup({})
-			nvim_lsp.lua_ls.setup({})
-			nvim_lsp.tailwindcss.setup({})
-			nvim_lsp.eslint.setup({})
-			nvim_lsp.elixirls.setup({})
-			nvim_lsp.gopls.setup({})
 
 			nvim_lsp.lua_ls.setup({
 				settings = {
