@@ -11,10 +11,20 @@ echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 ```
 
-Installation MacOS
+Installation Tools on MacOS
 ==================
 
 ```
-brew install alacritty neovim fzf rbenv ruby-build tmux tmuxinator gh koekeishiya/formulae/skhd
+brew install alacritty neovim stow fzf rbenv ruby-build tmux tmuxinator gh koekeishiya/formulae/skhd
 skhd --start-service
 ```
+
+Installing configs
+=====================
+stow 2.4.1 required
+
+
+```
+stow --dotfiles --target=$HOME .
+```
+
