@@ -154,6 +154,7 @@ alias tt="~/.config/scripts/new-tmux-session.sh"
 alias nb="~/.config/scripts/feature-branch.sh"
 alias gpr="gh pr create -f -r drosam,cannyedge34"
 alias sp="bundle exec rspec"
+alias lg="lazygit"
 
 source "$HOME/.cargo/env"
 export PATH="$HOME/scripts:/opt/homebrew/opt/openjdk/bin:$PATH"
