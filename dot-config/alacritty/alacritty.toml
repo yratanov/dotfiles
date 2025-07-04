@@ -92,6 +92,7 @@ hide_when_typing = true
 [window]
 option_as_alt = "Both"
 startup_mode = "SimpleFullscreen"
+opacity = 0.85
 
 [general]
 import = ["~/.config/alacritty/catppuccin/catppuccin-mocha.toml"]
