@@ -1,0 +1,22 @@
+window#waybar {
+  background-color: rgba(30, 30, 46, 0.5); /* base */
+  color: #cdd6f4; /* text */
+  border-bottom: 2px solid #313244; /* surface0 */
+  font-family: "JetBrainsMono Nerd Font", sans-serif;
+  font-size: 14px;
+}
+
+#workspaces button.active {
+  background-color: #89b4fa; /* blue */
+  color: #1e1e2e;
+}
+
+#clock {
+  padding: 0 10px;
+  border-radius: 8px;
+}
+
+
+.module {
+  margin: 0 5px;
+}

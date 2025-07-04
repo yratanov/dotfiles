@@ -1,5 +1,5 @@
 #export ZSH_TMUX_AUTOSTART=true
-
+source ~/powerlevel10k/powerlevel10k.zsh-theme
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -17,7 +17,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="powerlevel10k/powerlevel10k"
+# ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -155,8 +155,9 @@ alias nb="~/.config/scripts/feature-branch.sh"
 alias gpr="gh pr create -f -r drosam,cannyedge34"
 alias sp="bundle exec rspec"
 alias lg="lazygit"
+alias ll="ls -lAhF --color=auto --group-directories-first"
 
-source "$HOME/.cargo/env"
+# source "$HOME/.cargo/env"
 export PATH="$HOME/scripts:/opt/homebrew/opt/openjdk/bin:$PATH"
 export EDITOR='nvim'
 alias dfl='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
@@ -168,3 +169,7 @@ export FZF_DEFAULT_OPTS=" \
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+source /usr/share/nvm/init-nvm.sh
+
+# Added by `rbenv init` on Wed Jul  2 12:01:45 PM BST 2025
+eval "$(rbenv init - --no-rehash zsh)"
