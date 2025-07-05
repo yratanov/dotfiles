@@ -16,7 +16,14 @@ window#waybar {
   border-radius: 8px;
 }
 
-
 .module {
   margin: 0 5px;
+}
+
+#custom-weather {
+  font-size: 14px;
+}
+
+#pulseaudio {
+  min-width: 70px;
 }
