@@ -16,7 +16,6 @@
         "cpu",
         "memory",
         "temperature",
-        "custom/hyprlayout",
         "bluetooth",
         "battery",
         "tray",
@@ -24,9 +23,9 @@
     ],
     // Modules configuration
     "hyprland/workspaces": {
-        "format": "{name}",
+        "format": "",
         "on-click": "activate",
-        "active-only": true,
+        "active-only": false,
         "all-outputs": true
     },
     "tray": {
@@ -125,11 +124,12 @@
         "on-click": "pavucontrol"
     },
     "custom/weather": {
-        "format": "{}",
-        "interval": 3600,
-        "exec": "curl -s 'https://wttr.in/?format=1'",
-        "exec-if": "ping wttr.in -c1"
-    },
+      "format": "{}°",
+      "tooltip": true,
+      "interval": 3600,
+      "exec": "wttrbar",
+      "return-type": "json"
+  },
     "custom/media": {
         "format": "{icon} {text}",
         "return-type": "json",

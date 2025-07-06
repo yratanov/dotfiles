@@ -6,9 +6,20 @@ window#waybar {
   font-size: 14px;
 }
 
+#workspaces {
+  margin: 5px 0 5px 5px;
+}
+
 #workspaces button.active {
   background-color: #89b4fa; /* blue */
   color: #1e1e2e;
+}
+
+#workspaces button {
+  color: #cdd6f4; 
+  margin: 0 4px;
+  padding: 0 4px;
+  background-color: #313244; /* surface0 */ 
 }
 
 #clock {
@@ -20,8 +31,9 @@ window#waybar {
   margin: 0 5px;
 }
 
-#custom-weather {
+#custom-weather.icon {
   font-size: 14px;
+  font-family: "Noto Emoji";
 }
 
 #pulseaudio {
