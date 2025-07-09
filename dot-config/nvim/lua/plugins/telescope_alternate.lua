@@ -14,89 +14,27 @@ return {
 				ember = ember_mappings,
 			}
 
-			local pickers = require("telescope.pickers")
-			local finders = require("telescope.finders")
-			local conf = require("telescope.config").values
-			local actions = require("telescope.actions")
-			local action_state = require("telescope.actions.state")
+			local project_config = require("project_config")
+			local simple_picker = require("simple_picker")
 
-			local storage_path = vim.fn.stdpath("data") .. "/TelescopeAlternatePickMappings.json"
+			local selected_mapping = project_config.get_project_config("telescope_alternate_pick_mappings")
 
-			local function load_project_alternates()
-				local f = io.open(storage_path, "r")
-				if not f then
-					return {}
-				end
-				local content = f:read("*a")
-				f:close()
-				return vim.fn.json_decode(content)
-			end
-
-			local function save_project_alternates(data)
-				local f = io.open(storage_path, "w")
-				if not f then
-					return
-				end
-				f:write(vim.fn.json_encode(data))
-				f:close()
-			end
-
-			local function get_project_id()
-				return vim.fn.getcwd()
-			end
-
-			local function load_selected_key()
-				local all_keys = load_project_alternates()
-				return all_keys[get_project_id()]
-			end
-
-			local function save_selected_key(key)
-				local all_keys = load_project_alternates()
-				all_keys[get_project_id()] = key
-				save_project_alternates(all_keys)
-			end
-
-			local function pick_alternate_mappings()
-				local keys = {}
-				for key, _ in pairs(all_mappings) do
-					table.insert(keys, key)
-				end
-
-				pickers
-					.new({}, {
-						prompt_title = "",
-						finder = finders.new_table({
-							results = keys,
-						}),
-						sorter = conf.generic_sorter({}),
-						attach_mappings = function(prompt_bufnr, map)
-							actions.select_default:replace(function()
-								actions.close(prompt_bufnr)
-								local selection = action_state.get_selected_entry()
-								local key = selection[1]
-								local value = all_mappings[key]
-								save_selected_key(key)
-								require("telescope-alternate").setup({
-									mappings = value,
-									presets = {},
-								})
-							end)
-							return true
-						end,
-					})
-					:find()
-			end
-
-			local key = load_selected_key()
-
-			if key then
+			if selected_mapping then
 				require("telescope-alternate").setup({
-					mappings = all_mappings[key],
+					mappings = all_mappings[selected_mapping],
 					presets = {},
 				})
 			end
 
-			vim.api.nvim_create_user_command("TelescopeAlternatePickMappings", pick_alternate_mappings, {})
+			vim.api.nvim_create_user_command("TelescopeAlternatePickMappings", function()
+				simple_picker.simple_piker(all_mappings, function(key, value)
+					project_config.set_project_config("telescope_alternate_pick_mappings", key)
+					require("telescope-alternate").setup({
+						mappings = value,
+						presets = {},
+					})
+				end)
+			end, {})
 
 			vim.keymap.set(
 				"n",

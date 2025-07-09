@@ -3,7 +3,8 @@
     "spacing": 4, // Gaps between modules (4px)
     "modules-left": [
         "hyprland/workspaces",
-        "custom/media"
+        "custom/media",
+        "custom/satchel-vpn"
     ],
     "modules-center": [
         "custom/weather",
@@ -154,5 +155,14 @@
         "suspend": "systemctl suspend",
         "hibernate": "systemctl hibernate"
       }
+    },
+    "custom/satchel-vpn" : {
+      "name": "vpn",
+      "exec": "~/.config/scripts/check_service.sh openvpn-client@satchelcloud SatchelVPN",
+      "interval": 10,
+      "return-type": "json",
+      "format": "{}",
+      "tooltip": false,
+      "on-click": "~/.config/scripts/toggle_service.sh openvpn-client@satchelcloud"
     }
 }

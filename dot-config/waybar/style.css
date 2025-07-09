@@ -39,3 +39,20 @@ window#waybar {
 #pulseaudio {
   min-width: 70px;
 }
+#custom-satchel-vpn,
+#custom-ssh-tunnel {
+  padding: 0 8px;
+  font-size: 14px;
+}
+
+#custom-satchel-vpn.service-on {
+  color: #a6e3a1;
+}
+
+#custom-satchel-vpn.service-off {
+  color: #f38ba8;
+}
+
+#custom-satchel-vpn.service-error {
+  color: orange;
+}

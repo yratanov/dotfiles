@@ -3,14 +3,9 @@ vim.g.nowrap = true
 vim.o.updatetime = 250
 vim.wo.signcolumn = "yes"
 
--- vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
-
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 
--- vim.keymap.set("n", "J", "5j")
--- vim.keymap.set("n", "K", "5k")
--- vim.keymap.set("i", "jk", "<ESC>")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
@@ -40,11 +35,6 @@ vim.keymap.set(
 	{ noremap = true, desc = "Rubocop auto-correct" }
 )
 
--- vim.keymap.set("n", "<C-J>", "<C-w>j", { noremap = true })
--- vim.keymap.set("n", "<C-K>", "<C-w>k", { noremap = true })
--- vim.keymap.set("n", "<C-L>", "<C-w>l", { noremap = true })
--- vim.keymap.set("n", "<C-H>", "<C-w>h", { noremap = true })
---
 vim.keymap.set("n", "]q", ":cn<Cr>")
 vim.keymap.set("n", "[q", ":cN<Cr>")
 vim.keymap.set("n", "ga", "gg<S-v>G")
@@ -56,16 +46,12 @@ vim.keymap.set("n", "<Leader><Leader>", "<C-^>", { noremap = true, desc = "Switc
 
 vim.keymap.set("n", "<Leader>cp", ':let @+ = expand("%")<cr>', { noremap = true, desc = "Copy current file path" })
 
-vim.keymap.set("n", "<Leader>rdm", ":terminal bundle exec rails db:migrate<CR>", { noremap = true })
-vim.keymap.set("n", "<Leader>rdr", ":terminal bundle exec rails db:rollback<CR>", { noremap = true })
-vim.keymap.set("n", "<Leader>rgr", ":terminal bundle exec rails g migration ", { noremap = true })
-vim.keymap.set("n", "<Leader>rgm", ":terminal bundle exec rails g model ", { noremap = true })
-vim.keymap.set("n", "<Leader>rgc", ":terminal bundle exec rails g controller ", { noremap = true })
-vim.keymap.set("n", "<Leader>rge", ":terminal ember g ", { noremap = true })
-
 vim.keymap.set("n", "<Leader>gqa", ":terminal ~/.config/nvim/scripts/git_merge_current_to_qa.sh", { noremap = true })
 
 vim.keymap.set("n", "<Leader>gjt", ":%!sh ~/.config/scripts/jira-from-branch.sh<CR>", { noremap = true, silent = true })
 
 -- Copy/Paste JIRA ticket number
 vim.keymap.set("n", "<Leader>tp", "/PL<CR>yt/ggpA ")
+
+vim.keymap.set("n", "<Leader>rge", ":terminal ember g ", { noremap = true })
+
