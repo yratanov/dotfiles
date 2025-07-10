@@ -64,3 +64,6 @@ export FZF_DEFAULT_OPTS=" \
 
 eval "$(starship init zsh)"
 eval "$(mise activate zsh)"
+
+bindkey '^A' beginning-of-line
+bindkey '^E' end-of-line
