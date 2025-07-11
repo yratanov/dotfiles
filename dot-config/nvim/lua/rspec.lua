@@ -4,11 +4,22 @@ local global_options = {
 	},
 }
 
--- file = vim.fn.expand('%')
--- line = vim.fn.line('.')
+local project_config = require("project_config")
+local selected_mapping = project_config.get_project_config("development_environment")
+
+local prefix = ""
+
+if selected_mapping == "docker" then
+	prefix = "docker-compose exec web "
+end
+
 local function run(file)
 	vim.api.nvim_command("wa")
-	local terminal_cmd = "! $HOME/.config/nvim/scripts/run_tests.sh  'bundle exec rspec " .. file .. "' 2"
+	local terminal_cmd = "! $HOME/.config/nvim/scripts/run_tests.sh  '"
+		.. prefix
+		.. "bundle exec rspec "
+		.. file
+		.. "' 2"
 	vim.api.nvim_command(terminal_cmd)
 end
 

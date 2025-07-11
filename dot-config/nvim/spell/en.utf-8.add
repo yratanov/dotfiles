@@ -135,3 +135,5 @@ falsey
 ebsa
 validator
 devicons
+prepend
+activerecord

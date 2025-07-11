@@ -42,6 +42,7 @@ alias gpr="gh pr create -f -r drosam,cannyedge34"
 alias sp="bundle exec rspec"
 alias lg="lazygit"
 alias ll="ls -lAhF --color=auto --group-directories-first"
+alias dcw="docker compose exec web"
 
 if [[ "$(uname)" == "Linux" ]]; then
   alias open='xdg-open'
