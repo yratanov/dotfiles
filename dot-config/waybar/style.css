@@ -1,13 +1,12 @@
 window#waybar {
-  background-color: rgba(30, 30, 46, 0.5); /* base */
-  color: #cdd6f4; /* text */
-  border-bottom: 2px solid #313244; /* surface0 */
+  background-color: rgba(0,0,0, 0);
+  color: #cdd6f4;
   font-family: "JetBrainsMono Nerd Font", sans-serif;
   font-size: 14px;
 }
 
 #workspaces {
-  margin: 5px 0 5px 5px;
+  margin-top: 5px;
 }
 
 #workspaces button.active {
@@ -15,11 +14,17 @@ window#waybar {
   color: #1e1e2e;
 }
 
+#workspaces button:hover {
+  background-color: #89b4fa;
+  color: #1e1e2e; 
+}
+
 #workspaces button {
   color: #cdd6f4; 
   margin: 0 4px;
-  padding: 0 4px;
-  background-color: #313244; /* surface0 */ 
+  padding: 0 2px;
+  border-radius: 8px;
+  background-color: #313244;
 }
 
 #clock {
@@ -31,17 +36,20 @@ window#waybar {
   margin: 0 5px;
 }
 
+#custom-weather, #clock, .modules-right {
+  background-color: rgba(30, 30, 46, 0.5); /* base */
+  padding: 0 10px;
+  margin-top: 5px;
+  border-radius: 8px;
+}
+
 #custom-weather.icon {
   font-size: 14px;
   font-family: "Noto Emoji";
 }
 
-#pulseaudio {
-  min-width: 70px;
-}
-#custom-satchel-vpn,
-#custom-ssh-tunnel {
-  padding: 0 8px;
+#custom-satchel-vpn {
+  margin-top: 4px;
   font-size: 14px;
 }
 

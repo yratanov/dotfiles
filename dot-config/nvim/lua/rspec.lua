@@ -10,7 +10,7 @@ local selected_mapping = project_config.get_project_config("development_environm
 local prefix = ""
 
 if selected_mapping == "docker" then
-	prefix = "docker-compose exec web "
+	prefix = "docker-compose exec web env RAILS_ENV=test "
 end
 
 local function run(file)

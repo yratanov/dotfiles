@@ -26,11 +26,11 @@
     "hyprland/workspaces": {
         "format": "",
         "on-click": "activate",
+        "format": "{name}",
         "active-only": false,
         "all-outputs": true
     },
     "tray": {
-        // "icon-size": 21,
         "spacing": 10,
         // "icons": {
         //   "blueman": "bluetooth",
@@ -158,11 +158,11 @@
     },
     "custom/satchel-vpn" : {
       "name": "vpn",
-      "exec": "~/.config/scripts/check_service.sh openvpn-client@satchelcloud SatchelVPN",
+      "exec": "~/scripts/check_service.sh openvpn-client@satchelcloud SatchelVPN",
       "interval": 10,
       "return-type": "json",
       "format": "{}",
       "tooltip": false,
-      "on-click": "~/.config/scripts/toggle_service.sh openvpn-client@satchelcloud"
+      "on-click": "~/scripts/toggle_service.sh openvpn-client@satchelcloud"
     }
 }

@@ -18,3 +18,16 @@ invisible=true
 
 [mode=do-not-disturb app-name=notify-send]
 invisible=false
+
+[app-name=wp-vol]
+layer=overlay
+history=0
+anchor=top-center
+# Group all volume notifications together
+group-by=app-name
+# Hide the group-index
+format=<b>%s</b>\n%b
+
+[app-name=volume group-index=0]
+# Only show last notification
+invisible=0

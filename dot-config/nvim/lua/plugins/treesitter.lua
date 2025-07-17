@@ -21,6 +21,7 @@ return {
 					"typescript",
 					"ruby",
 					"markdown",
+					"html",
 					"markdown_inline",
 				},
 

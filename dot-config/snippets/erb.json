@@ -14,6 +14,11 @@
     "body": ["<% elsif ${1:truevalue} %>"],
     "description": "elsif"
   },
+  "icon": {
+    "prefix": "ic",
+    "body": ["<i class=\"icon-${1:icon}\"></i>"],
+    "description": "linearicon"
+  },
   "end": {
     "prefix": "end",
     "body": ["<% end %>"],

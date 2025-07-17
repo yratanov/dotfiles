@@ -47,6 +47,8 @@ return {
 		if selected_mapping then
 			local prefix = all_mappings[selected_mapping]
 			assign_rails_mappings(prefix)
+    else
+			assign_rails_mappings("")
 		end
 
 		vim.api.nvim_create_user_command("SelectDevelopmentEnvironment", function()
