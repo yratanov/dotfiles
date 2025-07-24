@@ -22,6 +22,8 @@ return {
 				javascript = { "prettierd" },
 				typescript = { "prettierd" },
 				handlebars = { "prettierd" },
+				css = { "prettierd" },
+				json = { "prettierd" },
 			},
 			formatters = {
 				prettier = {
