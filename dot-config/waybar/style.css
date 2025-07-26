@@ -36,21 +36,20 @@ window#waybar {
   margin: 0 5px;
 }
 
-#custom-weather, #clock, .modules-right {
+#custom-weather, #clock, .modules-right, #custom-satchel-prs, #custom-satchel-vpn {
   background-color: rgba(30, 30, 46, 0.5); /* base */
   padding: 0 10px;
   margin-top: 5px;
   border-radius: 8px;
 }
 
+.gh-review-requests {
+  color: #a6e3a1;
+}
+
 #custom-weather.icon {
   font-size: 14px;
   font-family: "Noto Emoji";
-}
-
-#custom-satchel-vpn {
-  margin-top: 4px;
-  font-size: 14px;
 }
 
 #custom-satchel-vpn.service-on {

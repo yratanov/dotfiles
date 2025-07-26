@@ -4,7 +4,8 @@
     "modules-left": [
         "hyprland/workspaces",
         "custom/media",
-        "custom/satchel-vpn"
+        "custom/satchel-vpn",
+        "custom/satchel-prs"
     ],
     "modules-center": [
         "custom/weather",
@@ -157,5 +158,11 @@
       "format": "{}",
       "tooltip": false,
       "on-click": "~/scripts/toggle_service.sh openvpn-client@satchelcloud"
-    }
+    },
+   "custom/satchel-prs" : {
+      "exec": "~/scripts/check-gh-review-requests mysencare/pulse-app",
+      "interval": 60,
+      "return-type": "json",
+      "on-click": "xdg-open https://github.com/mysencare/pulse-app/pulls?q=is%3Apr+is%3Aopen+user-review-requested%3A%40me"
+   }
 }

@@ -1,0 +1,37 @@
+#!/bin/bash
+
+set -euo pipefail
+
+repo="$1"
+
+prs=$(gh pr list --repo "$repo" --search "user-review-requested:@me" --state open --json number,title,url,updatedAt)
+
+pending_prs=()
+
+mapfile -t pr_lines < <(echo "$prs" | jq -c '.[]')
+
+for pr_json in "${pr_lines[@]}"; do
+    number=$(jq -r .number <<< "$pr_json")
+    title=$(jq -r .title <<< "$pr_json")
+    pending_prs+=("$title")
+done
+
+count=${#pending_prs[@]}
+tooltip=$(printf '%s\n' "${pending_prs[@]}" | sed 's/"/\\"/g')
+
+escape_json() {
+  # Escape backslashes, double quotes, and newlines for JSON string literal
+  echo "$1" | sed -e 's/\\/\\\\/g' -e 's/"/\\"/g' -e ':a;N;$!ba;s/\n/\\n/g'
+}
+
+tooltip=$(escape_json "$tooltip")
+
+if [ "$count" -eq 0 ]; then
+  css_class="no-gh-review-requests"
+else
+  css_class="gh-review-requests"
+fi
+
+~/scripts/notify-new-prs "$repo" > /dev/null
+
+echo "{\"text\": \" $count\", \"tooltip\": \"$tooltip\", \"class\": \"$css_class\"}"
