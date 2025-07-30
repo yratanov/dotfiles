@@ -1,7 +1,7 @@
-# ~/.tmuxinator/sample.yml
+# ./.tmuxinator.yml
 
-name: api
-root: ~/projects/pulse-app/api
+name: pulse-frontend
+root: ~/projects/pulse-app/frontend
 
 # Optional tmux socket
 # socket_name: foo
@@ -15,7 +15,7 @@ root: ~/projects/pulse-app/api
 # on_project_start: command
 
 # Run on project start, the first time
-# on_project_first_start: bundle install
+# on_project_first_start: command
 
 # Run on project start, after the first time
 # on_project_restart: command
@@ -44,8 +44,7 @@ root: ~/projects/pulse-app/api
 # Controls whether the tmux session should be attached to automatically. Defaults to true.
 # attach: false
 
+  # on_project_start: $(sleep 1 && tmux select-layout -t frontent:0 c093,316x74,0,0\{221x74,0,0,0,94x74,222,0\[94x27,222,0,1,94x46,222,28,2\]\}&
 windows:
   - editor: nvim
-  - server: docker compose up -d && docker compose attach web
-  - console: docker compose exec web bundle exec rails c
-  - lazygit: lazygit
+  - server: es

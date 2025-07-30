@@ -4,6 +4,11 @@ set -euo pipefail
 
 FILE="/tmp/last_checked_time"
 
+if [ ! -f "$FILE" ]; then
+  now_iso=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+  echo "$now_iso" > "$FILE"
+fi
+
 last_iso=$(cat "$FILE")
 
 repo="$1"
