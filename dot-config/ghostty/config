@@ -1,0 +1,17 @@
+theme = catppuccin-mocha
+font-family = "JetBrainsMono Nerd Font Mono"
+background-opacity = 0.95
+background-blur = true 
+
+keybind = super+o=text:\x13S
+keybind = super+]=text:\x13|
+keybind = super+[=text:\x13-
+keybind = super+s=text:\x13[
+keybind = super+t=text:\x13c
+keybind = ctrl+1=text:\x131
+keybind = ctrl+2=text:\x132
+keybind = ctrl+3=text:\x133
+keybind = ctrl+4=text:\x134
+keybind = ctrl+5=text:\x135
+keybind = ctrl+6=text:\x136
+keybind = ctrl+tab=text:\x13T

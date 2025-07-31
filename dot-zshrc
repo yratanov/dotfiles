@@ -10,7 +10,10 @@ export CPPFLAGS="-I/opt/homebrew/opt/postgresql@12/include"
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#878ede"
 
+# Ember aliases
 alias es="ember s --proxy=http://localhost:3000"
+alias exam="ember exam --split=10 --parallel > log/test.log"
+
 alias qa="ssh -i ~/.ssh/aws_id_ed25519 pulse-rw@bastionqa.satchel.cloud"
 alias prod="ssh -i ~/.ssh/aws_id_ed25519 pulse-rw@bastionprod.satchel.cloud"
 alias ukprod="ssh -i ~/.ssh/aws_id_ed25519 pulse-uk-rw@bastionprod.satchel.cloud"
@@ -18,7 +21,6 @@ alias ukqa="ssh -i ~/.ssh/aws_id_ed25519 pulse-uk-rw@bastionqa.satchel.cloud"
 alias thrqa="ssh -i .ssh/id_rsa satchel-thrive-rw@bastionqa.satchel.cloud"
 alias caprod="ssh -i ~/.ssh/aws_id_ed25519 pulse-ca-rw@bastionprod.satchel.cloud"
 alias caqa="ssh -i ~/.ssh/aws_id_ed25519 pulse-ca-rw@bastionqa.satchel.cloud"
-alias exam="ember exam --split=10 --parallel > log/test.log"
 alias rc="rails console"
 alias rdm="rake db:migrate"
 alias rdr="rake db:rollback"
@@ -31,20 +33,27 @@ alias bsqc="bundle exec sidekiq -C config/sidekiq.sel_calculations.yml"
 alias bsqb="bundle exec sidekiq -C config/sidekiq.skills_benchmarks.yml"
 alias ber="bundle exec rspec"
 alias mux="tmuxinator"
-alias api="mux start api"
-alias frontend="mux start frontend"
-alias dotf="mux start nvim"
 alias nv="nvim"
 alias merge_qa="~/.config/nvim/scripts/git_merge_current_to_qa.sh"
 alias tt="~/scripts/new-tmux-session.sh"
 alias nb="~/scripts/feature-branch.sh"
 alias gpr="gh pr create -f -r drosam,pikislabis"
-alias sp="bundle exec rspec"
+
 alias lg="lazygit"
+
 alias ll="ls -lAhF --color=auto --group-directories-first"
+
+# Docker aliases
 alias dcw="docker compose exec web"
+alias dcd="docker compose down"
+alias dcu="docker compose up -d"
+
+# Pacman aliases
 alias pas="sudo pacman -S"
 alias pad="sudo pacman -R"
+
+alias git-rev="git restore --source=HEAD^ --staged --worktree"
+alias gcnv="git commit --no-verify"
 
 if [[ "$(uname)" == "Linux" ]]; then
   alias open='xdg-open'
