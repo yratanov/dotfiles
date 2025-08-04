@@ -2,6 +2,7 @@ theme = catppuccin-mocha
 font-family = "JetBrainsMono Nerd Font Mono"
 background-opacity = 0.95
 background-blur = true 
+cursor-text="#000000"
 
 keybind = super+o=text:\x13S
 keybind = super+]=text:\x13|

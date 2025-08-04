@@ -22,7 +22,7 @@ window#waybar {
 #workspaces button {
   color: #cdd6f4; 
   margin: 0 4px;
-  padding: 0 2px;
+  padding: 0 10px 0 5px;
   border-radius: 8px;
   background-color: #313244;
 }

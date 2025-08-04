@@ -1,168 +1,187 @@
 {
-    "height": 30, // Waybar height (to be removed for auto height)
-    "spacing": 4, // Gaps between modules (4px)
-    "modules-left": [
-        "hyprland/workspaces",
-        "custom/media",
-        "custom/satchel-vpn",
-        "custom/satchel-prs"
-    ],
-    "modules-center": [
-        "custom/weather",
-        "clock"
-    ],
-    "modules-right": [
-        "pulseaudio",
-        "network",
-        "power-profiles-daemon",
-        "cpu",
-        "memory",
-        "temperature",
-        "bluetooth",
-        "battery",
-        "tray",
-        "custom/power"
-    ],
-    // Modules configuration
-    "hyprland/workspaces": {
-        "format": "",
-        "on-click": "activate",
-        "format": "{name}",
-        "active-only": false,
-        "all-outputs": true
+  "height": 30, // Waybar height (to be removed for auto height)
+  "spacing": 4, // Gaps between modules (4px)
+  "modules-left": [
+    "hyprland/workspaces",
+    "custom/media",
+    "custom/satchel-vpn",
+    "custom/satchel-prs",
+  ],
+  "modules-center": ["custom/weather", "clock"],
+  "modules-right": [
+    "pulseaudio",
+    "network",
+    "power-profiles-daemon",
+    "cpu",
+    "memory",
+    "temperature",
+    "bluetooth",
+    "battery",
+    "tray",
+    "custom/power",
+  ],
+  // Modules configuration
+  "hyprland/workspaces": {
+    "format": "{icon} {windows}",
+    "on-scroll-up": "hyprctl dispatch workspace e+1",
+    "on-scroll-down": "hyprctl dispatch workspace e-1",
+    "on-click": "activate",
+    "window-rewrite-default": "",
+    "window-rewrite": {
+      "title<.*youtube.*>": "", // Windows whose titles contain "youtube"
+      "class<zen>": "", // Windows whose classes are "firefox"
+      "class<firefox> title<.*github.*>": "", // Windows whose class is "firefox" and title contains "github"
+      "class<firefox> title<.*twitch|youtube.*>": "",
+      "class<com.mitchellh.ghostty>": "",
+      "class<org.telegram.desktop>": "",
+      "class<DBeaver>": "",
+      "class<Slack>": "󰒱",
+      "class<kitty>": "",
+      "code": "",
+      "class<thunderbird>": "",
+      "class<vlc>": "",
+      "class<mpv>": "",
+      "class<thunar>": "",
+      "class<org.gnome.Nautilus>": "",
+      "class<org.kde.dolphin>": "",
+      "class<libreoffice-draw>": "",
+      "class<libreoffice-writer>": "",
+      "class<libreoffice-calc>": "",
+      "class<libreoffice-impress>": "",
     },
-    "tray": {
-        "spacing": 10,
-        // "icons": {
-        //   "blueman": "bluetooth",
-        //   "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
-        // }
-    },
-    "clock": {
-        "format": "{:%d %b %H:%M}",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "on-click": "gnome-calendar"
-    },
-    "bluetooth": {
-      "format": " {status}",
-      "format-disabled": "",
-      "format-connected": " {num_connections}",
-      "tooltip-format": "{controller_alias}\t{controller_address}",
-      "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
-      "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-      "on-click": "blueberry"
-    },
-    "cpu": {
-        "format": "{usage}%  ",
-        "tooltip": false,
-        "on-click": "alacritty -e btop"
-    },
-    "memory": {
-        "format": "{}%  ",
-        "on-click": "alacritty -e btop"
-    },
-    "temperature": {
-        "critical-threshold": 80,
-        "on-click": "alacritty -e btop",
-        "format": "{temperatureC}°C"
-    },
-    "custom/hyprlayout": {
-      "exec": "~/.config/waybar/scripts/hyprlayout.sh",
-      "interval": 2,
-      "format": "{}"
-    },
-    "battery": {
-        "states": {
-            // "good": 95,
-            "warning": 30,
-            "critical": 15
-        },
-        "format": "{capacity}% {icon}",
-        "format-full": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
-        "format-plugged": "{capacity}% ",
-        "format-alt": "{time} {icon}",
-        // "format-good": "", // An empty format will hide the module
-        // "format-full": "",
-        "format-icons": [" ", " ", " ", " ", " "]
-    },
-    "power-profiles-daemon": {
-      "format": "{icon}",
-      "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
-      "tooltip": true,
-      "format-icons": {
-        "default": "",
-        "performance": "",
-        "balanced": "",
-        "power-saver": ""
-      }
-    },
-    "network": {
-        "format-wifi": "{essid} ({signalStrength}%)  ",
-        "format-ethernet": "{ipaddr}/{cidr} ",
-        "tooltip-format": "{ifname} via {gwaddr} ",
-        "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "Disconnected ⚠",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}"
-    },
-    "pulseaudio": {
-        "scroll-step": 10,
-        "format": "{volume}% {icon} {format_source}",
-        "tooltip-format": "{volume}% {icon} {format_source}",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": "  {format_source}",
-        "format-source": "",
-        "format-source-muted": "",
-        "format-icons": {
-            "headphone": " ",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": " ",
-            "default": ["", " ", " "]
-        },
-        "on-click": "pavucontrol"
-    },
-    "custom/weather": {
-      "format": "{}°",
-      "tooltip": true,
-      "interval": 3600,
-      "exec": "wttrbar",
-      "return-type": "json",
-      "on-click": "gnome-weather"
   },
-    "custom/media": {
-        "format": "{icon} {text}",
-        "return-type": "json",
-        "max-length": 40,
-        "format-icons": {
-            "spotify": "",
-            "default": "🎜"
-        },
-        "escape": true,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
-        // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+  "tray": {
+    "spacing": 10,
+    // "icons": {
+    //   "blueman": "bluetooth",
+    //   "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
+    // }
+  },
+  "clock": {
+    "format": "{:%d %b %H:%M}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "on-click": "gnome-calendar",
+  },
+  "bluetooth": {
+    "format": " {status}",
+    "format-disabled": "",
+    "format-connected": " {num_connections}",
+    "tooltip-format": "{controller_alias}\t{controller_address}",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+    "on-click": "blueberry",
+  },
+  "cpu": {
+    "format": "{usage}%  ",
+    "tooltip": false,
+    "on-click": "alacritty -e btop",
+  },
+  "memory": {
+    "format": "{}%  ",
+    "on-click": "alacritty -e btop",
+  },
+  "temperature": {
+    "critical-threshold": 80,
+    "on-click": "alacritty -e btop",
+    "format": "{temperatureC}°C",
+  },
+  "custom/hyprlayout": {
+    "exec": "~/.config/waybar/scripts/hyprlayout.sh",
+    "interval": 2,
+    "format": "{}",
+  },
+  "battery": {
+    "states": {
+      // "good": 95,
+      "warning": 30,
+      "critical": 15,
     },
-    "custom/power": {
-      "format" : "⏻ ",
-      "tooltip": false,
-      "on-click": "~/scripts/menu-power",
+    "format": "{capacity}% {icon}",
+    "format-full": "{capacity}% {icon}",
+    "format-charging": "{capacity}% ",
+    "format-plugged": "{capacity}% ",
+    "format-alt": "{time} {icon}",
+    // "format-good": "", // An empty format will hide the module
+    // "format-full": "",
+    "format-icons": [" ", " ", " ", " ", " "],
+  },
+  "power-profiles-daemon": {
+    "format": "{icon}",
+    "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+    "tooltip": true,
+    "format-icons": {
+      "default": "",
+      "performance": "",
+      "balanced": "",
+      "power-saver": "",
     },
-    "custom/satchel-vpn" : {
-      "name": "vpn",
-      "exec": "~/scripts/check_service.sh openvpn-client@satchelcloud SatchelVPN",
-      "interval": 10,
-      "return-type": "json",
-      "format": "{}",
-      "tooltip": false,
-      "on-click": "~/scripts/toggle_service.sh openvpn-client@satchelcloud"
+  },
+  "network": {
+    "format-wifi": "{essid} ({signalStrength}%)  ",
+    "format-ethernet": "{ipaddr}/{cidr} ",
+    "tooltip-format": "{ifname} via {gwaddr} ",
+    "format-linked": "{ifname} (No IP) ",
+    "format-disconnected": "Disconnected ⚠",
+    "format-alt": "{ifname}: {ipaddr}/{cidr}",
+  },
+  "pulseaudio": {
+    "scroll-step": 10,
+    "format": "{volume}% {icon} {format_source}",
+    "tooltip-format": "{volume}% {icon} {format_source}",
+    "format-bluetooth": "{volume}% {icon} {format_source}",
+    "format-bluetooth-muted": " {icon} {format_source}",
+    "format-muted": "  {format_source}",
+    "format-source": "",
+    "format-source-muted": "",
+    "format-icons": {
+      "headphone": " ",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": " ",
+      "default": ["", " ", " "],
     },
-   "custom/satchel-prs" : {
-      "exec": "~/scripts/check-gh-review-requests mysencare/pulse-app",
-      "interval": 60,
-      "return-type": "json",
-      "on-click": "xdg-open https://github.com/mysencare/pulse-app/pulls?q=is%3Apr+is%3Aopen+user-review-requested%3A%40me"
-   }
+    "on-click": "pavucontrol",
+  },
+  "custom/weather": {
+    "format": "{}°",
+    "tooltip": true,
+    "interval": 3600,
+    "exec": "wttrbar",
+    "return-type": "json",
+    "on-click": "gnome-weather",
+  },
+  "custom/media": {
+    "format": "{icon} {text}",
+    "return-type": "json",
+    "max-length": 40,
+    "format-icons": {
+      "spotify": "",
+      "default": "🎜",
+    },
+    "escape": true,
+    "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null", // Script in resources folder
+    // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+  },
+  "custom/power": {
+    "format": "⏻ ",
+    "tooltip": false,
+    "on-click": "~/scripts/menu-power",
+  },
+  "custom/satchel-vpn": {
+    "name": "vpn",
+    "exec": "~/scripts/check_service.sh openvpn-client@satchelcloud SatchelVPN",
+    "interval": 10,
+    "return-type": "json",
+    "format": "{}",
+    "tooltip": false,
+    "on-click": "~/scripts/toggle_service.sh openvpn-client@satchelcloud",
+  },
+  "custom/satchel-prs": {
+    "exec": "~/scripts/check-gh-review-requests mysencare/pulse-app",
+    "interval": 60,
+    "return-type": "json",
+    "on-click": "xdg-open https://github.com/mysencare/pulse-app/pulls?q=is%3Apr+is%3Aopen+user-review-requested%3A%40me",
+  },
 }
