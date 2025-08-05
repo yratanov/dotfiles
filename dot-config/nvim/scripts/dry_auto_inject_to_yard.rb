@@ -42,7 +42,7 @@ end
 
 def parse_inflections(inflections_path)
   content = File.read(inflections_path)
-  content.scan(/inflect.acronym '(\w+)'/).flatten
+  content.scan(/inflect.acronym ['"](\w+)["']/).flatten
 end
 
 if !filepath

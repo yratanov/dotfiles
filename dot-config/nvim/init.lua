@@ -1,7 +1,6 @@
 require("remap")
 require("set")
 require("rspec")
-require("helpers/auto_inject_yard")
 require("helpers/highlight_yank")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"

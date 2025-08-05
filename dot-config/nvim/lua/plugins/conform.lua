@@ -31,7 +31,7 @@ return {
 				},
 			},
 			-- Set up format-on-save
-			format_on_save = false,
+			format_on_save = true,
 		},
-	},
+	}
 }
