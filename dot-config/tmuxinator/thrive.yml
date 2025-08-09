@@ -46,6 +46,10 @@ root: ~/projects/satchel-thrive
 
 windows:
   - editor: nvim
-  - server: docker compose up -d && docker compose attach web
-  - console: docker compose exec web bundle exec rails c
+  - server:
+      layout: main-vertical
+      panes: 
+        - docker compose up -d && rails s
+        - rails tailwindcss:watch
+  - console: rails c
   - lazygit: lazygit

@@ -38,6 +38,7 @@ alias merge_qa="~/.config/nvim/scripts/git_merge_current_to_qa.sh"
 alias tt="~/scripts/new-tmux-session.sh"
 alias nb="~/scripts/feature-branch.sh"
 alias gpr="gh pr create -f -r drosam,pikislabis"
+alias tw="tw --theme catppuccin"
 
 alias lg="lazygit"
 

@@ -137,3 +137,6 @@ validator
 devicons
 prepend
 activerecord
+conf
+tmux
+byobu

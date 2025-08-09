@@ -10,6 +10,7 @@
   "modules-center": ["custom/weather", "clock"],
   "modules-right": [
     "pulseaudio",
+    "custom/mouse-battery",
     "network",
     "power-profiles-daemon",
     "cpu",
@@ -26,24 +27,20 @@
     "on-scroll-up": "hyprctl dispatch workspace e+1",
     "on-scroll-down": "hyprctl dispatch workspace e-1",
     "on-click": "activate",
-    "window-rewrite-default": "",
+    "window-rewrite-default": " ",
     "window-rewrite": {
-      "title<.*youtube.*>": "", // Windows whose titles contain "youtube"
-      "class<zen>": "", // Windows whose classes are "firefox"
-      "class<firefox> title<.*github.*>": "", // Windows whose class is "firefox" and title contains "github"
-      "class<firefox> title<.*twitch|youtube.*>": "",
+      "title<.*youtube.*>": " ", 
       "class<com.mitchellh.ghostty>": "",
-      "class<org.telegram.desktop>": "",
-      "class<DBeaver>": "",
-      "class<Slack>": "󰒱",
-      "class<kitty>": "",
-      "code": "",
-      "class<thunderbird>": "",
+      "class<org.telegram.desktop>": " ",
+      "class<DBeaver>": " ",
+      "class<chromium>": " ",
+      "class<discord>": " ",
+      "class<chrome-chatgpt.com__-Default>": " ",
+      "class<chrome-geoguessr.com__-Default>": " ",
+      "class<Slack>": "󰒱 ",
+      "class<thunderbird>": " ",
       "class<vlc>": "",
       "class<mpv>": "",
-      "class<thunar>": "",
-      "class<org.gnome.Nautilus>": "",
-      "class<org.kde.dolphin>": "",
       "class<libreoffice-draw>": "",
       "class<libreoffice-writer>": "",
       "class<libreoffice-calc>": "",
@@ -183,5 +180,10 @@
     "interval": 60,
     "return-type": "json",
     "on-click": "xdg-open https://github.com/mysencare/pulse-app/pulls?q=is%3Apr+is%3Aopen+user-review-requested%3A%40me",
+  },
+  "custom/mouse-battery": {
+    "exec": "solaar show 2>/dev/null | grep -i 'Battery:' | head -n1 | awk '{print $2}'",
+    "interval": 60,
+    "format": "{} ",
   },
 }
