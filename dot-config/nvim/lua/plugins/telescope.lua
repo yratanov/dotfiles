@@ -80,19 +80,6 @@ return {
 				return out
 			end
 
-			function vim.getVisualSelection()
-				vim.cmd('noau normal! "vy"')
-				local text = vim.fn.getreg("v")
-				vim.fn.setreg("v", {})
-
-				text = string.gsub(text, "\n", "")
-				if #text > 0 then
-					return text
-				else
-					return ""
-				end
-			end
-
 			vim.keymap.set("n", "<leader>o", function()
 				builtin.find_files({
 					hidden = true,
@@ -102,8 +89,7 @@ return {
 
 			vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "[TELESCOPE] Grep current word" })
 			vim.keymap.set("v", "<leader>f", function()
-				local text = vim.getVisualSelection()
-				builtin.live_grep({ default_text = text })
+				builtin.live_grep({ default_text = get_word_or_selection() })
 			end, { desc = "[TELESCOPE] Grep current word" })
 			vim.keymap.set(
 				"n",
@@ -158,6 +144,78 @@ return {
 					})
 					:find()
 			end, { desc = "[TELESCOPE] Git branch modified" })
+
+			local function get_lib_root()
+				local ft = vim.bo.filetype
+
+				if ft == "ruby" then
+					local handle = io.popen("ruby -e 'print Gem.default_dir'")
+					if handle then
+						local dir = handle:read("*a")
+						handle:close()
+						if dir and dir ~= "" then
+							return dir .. "/gems"
+						end
+					end
+				elseif ft:match("javascript") or ft:match("typescript") then
+					local node_modules = vim.fn.finddir("node_modules", ".;")
+					if node_modules ~= "" then
+						return node_modules
+					end
+				end
+
+				return nil
+			end
+
+			-- 🔹 Search files in libraries
+			local function search_lib_files()
+				local lib_root = get_lib_root()
+				if not lib_root or vim.fn.isdirectory(lib_root) == 0 then
+					print("No library directory found for " .. vim.bo.filetype)
+					return
+				end
+
+				builtin.find_files({
+					prompt_title = "Library files (" .. vim.bo.filetype .. ")",
+					cwd = lib_root,
+					hidden = true,
+				})
+			end
+
+			local function get_word_or_selection()
+				local mode = vim.fn.mode()
+				if mode:match("[vV]") then
+					local _, ls, cs = unpack(vim.fn.getpos("'<"))
+					local _, le, ce = unpack(vim.fn.getpos("'>"))
+					local lines = vim.fn.getline(ls, le)
+					if #lines == 0 then
+						return ""
+					end
+					lines[#lines] = string.sub(lines[#lines], 1, ce)
+					lines[1] = string.sub(lines[1], cs)
+					return table.concat(lines, "\n")
+				else
+					return vim.fn.expand("<cword>")
+				end
+			end
+
+			-- 🔹 Search text in libraries
+			local function search_lib_text()
+				local lib_root = get_lib_root()
+				if not lib_root or vim.fn.isdirectory(lib_root) == 0 then
+					print("No library directory found for " .. vim.bo.filetype)
+					return
+				end
+
+				builtin.live_grep({
+					prompt_title = "Library text search (" .. vim.bo.filetype .. ")",
+					cwd = lib_root,
+					default_text = get_word_or_selection(),
+				})
+			end
+
+			vim.keymap.set("n", "<leader>fl", search_lib_files, { desc = "Search in libraries" })
+			vim.keymap.set({ "n", "v" }, "<leader>fg", search_lib_text, { desc = "Search text in libraries" })
 
 			vim.keymap.set("n", "<leader>fr", builtin.lsp_references, { desc = "[TELESCOPE] LSP references" })
 

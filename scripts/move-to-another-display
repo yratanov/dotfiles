@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+# Get the current workspace ID and monitorID
+current_ws=$(hyprctl activeworkspace -j | jq '.id')
+current_monitor=$(hyprctl activeworkspace -j | jq '.monitorID')
+
+# Get list of monitor IDs
+mapfile -t monitors < <(hyprctl monitors -j | jq '.[].id')
+
+# Find current monitor index
+for i in "${!monitors[@]}"; do
+    if [[ "${monitors[$i]}" == "$current_monitor" ]]; then
+        current_index=$i
+        break
+    fi
+done
+
+# Calculate next monitor (wrap if needed)
+next_index=$(( (current_index + 1) % ${#monitors[@]} ))
+next_monitor="${monitors[$next_index]}"
+
+# Move the workspace
+hyprctl dispatch moveworkspacetomonitor "$current_ws" "$next_monitor"
