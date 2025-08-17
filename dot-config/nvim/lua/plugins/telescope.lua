@@ -87,6 +87,23 @@ return {
 				})
 			end, { desc = "[TELESCOPE] Find files" })
 
+			local function get_word_or_selection()
+				local mode = vim.fn.mode()
+				if mode:match("[vV]") then
+					local _, ls, cs = unpack(vim.fn.getpos("'<"))
+					local _, le, ce = unpack(vim.fn.getpos("'>"))
+					local lines = vim.fn.getline(ls, le)
+					if #lines == 0 then
+						return ""
+					end
+					lines[#lines] = string.sub(lines[#lines], 1, ce)
+					lines[1] = string.sub(lines[1], cs)
+					return table.concat(lines, "\n")
+				else
+					return vim.fn.expand("<cword>")
+				end
+			end
+
 			vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "[TELESCOPE] Grep current word" })
 			vim.keymap.set("v", "<leader>f", function()
 				builtin.live_grep({ default_text = get_word_or_selection() })
@@ -182,23 +199,6 @@ return {
 				})
 			end
 
-			local function get_word_or_selection()
-				local mode = vim.fn.mode()
-				if mode:match("[vV]") then
-					local _, ls, cs = unpack(vim.fn.getpos("'<"))
-					local _, le, ce = unpack(vim.fn.getpos("'>"))
-					local lines = vim.fn.getline(ls, le)
-					if #lines == 0 then
-						return ""
-					end
-					lines[#lines] = string.sub(lines[#lines], 1, ce)
-					lines[1] = string.sub(lines[1], cs)
-					return table.concat(lines, "\n")
-				else
-					return vim.fn.expand("<cword>")
-				end
-			end
-
 			-- 🔹 Search text in libraries
 			local function search_lib_text()
 				local lib_root = get_lib_root()
@@ -275,7 +275,12 @@ return {
 			local file_browser = require("telescope").extensions.file_browser
 			file_browser.hidden = true
 			vim.keymap.set("n", "<space>fd", function()
-				file_browser.file_browser({ path = "%:p:h", select_buffer = true, respect_gitignore = false })
+				file_browser.file_browser({
+					path = "%:p:h",
+					select_buffer = true,
+					hide_parent_dir = true,
+					respect_gitignore = false,
+				})
 			end, { desc = "[TELESCOPE] File browser" })
 		end,
 	},

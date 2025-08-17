@@ -5,7 +5,7 @@ return {
 		priority = 1000,
 		init = function()
 			require("catppuccin").setup({
-				flavour = "frappe", -- latte, frappe, macchiato, mocha
+				flavour = "mocha", -- latte, frappe, macchiato, mocha
 				background = { -- :h background
 					light = "mocha",
 					dark = "mocha",
@@ -17,6 +17,10 @@ return {
 					enabled = false, -- dims the background color of inactive window
 					shade = "dark",
 					percentage = 0.15, -- percentage of the shade to apply to the inactive window
+				},
+				float = {
+					transparent = true, -- enable transparent floating windows
+					solid = false, -- use solid styling for floating windows, see |winborder|
 				},
 				no_italic = false, -- Force no italic
 				no_bold = false, -- Force no bold
@@ -37,9 +41,13 @@ return {
 				},
 				color_overrides = {},
 				custom_highlights = {},
+				telescope = {
+					enabled = true, -- enable telescope integration
+				},
 				integrations = {
 					cmp = true,
 					gitsigns = true,
+					telescope = true,
 					nvimtree = true,
 					treesitter = true,
 					notify = false,
