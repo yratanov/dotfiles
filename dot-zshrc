@@ -39,6 +39,7 @@ alias tt="~/scripts/new-tmux-session.sh"
 alias nb="~/scripts/feature-branch.sh"
 alias gpr="gh pr create -f -r drosam,pikislabis"
 alias tw="tw --theme catppuccin"
+alias SatchelVPN="~/scripts/toggle_service.sh openvpn-client@satchelcloud"
 
 alias lg="lazygit"
 

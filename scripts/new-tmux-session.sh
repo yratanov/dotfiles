@@ -6,10 +6,11 @@ PROJECTS_DIR="$HOME/projects"
 # 
 PROJECTS=$(ls -l "$PROJECTS_DIR" | grep '^d' | awk '{print " ", $NF}')
 
-TMUXINATORS=$(tmuxinator list | tail -n 1 | tr -s "[:space:]" "\n" | awk '{print  " ", $1}')
+TMUXINATORS=$(for f in "$HOME/.config/tmuxinator"/*; do
+  [ -f "$f" ] && echo " ${f##*/}" | sed 's/\.[^.]*$//'
+done)
 
 SELECTED=$(printf "$PROJECTS\n$TMUXINATORS" | fzf-tmux)
-
 
 if [[ $SELECTED == *""* ]]; then
   tmuxinator $(echo $SELECTED | awk '{print $2}')
