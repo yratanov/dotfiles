@@ -30,7 +30,7 @@
     "window-rewrite-default": " ",
     "window-rewrite": {
       "title<.*youtube.*>": " ", 
-      "class<com.mitchellh.ghostty>": "",
+      "class<com.mitchellh.ghostty>": " ",
       "class<org.telegram.desktop>": " ",
       "class<TelegramDesktop>": " ",
       "class<DBeaver>": " ",

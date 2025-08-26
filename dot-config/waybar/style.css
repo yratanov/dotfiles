@@ -15,17 +15,22 @@ window#waybar {
 }
 
 #workspaces button:hover {
+  box-shadow: none;
+  text-shadow: none;
+  background: none;
+  transition: none;
   color: #89b4fa;
-  background-color: rgba(30, 30, 46, 0.5); /* base */
-  border-color: transparent;
+  background-color: rgba(30, 30, 46, 0.75);
+  border: none;
 }
 
 #workspaces button {
   color: #cdd6f4;
   margin: 0 4px;
-  padding: 0 10px 0 5px;
+  padding: 0 7px 0 5px;
   border-radius: 8px;
-  background-color: rgba(30, 30, 46, 0.5); /* base */
+  background-color: rgba(30, 30, 46, 0.5);
+  border: none;
 }
 
 #clock {
