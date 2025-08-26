@@ -115,9 +115,9 @@
     },
   },
   "network": {
-    "format-wifi": "{essid} ({signalStrength}%)  ",
+    "format-wifi": " ({signalStrength}%)",
     "format-ethernet": "{ipaddr}/{cidr} ",
-    "tooltip-format": "{ifname} via {gwaddr} ",
+    "tooltip-format": "{essid} {signalStrength}% {ifname} via {gwaddr} ",
     "format-linked": "{ifname} (No IP) ",
     "format-disconnected": "Disconnected ⚠",
     "format-alt": "{ifname}: {ipaddr}/{cidr}",
@@ -185,6 +185,6 @@
   "custom/mouse-battery": {
     "exec": "solaar show 2>/dev/null | grep -i 'Battery:' | head -n1 | awk '{print $2}'",
     "interval": 60,
-    "format": "{} ",
+    "format": " ({})",
   },
 }
