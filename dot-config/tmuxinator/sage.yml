@@ -51,5 +51,6 @@ windows:
       panes: 
         - docker compose up -d && rails s
         - rails tailwindcss:watch
+        - yarn build --watch
   - console: rails c
   - lazygit: lazygit

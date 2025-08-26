@@ -46,6 +46,13 @@ root: ~/projects/pulse-app/api
 
 windows:
   - editor: nvim
-  - server: docker compose up -d && docker compose attach web
-  - console: docker compose exec web bundle exec rails c
+  - server:
+      layout: main-vertical
+      panes: 
+        - docker compose up -d && rails s
+  - workers:
+    - bundle exec sidekiq -C config/sidekiq.yml
+    - bundle exec sidekiq -C config/sidekiq.sel_calculations.yml
+    - bundle exec sidekiq -C config/sidekiq.skills_benchmarks.yml
+  - console: rails c
   - lazygit: lazygit
