@@ -1,0 +1,54 @@
+#!/bin/bash
+# Usage: ./weather.sh "London"
+
+LOCATION="$1"
+
+if [ -z "$LOCATION" ]; then
+  echo '{"text":"","tooltip":"Please provide a location"}'
+  exit 1
+fi
+
+# Get coordinates using Open-Meteo geocoding
+GEO_URL="https://geocoding-api.open-meteo.com/v1/search?name=${LOCATION}&count=1&language=en&format=json"
+GEO_RESPONSE=$(curl -sf "$GEO_URL")
+
+if [ $? -ne 0 ] || [ -z "$GEO_RESPONSE" ]; then
+  echo '{"text":"","tooltip":"Failed to geocode"}'
+  exit 1
+fi
+
+LAT=$(echo "$GEO_RESPONSE" | jq '.results[0].latitude')
+LON=$(echo "$GEO_RESPONSE" | jq '.results[0].longitude')
+CITY=$(echo "$GEO_RESPONSE" | jq -r '.results[0].name')
+
+# Query weather forecast
+WEATHER_URL="https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&current=temperature_2m,weathercode&timezone=auto"
+WEATHER_RESPONSE=$(curl -sf "$WEATHER_URL")
+
+if [ $? -ne 0 ] || [ -z "$WEATHER_RESPONSE" ]; then
+  echo '{"text":"","tooltip":"Failed to fetch weather"}'
+  exit 1
+fi
+
+TEMP=$(echo "$WEATHER_RESPONSE" | jq '.current.temperature_2m' | xargs printf "%.0f")
+CODE=$(echo "$WEATHER_RESPONSE" | jq '.current.weathercode')
+
+# Map Open-Meteo weather codes to icons
+# https://open-meteo.com/en/docs#weathervariables
+case $CODE in
+  0) SYMBOL="☀️"; DESC="Clear sky";;
+  1|2) SYMBOL="🌤️"; DESC="Mainly clear";;
+  3) SYMBOL="☁️"; DESC="Cloudy";;
+  45|48) SYMBOL="🌫️"; DESC="Fog";;
+  51|53|55) SYMBOL="🌦️"; DESC="Drizzle";;
+  61|63|65) SYMBOL="🌧️"; DESC="Rain";;
+  66|67) SYMBOL="🌧️"; DESC="Freezing rain";;
+  71|73|75|77) SYMBOL="❄️"; DESC="Snowfall";;
+  80|81|82) SYMBOL="🌧️"; DESC="Rain showers";;
+  85|86) SYMBOL="❄️"; DESC="Snow showers";;
+  95) SYMBOL="⛈️"; DESC="Thunderstorm";;
+  96|99) SYMBOL="⛈️"; DESC="Thunderstorm with hail";;
+  *) SYMBOL="❔"; DESC="Unknown";;
+esac
+
+echo "{\"text\":\"${SYMBOL} ${TEMP}°C\",\"tooltip\":\"${DESC} in ${CITY}, ${TEMP}°C\", \"alt\":\"${DESC}\"}"

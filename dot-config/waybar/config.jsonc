@@ -143,10 +143,10 @@
     "on-click": "pavucontrol",
   },
   "custom/weather": {
-    "format": "{}°",
+    "format": "{}",
     "tooltip": true,
     "interval": 3600,
-    "exec": "wttrbar --lang ru",
+    "exec": "$HOME/scripts/waybar-weather London",
     "return-type": "json",
     "on-click": "gnome-weather",
   },
