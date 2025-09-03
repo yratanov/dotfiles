@@ -90,15 +90,16 @@ return {
 			local function get_word_or_selection()
 				local mode = vim.fn.mode()
 				if mode:match("[vV]") then
-					local _, ls, cs = unpack(vim.fn.getpos("'<"))
-					local _, le, ce = unpack(vim.fn.getpos("'>"))
-					local lines = vim.fn.getline(ls, le)
-					if #lines == 0 then
+					vim.cmd('noau normal! "vy"')
+					local text = vim.fn.getreg("v")
+					vim.fn.setreg("v", {})
+
+					text = string.gsub(text, "\n", "")
+					if #text > 0 then
+						return text
+					else
 						return ""
 					end
-					lines[#lines] = string.sub(lines[#lines], 1, ce)
-					lines[1] = string.sub(lines[1], cs)
-					return table.concat(lines, "\n")
 				else
 					return vim.fn.expand("<cword>")
 				end
