@@ -141,3 +141,8 @@ conf
 tmux
 byobu
 Upsert
+hyprlock
+devel
+pacman
+hyprland
+waybar
