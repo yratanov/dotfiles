@@ -16,6 +16,8 @@ return {
 					"solargraph",
 					"emmet_ls",
 					"elixirls",
+					"arduino_language_server",
+					"clangd",
 					"gopls",
 				},
 			})
@@ -33,6 +35,18 @@ return {
 				},
 			})
 
+			nvim_lsp.arduino_language_server.setup({
+				cmd = {
+					"arduino-language-server",
+					"-cli",
+					"/usr/bin/arduino-cli",
+					"-clangd",
+					"/usr/bin/clangd",
+				},
+				filetypes = { "arduino" },
+				root_dir = nvim_lsp.util.root_pattern("*.ino", ".git"),
+				settings = {},
+			})
 			vim.api.nvim_create_autocmd("LspAttach", {
 				callback = function(ev)
 					local bufnr = ev.buf
