@@ -24,6 +24,8 @@ return {
 				handlebars = { "prettierd" },
 				css = { "prettierd" },
 				json = { "prettierd" },
+				c = { "clang-format" },
+				ino = { "clang-format" },
 			},
 			formatters = {
 				prettier = {
@@ -33,5 +35,5 @@ return {
 			-- Set up format-on-save
 			format_on_save = true,
 		},
-	}
+	},
 }

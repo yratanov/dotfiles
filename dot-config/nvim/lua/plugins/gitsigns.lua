@@ -89,6 +89,83 @@ return {
 
 					-- Text object
 					map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "[GIT] Select hunk" })
+
+					vim.keymap.set({ "n", "v" }, "<leader>go", function()
+						-- git repo root
+						local repo_root = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
+						if not repo_root or repo_root == "" then
+							print("Not a git repository")
+							return
+						end
+
+						-- full path of current file
+						local filepath = vim.fn.expand("%:p")
+
+						-- path relative to git root
+						local relpath = filepath:sub(#repo_root + 2) -- +2 for trailing "/"
+
+						-- get remote url
+						local remote_url = vim.fn.systemlist("git remote get-url origin")[1]
+						if not remote_url or remote_url == "" then
+							print("No remote origin")
+							return
+						end
+
+						-- normalize GitHub URLs (SSH → HTTPS)
+						remote_url = remote_url:gsub("^git@github.com:", "https://github.com/"):gsub("%.git$", "")
+
+						-- get branch or commit
+						local branch = vim.fn.systemlist("git rev-parse --abbrev-ref HEAD")[1]
+						if branch == "HEAD" then
+							branch = vim.fn.systemlist("git rev-parse HEAD")[1] -- detached HEAD → commit hash
+						end
+
+						-- check if branch exists locally under origin, else fallback
+						local origin_branches =
+							vim.fn.systemlist("git for-each-ref --format='%(refname:short)' refs/remotes/origin")
+						local exists = false
+						for _, b in ipairs(origin_branches) do
+							if b == "origin/" .. branch then
+								exists = true
+								break
+							end
+						end
+						if not exists then
+							if vim.fn.index(origin_branches, "origin/master") >= 0 then
+								branch = "master"
+							else
+								branch = "main"
+							end
+						end
+
+						-- build URL (single line or visual range)
+						local url
+						if vim.fn.mode() == "v" or vim.fn.mode() == "V" then
+							local start_line = vim.fn.line("v")
+							local end_line = vim.fn.line(".")
+							if start_line > end_line then
+								start_line, end_line = end_line, start_line
+							end
+							url = string.format(
+								"%s/blob/%s/%s#L%d-L%d",
+								remote_url,
+								branch,
+								relpath,
+								start_line,
+								end_line
+							)
+						else
+							local line = vim.fn.line(".")
+							url = string.format("%s/blob/%s/%s#L%d", remote_url, branch, relpath, line)
+						end
+
+						-- open in browser (Linux/macOS/Windows)
+						local opener = vim.fn.has("macunix") == 1 and "open"
+							or (vim.fn.has("win32") == 1 and "start" or "xdg-open")
+
+						vim.fn.jobstart({ opener, url }, { detach = true })
+						print("Opening " .. url)
+					end, { desc = "Open current line/range on GitHub" })
 				end,
 			})
 		end,

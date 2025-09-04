@@ -9,13 +9,13 @@ yay -Syu --noconfirm \
   \
   swappy hyprshot wl-screenrec wf-recorder slurp \
   \
-  alacritty ghostty nautilus nextcloud-client fzf starship fd man \
+  alacritty ghostty nautilus nextcloud-client fzf starship fd man stow \
   \
   firefox chromium thunderbird \
   \
   bitwarden 1password-cli 1password-beta \
   \
-  neovim mise lazygit docker docker-compose ttf-jetbrains-mono-nerd stylua arduino-cli lazydocker imagemagick github-cli clang \
+  neovim mise lazygit docker docker-compose ttf-jetbrains-mono-nerd stylua arduino-cli lazydocker imagemagick github-cli clang 
   \
   mpv youtube-music vlc imv \
   \
@@ -28,6 +28,8 @@ yay -Syu --noconfirm \
   freecad libreoffice bambustudio-bin prusa-slicer
   \
   pipewire pipewire-pulse pipewire-jack wireplumber
+  
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
 # Open all images with imv
 xdg-mime default imv.desktop image/png
