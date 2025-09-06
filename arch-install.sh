@@ -4,18 +4,18 @@
 sudo pacman -Syu --needed git base-devel && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si
 
 yay -Syu --noconfirm \
-  hyprland waybar hyprlock hypridle hyprpaper wl-clipboard pavucontrol clipse sddm wl-clip-persist walker-bin hyprland-per-window-layout mako qt5-wayland qt6-wayland noto-fonts noto-fonts-extra noto-fonts-emoji woff2-font-awesome xdg-desktop-portal-gtk xdg-desktop-portal-hyprland \
+  hyprland waybar hyprlock hypridle hyprpaper wl-clipboard pavucontrol clipse sddm wl-clip-persist walker-bin hyprland-per-window-layout mako qt5-wayland qt6-wayland noto-fonts noto-fonts-extra noto-fonts-emoji woff2-font-awesome xdg-desktop-portal-gtk xdg-desktop-portal-hyprland plymouth \
   gnome-calculator gnome-weather fontconfig gnome-keyring gnome-themes-extra noto-fonts-cjk noto-fonts-emoji noto-fonts-extra yaru-icon-theme \
   \
   swappy hyprshot wl-screenrec wf-recorder slurp \
   \
-  alacritty ghostty nautilus nextcloud-client fzf starship fd man stow \
+  alacritty ghostty nautilus nextcloud-client fzf starship fd man stow tmux fzf-tmux rip-grep bc\
   \
   firefox chromium thunderbird \
   \
   bitwarden 1password-cli 1password-beta \
   \
-  neovim mise lazygit docker docker-compose ttf-jetbrains-mono-nerd stylua arduino-cli lazydocker imagemagick github-cli clang 
+  neovim mise lazygit docker docker-compose ttf-jetbrains-mono-nerd stylua arduino-cli lazydocker imagemagick github-cli clang \
   \
   mpv youtube-music vlc imv \
   \
@@ -25,11 +25,15 @@ yay -Syu --noconfirm \
   \
   dbeaver \
   \
-  freecad libreoffice bambustudio-bin prusa-slicer
+  freecad libreoffice bambustudio-bin prusa-slicer \
   \
   pipewire pipewire-pulse pipewire-jack wireplumber
   
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+mkdir -p ~/.config/tmux/plugins/catppuccin
+git clone -b v2.1.3 https://github.com/catppuccin/tmux.git ~/.config/tmux/plugins/catppuccin/tmux
 
 # Open all images with imv
 xdg-mime default imv.desktop image/png
@@ -48,21 +52,21 @@ xdg-mime default chromium.desktop x-scheme-handler/http
 xdg-mime default chromium.desktop x-scheme-handler/https
 
 # Open video files with mpv
-xdg-mime default vlc.desktop video/mp4
-xdg-mime default vlc.desktop video/x-msvideo
-xdg-mime default vlc.desktop video/x-matroska
-xdg-mime default vlc.desktop video/x-flv
-xdg-mime default vlc.desktop video/x-ms-wmv
-xdg-mime default vlc.desktop video/mpeg
-xdg-mime default vlc.desktop video/ogg
-xdg-mime default vlc.desktop video/webm
-xdg-mime default vlc.desktop video/quicktime
-xdg-mime default vlc.desktop video/3gpp
-xdg-mime default vlc.desktop video/3gpp2
-xdg-mime default vlc.desktop video/x-ms-asf
-xdg-mime default vlc.desktop video/x-ogm+ogg
-xdg-mime default vlc.desktop video/x-theora+ogg
-xdg-mime default vlc.desktop application/ogg
+xdg-mime default mpv.desktop video/mp4
+xdg-mime default mpv.desktop video/x-msvideo
+xdg-mime default mpv.desktop video/x-matroska
+xdg-mime default mpv.desktop video/x-flv
+xdg-mime default mpv.desktop video/x-ms-wmv
+xdg-mime default mpv.desktop video/mpeg
+xdg-mime default mpv.desktop video/ogg
+xdg-mime default mpv.desktop video/webm
+xdg-mime default mpv.desktop video/quicktime
+xdg-mime default mpv.desktop video/3gpp
+xdg-mime default mpv.desktop video/3gpp2
+xdg-mime default mpv.desktop video/x-ms-asf
+xdg-mime default mpv.desktop video/x-ogm+ogg
+xdg-mime default mpv.desktop video/x-theora+ogg
+xdg-mime default mpv.desktop application/ogg
 
 mise settings add idiomatic_version_file_enable_tools ruby
 
