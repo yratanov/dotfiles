@@ -1,0 +1,48 @@
+#!/bin/bash
+set -euo pipefail
+
+BACKUP_DIR="$1"
+SCRIPT_PATH="$HOME/.bin/backup-chromium-profiles"
+
+if [[ ! -x "$SCRIPT_PATH" ]]; then
+  echo "❌ Backup script not found or not executable: $SCRIPT_PATH"
+  exit 1
+fi
+
+mkdir -p "$BACKUP_DIR"
+
+# Systemd service unit
+SERVICE_FILE="$HOME/.config/systemd/user/chromium-backup.service"
+TIMER_FILE="$HOME/.config/systemd/user/chromium-backup.timer"
+
+mkdir -p "$(dirname "$SERVICE_FILE")"
+
+cat > "$SERVICE_FILE" <<EOF
+[Unit]
+Description=Backup Chromium profiles
+
+[Service]
+Type=oneshot
+ExecStart=$SCRIPT_PATH $BACKUP_DIR
+EOF
+
+# Timer unit
+cat > "$TIMER_FILE" <<EOF
+[Unit]
+Description=Run Chromium backup daily
+
+[Timer]
+OnCalendar=daily
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+EOF
+
+# Enable and start timer
+systemctl --user daemon-reload
+systemctl --user enable --now chromium-backup.timer
+
+echo "✅ Installed daily backup timer."
+systemctl --user list-timers chromium-backup.timer
+

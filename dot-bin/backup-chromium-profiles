@@ -1,0 +1,40 @@
+#!/bin/bash
+set -euo pipefail
+
+BACKUP_DIR="$1"
+SRC_DIR="$HOME/.cache/chromium"
+LOG_FILE="$HOME/.cache/chromium-backup.log"
+
+mkdir -p "$BACKUP_DIR"
+mkdir -p "$(dirname "$LOG_FILE")"
+
+{
+  echo "[$(date '+%Y-%m-%d %H:%M:%S')] Starting Chromium profile backup..."
+
+  if [[ ! -d "$SRC_DIR" ]]; then
+    echo "❌ Source directory not found: $SRC_DIR"
+    exit 1
+  fi
+
+  TIMESTAMP=$(date +"%Y%m%d-%H%M%S")
+  ZIP_FILE="$BACKUP_DIR/chromium-profiles-$TIMESTAMP.zip"
+
+  cd "$SRC_DIR" || exit 1
+  profiles=(Default Profile*)
+
+  if [[ ${#profiles[@]} -eq 0 ]]; then
+    echo "⚠️ No Chromium profiles found in $SRC_DIR"
+    exit 0
+  fi
+
+  zip -qr "$ZIP_FILE" "${profiles[@]}"
+  echo "✅ Created backup: $ZIP_FILE"
+
+  # Keep only 5 most recent backups
+  ls -1t "$BACKUP_DIR"/chromium-profiles-*.zip | tail -n +6 | xargs -r rm --
+  echo "🧹 Old backups cleaned, keeping last 5."
+
+  echo "✅ Backup completed."
+  echo
+} >>"$LOG_FILE" 2>&1
+
