@@ -32,6 +32,6 @@ else
   css_class="gh-review-requests"
 fi
 
-~/scripts/notify-new-prs "$repo" > /dev/null
+~/.bin/notify-new-prs "$repo" > /dev/null
 
 echo "{\"text\": \" $count\", \"tooltip\": \"$tooltip\", \"class\": \"$css_class\"}"

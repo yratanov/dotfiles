@@ -35,11 +35,11 @@ alias ber="bundle exec rspec"
 alias mux="tmuxinator"
 alias nv="nvim"
 alias merge_qa="~/.config/nvim/scripts/git_merge_current_to_qa.sh"
-alias tt="~/scripts/new-tmux-session.sh"
-alias nb="~/scripts/feature-branch.sh"
+alias tt="~/.bin/new-tmux-session.sh"
+alias nb="~/.bin/feature-branch.sh"
 alias gpr="gh pr create -f -r drosam,pikislabis"
 alias tw="tw --theme catppuccin"
-alias SatchelVPN="~/scripts/toggle_service.sh openvpn-client@satchelcloud"
+alias SatchelVPN="~/.bin/toggle_service.sh openvpn-client@satchelcloud"
 
 alias lg="lazygit"
 
@@ -66,7 +66,7 @@ else
 fi
 
 # source "$HOME/.cargo/env"
-export PATH="$HOME/scripts:/opt/homebrew/opt/openjdk/bin:$PATH:/var/lib/snapd/snap/bin"
+export PATH="$HOME/.bin:/opt/homebrew/opt/openjdk/bin:$PATH:/var/lib/snapd/snap/bin"
 export EDITOR='nvim'
 alias dfl='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 

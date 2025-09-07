@@ -48,7 +48,7 @@ vim.keymap.set("n", "<Leader>cp", ':let @+ = expand("%")<cr>', { noremap = true,
 
 vim.keymap.set("n", "<Leader>gqa", ":terminal ~/.config/nvim/scripts/git_merge_current_to_qa.sh", { noremap = true })
 
-vim.keymap.set("n", "<Leader>gjt", ":%!sh ~/scripts/jira-from-branch.sh<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<Leader>gjt", ":%!sh ~/.bin/jira-from-branch.sh<CR>", { noremap = true, silent = true })
 
 -- Copy/Paste JIRA ticket number
 vim.keymap.set("n", "<Leader>tp", "/PL<CR>yt/ggpA ")

@@ -9,7 +9,7 @@ yay -Syu --noconfirm \
   \
   swappy hyprshot wl-screenrec wf-recorder slurp \
   \
-  alacritty ghostty nautilus nextcloud-client fzf starship fd man stow tmux fzf-tmux rip-grep bc\
+  alacritty ghostty nautilus nextcloud-client fzf starship fd man stow tmux fzf-tmux rip-grep bc unzip usbutils gum\
   \
   firefox chromium thunderbird \
   \
@@ -97,6 +97,8 @@ sudo systemctl enable docker
 
 # Give this user privileged Docker access
 sudo usermod -aG docker ${USER}
+sudo usermod -aG dialout ${USER}
+sudo usermod -aG uucp ${USER}
 
 # Prevent Docker from preventing boot for network-online.target
 sudo mkdir -p /etc/systemd/system/docker.service.d

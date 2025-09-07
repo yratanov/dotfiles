@@ -29,7 +29,7 @@ for pr_json in "${pr_lines[@]}"; do
   echo "Time difference for '$title': $diff seconds"
   
   if [ "$diff" -lt 0 ]; then
-    notify-send "New PR Review Request" "$title" --icon "$HOME/scripts/assets/gh.svg"
+    notify-send "New PR Review Request" "$title" --icon "$HOME/.bin/assets/gh.svg"
   fi
 done
 
