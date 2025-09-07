@@ -1,1 +1,2 @@
+#!/bin/bash
 stow --dotfiles --adopt --target=$HOME .
