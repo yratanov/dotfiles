@@ -17,7 +17,7 @@ yay -Syu --noconfirm \
   \
   neovim mise lazygit docker docker-compose ttf-jetbrains-mono-nerd stylua arduino-cli lazydocker imagemagick github-cli clang \
   \
-  mpv youtube-music vlc imv \
+  mpv youtube-music vlc imv vlc-plugin-gstreamer vlc-plugin-ffmpeg\
   \
   discord telegram-desktop slack-desktop-wayland \
   \
