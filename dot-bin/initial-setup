@@ -9,7 +9,7 @@ yay -Syu --noconfirm \
   \
   swappy hyprshot wl-screenrec wf-recorder slurp \
   \
-  alacritty ghostty nautilus nextcloud-client fzf starship fd man stow tmux fzf-tmux rip-grep bc unzip usbutils gum zip smbclient	gvfs-smb postgresql-libs\
+  alacritty ghostty nautilus nextcloud-client fzf starship fd man stow tmux fzf-tmux rip-grep bc unzip usbutils gum zip smbclient	gvfs-smb postgresql-libs git-delta wget\
   \
   firefox chromium thunderbird \
   \
@@ -124,3 +124,7 @@ sudo systemctl enable iwd.service
 # Prevent systemd-networkd-wait-online timeout on boot
 sudo systemctl disable systemd-networkd-wait-online.service
 sudo systemctl mask systemd-networkd-wait-online.service
+
+dot-bin/sync-dotfiles
+
+bat cache --build
