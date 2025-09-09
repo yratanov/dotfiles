@@ -180,7 +180,7 @@
     "exec": "~/.bin/check-gh-review-requests mysencare/pulse-app",
     "interval": 60,
     "return-type": "json",
-    "on-click": "xdg-open https://github.com/mysencare/pulse-app/pulls?q=is%3Apr+is%3Aopen+user-review-requested%3A%40me",
+    "on-click": "xdg-open https://github.com/mysencare/pulse-app/pulls?q=is%3Apr+is%3Aopen+user-review-requested%3A%40me && hyprctl dispatch workspace 1",
   },
   "custom/mouse-battery": {
     "exec": "solaar show 2>/dev/null | grep -i 'Battery:' | head -n1 | awk '{print $2}'",

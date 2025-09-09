@@ -14,5 +14,5 @@ fi
 ENCODED_TEXT=$(python3 -c "import urllib.parse, sys; print(urllib.parse.quote(sys.argv[1]))" "$TEXT")
 
 # Open browser with the encoded URL
-xdg-open "http://localhost:4200/tests?filter=$ENCODED_TEXT"
+xdg-open "http://localhost:4200/tests?hidepassed=true&mirageLogging&filter=$ENCODED_TEXT"
 
