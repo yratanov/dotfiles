@@ -5,7 +5,7 @@ sudo pacman -Syu --needed git base-devel && git clone https://aur.archlinux.org/
 
 yay -Syu --noconfirm \
   hyprland waybar hyprlock hypridle hyprpaper wl-clipboard pavucontrol clipse sddm wl-clip-persist walker-bin hyprland-per-window-layout mako qt5-wayland qt6-wayland noto-fonts noto-fonts-extra noto-fonts-emoji woff2-font-awesome xdg-desktop-portal-gtk xdg-desktop-portal-hyprland plymouth uwsm hyprpicker\
-  gnome-calculator gnome-weather fontconfig gnome-keyring gnome-themes-extra noto-fonts-cjk noto-fonts-emoji noto-fonts-extra yaru-icon-theme libqalculate\
+  gnome-calculator gnome-weather fontconfig gnome-keyring gnome-themes-extra noto-fonts-cjk noto-fonts-emoji noto-fonts-extra yaru-icon-theme libqalculate sushi\
   \
   swappy hyprshot wl-screenrec wf-recorder slurp \
   \
