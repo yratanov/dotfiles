@@ -19,7 +19,7 @@ yay -Syu --noconfirm \
   \
   mpv youtube-music vlc imv vlc-plugin-gstreamer vlc-plugin-ffmpeg\
   \
-  discord telegram-desktop slack-desktop-wayland \
+  discord telegram-desktop slack-desktop-wayland zoom\
   \
   neofetch btop gnome-disk-utility openvpn \
   \
