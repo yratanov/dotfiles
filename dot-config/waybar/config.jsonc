@@ -16,7 +16,8 @@
     "cpu",
     "memory",
     "temperature",
-    "bluetooth",
+    //"bluetooth",
+    "hyprland/language",
     "battery",
     "tray",
     "custom/power",
@@ -29,7 +30,7 @@
     "on-click": "activate",
     "window-rewrite-default": " ",
     "window-rewrite": {
-      "title<.*youtube.*>": " ", 
+      "title<.*youtube.*>": " ",
       "class<com.mitchellh.ghostty>": " ",
       "class<org.telegram.desktop>": " ",
       "class<TelegramDesktop>": " ",
@@ -52,10 +53,6 @@
   },
   "tray": {
     "spacing": 10,
-    // "icons": {
-    //   "blueman": "bluetooth",
-    //   "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
-    // }
   },
   "clock": {
     "format": "{:%d %b %H:%M}",
@@ -101,8 +98,6 @@
     "format-charging": "{capacity}% ",
     "format-plugged": "{capacity}% ",
     "format-alt": "{time} {icon}",
-    // "format-good": "", // An empty format will hide the module
-    // "format-full": "",
     "format-icons": [" ", " ", " ", " ", " "],
   },
   "power-profiles-daemon": {
@@ -188,5 +183,11 @@
     "exec": "solaar show 2>/dev/null | grep -i 'Battery:' | head -n1 | awk '{print $2}'",
     "interval": 60,
     "format": " ({})",
+  },
+  "hyprland/language": {
+    "format": "{}",
+    "keyboard-name": "keychron-keychron-q2-pro-keyboard",
+    "format-en": "EN",
+    "format-ru": "RU",
   },
 }
