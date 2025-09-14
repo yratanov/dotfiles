@@ -1,6 +1,8 @@
 text-color=#cad3f5
-border-color=#c6d0f5
-background-color=#24273a
+# border-color=#c6d0f5
+# background-color=#24273a
+border-color=#425047
+background-color=#2D353B
 width=420
 height=110
 padding=10

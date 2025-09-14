@@ -1,4 +1,4 @@
-theme = catppuccin-mocha
+theme = "Everforest Dark - Hard"
 font-family = "JetBrainsMono Nerd Font Mono"
 background-opacity = 0.95
 background-blur = true 

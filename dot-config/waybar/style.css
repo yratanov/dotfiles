@@ -1,6 +1,7 @@
 window#waybar {
   background-color: rgba(0, 0, 0, 0);
-  color: #cdd6f4;
+  /* color: #cdd6f4; */
+  color: #d3c6aa;
   font-family: "JetBrainsMono Nerd Font", sans-serif;
   font-size: 14px;
 }
@@ -10,8 +11,10 @@ window#waybar {
 }
 
 #workspaces button.active {
-  background-color: #89b4fa; /* blue */
-  color: #1e1e2e;
+  /* background-color: #89b4fa; */
+  /* color: #1e1e2e; */
+  background-color: #2d353b;
+  color: #d3c6aa;
 }
 
 #workspaces button:hover {
@@ -19,17 +22,20 @@ window#waybar {
   text-shadow: none;
   background: none;
   transition: none;
-  color: #89b4fa;
+  /* color: #89b4fa; */
+  color: #a7c080;
   background-color: rgba(30, 30, 46, 0.75);
   border: none;
 }
 
 #workspaces button {
-  color: #cdd6f4;
+  /* color: #cdd6f4; */
+  /* background-color: rgba(30, 30, 46, 0.5); */
   margin: 0 4px;
   padding: 0 7px 0 5px;
   border-radius: 8px;
-  background-color: rgba(30, 30, 46, 0.5);
+  background-color: #414b50;
+  color: #859289;
   border: none;
 }
 
@@ -47,7 +53,8 @@ window#waybar {
 .modules-right,
 #custom-satchel-prs,
 #custom-satchel-vpn {
-  background-color: rgba(30, 30, 46, 0.5); /* base */
+  /* background-color: rgba(30, 30, 46, 0.5); */
+  background-color: #414b50;
   padding: 0 10px;
   margin-top: 5px;
   border-radius: 8px;
@@ -67,7 +74,7 @@ window#waybar {
 }
 
 #custom-satchel-vpn.service-off {
-  color: #f38ba8;
+  color: #e17c7e;
 }
 
 #custom-satchel-vpn.service-error {
