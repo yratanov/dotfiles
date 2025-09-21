@@ -35,18 +35,23 @@ return {
 				},
 			})
 
-			nvim_lsp.arduino_language_server.setup({
-				cmd = {
-					"arduino-language-server",
-					"-cli",
-					"/usr/bin/arduino-cli",
-					"-clangd",
-					"/usr/bin/clangd",
-				},
-				filetypes = { "arduino" },
-				root_dir = nvim_lsp.util.root_pattern("*.ino", ".git"),
-				settings = {},
-			})
+			-- nvim_lsp.clangd.setup({
+			-- 	cmd = { "clangd", "--background-index", "--clang-tidy" },
+			-- 	root_dir = nvim_lsp.util.root_pattern("compile_commands.json", ".git"),
+			-- })
+
+			-- nvim_lsp.arduino_language_server.setup({
+			-- 	cmd = {
+			-- 		"arduino-language-server",
+			-- 		"-cli",
+			-- 		"/usr/bin/arduino-cli",
+			-- 		"-clangd",
+			-- 		"/usr/bin/clangd",
+			-- 	},
+			-- 	filetypes = { "arduino" },
+			-- 	root_dir = nvim_lsp.util.root_pattern("*.ino", ".git"),
+			-- 	settings = {},
+			-- })
 			vim.api.nvim_create_autocmd("LspAttach", {
 				callback = function(ev)
 					local bufnr = ev.buf

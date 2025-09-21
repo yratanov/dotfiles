@@ -79,6 +79,7 @@
   },
   "temperature": {
     "critical-threshold": 80,
+    "hwmon-path": ["/sys/class/thermal/thermal_zone1/temp"],
     "on-click": "alacritty -e btop",
     "format": "{temperatureC}°C",
   },

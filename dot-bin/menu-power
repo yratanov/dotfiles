@@ -7,7 +7,7 @@ show_power_menu() {
 \u200D Relaunch
 \u2060󰜉 Restart
 \u2063󰐥 Shutdown"
-  local selection=$(echo -e "$menu_options" | walker --dmenu --theme catpuccin)
+  local selection=$(echo -e "$menu_options" | walker --dmenu --theme everforest)
 
   case "$selection" in
   *Lock*) hyprlock ;;
