@@ -21,7 +21,7 @@ yay -Syu --noconfirm \
   \
   discord telegram-desktop slack-desktop-wayland zoom\
   \
-  neofetch btop gnome-disk-utility openvpn \
+  neofetch btop gnome-disk-utility openvpn openvpn-update-systemd-resolved \
   \
   dbeaver \
   \
