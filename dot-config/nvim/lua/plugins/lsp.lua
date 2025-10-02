@@ -13,7 +13,6 @@ return {
 					"ember",
 					"rust_analyzer",
 					"lua_ls",
-					"solargraph",
 					"emmet_ls",
 					"elixirls",
 					"arduino_language_server",
@@ -34,6 +33,26 @@ return {
 					},
 				},
 			})
+			vim.lsp.enable("ruby_lsp")
+
+			--
+			-- get current folder ruby version with mise (mise can have ruby and node, we need only ruby)
+			local handle = io.popen("mise current")
+			local result = handle:read("*a")
+			handle:close()
+
+			local ruby_version = result:match("ruby (%d+%.%d+%.%d+)")
+			if ruby_version == nil then
+				ruby_version = "3.4.5" -- default to 3.4.5 if no version found
+			end
+
+			vim.lsp.config.ruby_lsp = {
+				cmd = {
+					os.getenv("HOME") .. "/.local/share/mise/installs/ruby/" .. ruby_version .. "/bin/ruby-lsp",
+				},
+				filetypes = { "ruby", "eruby" },
+				root_markers = { "Gemfile", ".git", "." },
+			}
 
 			-- nvim_lsp.clangd.setup({
 			-- 	cmd = { "clangd", "--background-index", "--clang-tidy" },

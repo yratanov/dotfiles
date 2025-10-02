@@ -45,7 +45,7 @@ root: ~/projects/pulse-app/api
 # attach: false
 
 windows:
-  - editor: nvim
+  - editor: nvim .
   - server:
       layout: main-vertical
       panes: 

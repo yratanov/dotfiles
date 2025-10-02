@@ -46,5 +46,5 @@ root: ~/projects/pulse-app/frontend
 
   # on_project_start: $(sleep 1 && tmux select-layout -t frontent:0 c093,316x74,0,0\{221x74,0,0,0,94x74,222,0\[94x27,222,0,1,94x46,222,28,2\]\}&
 windows:
-  - editor: nvim
+  - editor: nvim .
   - server: es

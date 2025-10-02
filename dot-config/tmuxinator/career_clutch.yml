@@ -1,7 +1,7 @@
 # ~/.tmuxinator/sample.yml
 
-name: thrive
-root: ~/projects/satchel-thrive
+name: career_clutch
+root: ~/projects/career_clutch
 
 # Optional tmux socket
 # socket_name: foo
@@ -51,5 +51,6 @@ windows:
       panes: 
         - docker compose up -d && rails s
         - rails tailwindcss:watch
+        - yarn build --watch
   - console: rails c
   - lazygit: lazygit

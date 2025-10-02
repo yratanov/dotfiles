@@ -45,7 +45,7 @@ root: ~/projects/sage
 # attach: false
 
 windows:
-  - editor: nvim
+  - editor: nvim .
   - server:
       layout: main-vertical
       panes: 
