@@ -24,7 +24,7 @@ return {
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-			nvim_lsp.lua_ls.setup({
+			vim.lsp.config.lua_ls = {
 				settings = {
 					Lua = {
 						diagnostics = {
@@ -32,7 +32,8 @@ return {
 						},
 					},
 				},
-			})
+			}
+
 			vim.lsp.enable("ruby_lsp")
 
 			--
@@ -54,23 +55,6 @@ return {
 				root_markers = { "Gemfile", ".git", "." },
 			}
 
-			-- nvim_lsp.clangd.setup({
-			-- 	cmd = { "clangd", "--background-index", "--clang-tidy" },
-			-- 	root_dir = nvim_lsp.util.root_pattern("compile_commands.json", ".git"),
-			-- })
-
-			-- nvim_lsp.arduino_language_server.setup({
-			-- 	cmd = {
-			-- 		"arduino-language-server",
-			-- 		"-cli",
-			-- 		"/usr/bin/arduino-cli",
-			-- 		"-clangd",
-			-- 		"/usr/bin/clangd",
-			-- 	},
-			-- 	filetypes = { "arduino" },
-			-- 	root_dir = nvim_lsp.util.root_pattern("*.ino", ".git"),
-			-- 	settings = {},
-			-- })
 			vim.api.nvim_create_autocmd("LspAttach", {
 				callback = function(ev)
 					local bufnr = ev.buf
