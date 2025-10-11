@@ -1,9 +1,10 @@
-theme = "Everforest Dark   Hard"
+theme = "Everforest Dark Hard"
 font-family = "JetBrainsMono Nerd Font Mono"
 background-opacity = 0.95
+font-size = 11
 background-blur = true 
 cursor-text="#000000"
-mouse-scroll-multiplier=1
+mouse-scroll-multiplier=0.5
 
 keybind = super+o=text:\x13S
 keybind = super+]=text:\x13|

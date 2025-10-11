@@ -1,0 +1,13 @@
+export QT_QPA_PLATFORMTHEME=qt6ct
+export QT_QPA_PLATFORM=wayland
+export QT_STYLE_OVERRIDE=Darkly
+export MOZ_ENABLE_WAYLAND=1
+export SDL_VIDEODRIVER=wayland
+export GDK_BACKEND=wayland
+export GDK_SCALE=2
+export ELECTRON_OZONE_PLATFORM_HINT=wayland
+export OZONE_PLATFORM=wayland
+export CHROMIUM_FLAGS="--enable-features=UseOzonePlatform --ozone-platform=wayland --gtk-version=4"
+export XCURSOR_SIZE=24
+export HYPRCURSOR_SIZE=24
+export WLR_NO_HARDWARE_CURSORS=1

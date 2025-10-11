@@ -81,3 +81,7 @@ eval "$(mise activate zsh)"
 
 bindkey '^A' beginning-of-line
 bindkey '^E' end-of-line
+
+autoload -Uz compinit
+compinit
+source ~/.config/zsh/gh
