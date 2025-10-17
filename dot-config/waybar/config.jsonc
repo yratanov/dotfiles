@@ -30,7 +30,8 @@
     "on-click": "activate",
     "window-rewrite-default": " ",
     "window-rewrite": {
-      "title<.*youtube.*>": " ",
+      "class<chrome-youtube.*>": " ",
+      "class<.*youtube_music>": "󰝚 ",
       "class<com.mitchellh.ghostty>": " ",
       "class<org.telegram.desktop>": " ",
       "class<TelegramDesktop>": " ",
