@@ -1,0 +1,143 @@
+#!/usr/bin/env bash
+# rofi-chromium-profiles.sh
+# Robust Chromium profile selector for rofi / uwsm (Wayland-safe)
+# - Presents numbered friendly names
+# - Maps selection back to profile directory reliably
+# - Dedupe and fallback scanning
+# - Forces Wayland rendering under uwsm
+
+set -euo pipefail
+
+ROFI_CMD="rofi -dmenu -i -p 'Select Chromium Profile:'"
+URL="${1:-}"
+
+# 1) Find browser
+BROWSER=""
+for b in chromium chromium-browser google-chrome-stable google-chrome; do
+  if command -v "$b" >/dev/null 2>&1; then
+    BROWSER="$b"
+    break
+  fi
+done
+if [[ -z "$BROWSER" ]]; then
+  notify-send "Rofi Chromium" "No Chromium/Chrome binary found."
+  exit 1
+fi
+
+# 2) Find config dir
+CONFIG_DIR=""
+CONFIG_DIRS=(
+  "${XDG_CONFIG_HOME:-$HOME/.config}/chromium"
+  "$HOME/.config/chromium"
+  "${XDG_CONFIG_HOME:-$HOME/.config}/google-chrome"
+  "$HOME/.config/google-chrome"
+)
+for d in "${CONFIG_DIRS[@]}"; do
+  [[ -d "$d" ]] && { CONFIG_DIR="$d"; break; }
+done
+[[ -z "$CONFIG_DIR" ]] && CONFIG_DIR="$HOME/.config/chromium"
+LOCAL_STATE="$CONFIG_DIR/Local State"
+
+# 3) Populate arrays: names[] and dirs[]
+declare -a names
+declare -a dirs
+declare -A seen_dir   # associative array for dedupe
+
+# Helper: add one profile if not seen
+add_profile() {
+  local nm="$1"; local dr="$2"
+  if [[ -z "${dr}" ]]; then
+    return
+  fi
+  if [[ -n "${seen_dir[$dr]:-}" ]]; then
+    return
+  fi
+  seen_dir[$dr]=1
+  names+=("$nm")
+  dirs+=("$dr")
+}
+
+# 3a) Try parsing Local State
+if [[ -f "$LOCAL_STATE" ]]; then
+  # Use python to reliably parse JSON; print lines "name|||dir"
+  mapfile -t raw_profiles < <(python3 - "$LOCAL_STATE" <<'PY'
+import json, sys
+path = sys.argv[1]
+try:
+    with open(path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    info = data.get("profile", {}).get("info_cache", {})
+    for dname, pdata in info.items():
+        name = pdata.get("name") or dname
+        print(f"{name}|||{dname}")
+except Exception:
+    # nothing, python will exit and raw_profiles may be empty
+    pass
+PY
+"$LOCAL_STATE")
+  # Add parsed ones
+  for line in "${raw_profiles[@]:-}"; do
+    [[ -z "$line" ]] && continue
+    # safe split on first '|||'
+    name="${line%%|||*}"
+    dir="${line#*|||}"
+    add_profile "$name" "$dir"
+  done
+fi
+
+# 3b) Fallback scanning (only add directories we haven't seen)
+# Look for Default and Profile* directories
+for d in "$CONFIG_DIR"/Default "$CONFIG_DIR"/Profile*; do
+  [[ -d "$d" ]] || continue
+  dir=$(basename "$d")
+  # Use a readable name: if we already have a name for this dir, skip; else use dir as name
+  if [[ -z "${seen_dir[$dir]:-}" ]]; then
+    add_profile "$dir" "$dir"
+  fi
+done
+
+# If still empty, add Default
+if [[ ${#dirs[@]} -eq 0 ]]; then
+  add_profile "Default" "Default"
+fi
+
+# 4) Build the rofi menu (numbered)
+menu=""
+for i in "${!names[@]}"; do
+  idx=$((i+1))
+  menu+="${idx}) ${names[i]}"$'\n'
+done
+
+# 5) Ask the user
+selection=$(printf "%s" "$menu" | eval "$ROFI_CMD") || exit 0
+[[ -z "$selection" ]] && exit 0
+
+# Extract number (handles "2) Name" or just "2")
+selnum=$(printf "%s" "$selection" | sed -E 's/^[[:space:]]*([0-9]+).*/\1/')
+if ! [[ "$selnum" =~ ^[0-9]+$ ]]; then
+  notify-send "Rofi Chromium" "Invalid selection."
+  exit 1
+fi
+
+index=$((selnum-1))
+profile_dir="${dirs[index]:-}"
+
+# 6) Validate profile_dir exists under CONFIG_DIR
+if [[ -z "$profile_dir" ]] || [[ ! -d "$CONFIG_DIR/$profile_dir" ]]; then
+  notify-send "Rofi Chromium" "Profile directory not found: $profile_dir"
+  exit 1
+fi
+
+# 7) Launch browser (force Wayland for uwsm)
+env \
+  WAYLAND_DISPLAY="${WAYLAND_DISPLAY:-wayland-1}" \
+  XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}" \
+  MOZ_ENABLE_WAYLAND=1 \
+  "$BROWSER" \
+  --ozone-platform-hint=wayland \
+  --enable-features=UseOzonePlatform \
+  --profile-directory="$profile_dir" \
+  --new-window ${URL:+$URL} >/dev/null 2>&1 &
+
+exit 0
+

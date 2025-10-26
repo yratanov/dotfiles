@@ -55,6 +55,13 @@ alias dcu="docker compose up -d"
 alias pas="sudo pacman -S"
 alias pad="sudo pacman -R"
 
+# yay aliases
+alias yas="yay -S"
+alias yad="yay -R"
+
+alias rofi-refresh='update-desktop-database ~/.local/share/applications && rm -f ~/.cache/rofi-drun-desktop.cache'
+
+
 alias git-rev="git restore --source=HEAD^ --staged --worktree"
 alias gcnv="git commit --no-verify"
 

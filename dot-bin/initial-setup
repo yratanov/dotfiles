@@ -13,7 +13,7 @@ yay -Syu --noconfirm \
   \
   firefox chromium thunderbird \
   \
-rofi rofi-calc \
+rofi rofi-calc rofi-power-menu rofi-emoji wtype \
   bitwarden 1password-cli 1password-beta \
   \
   neovim mise lazygit docker docker-compose ttf-jetbrains-mono-nerd stylua arduino-cli lazydocker imagemagick github-cli clang ansible-core \

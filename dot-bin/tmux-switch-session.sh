@@ -19,6 +19,7 @@ choice=$(sort -rfu <<< "$tmuxsessions" \
 if [ -z "$choice" ]; then
     exit 0
 fi
+
 echo $CURRENT_SESSION > /tmp/.prev-session
 
 tmux_switch_to_session "$choice"
