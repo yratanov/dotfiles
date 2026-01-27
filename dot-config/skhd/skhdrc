@@ -105,9 +105,9 @@
 #    "qutebrowser"
 # ]
 
-ctrl + shift - i: open -a /opt/homebrew/bin/alacritty
+ctrl + shift - i: open -a /opt/homebrew/bin/ghostty
 ctrl + shift - t: open -a /Applications/Telegram.app
-ctrl + shift - a: open -a /Applications/Zen.app
+ctrl + shift - a: open -a /Applications/Google\ Chrome.app
 ctrl + shift - s: open -a /Applications/Slack.app
 ctrl + shift - m: open -a /System/Applications/Mail.app
 ctrl + shift - u: open -a ~/Applications/Chrome\ Apps.localized/YouTube\ Music.app
