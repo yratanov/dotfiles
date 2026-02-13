@@ -44,7 +44,7 @@ This converts `dot-` prefixed files to dotfiles (e.g., `dot-zshrc` → `~/.zshrc
 - Session layouts for projects (pulse-api, pulse-frontend, etc.)
 
 ### Consistent Theming
-- Catppuccin Mocha color scheme across all tools
+- Everforest color scheme across all tools
 - JetBrainsMono Nerd Font
 
 ### Development Context

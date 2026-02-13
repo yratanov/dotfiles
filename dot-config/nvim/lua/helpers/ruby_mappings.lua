@@ -133,6 +133,8 @@ function M.get_rails_full_stack_mappings()
 			{
 				{ "app/components[1]/[2]_component.html.erb", "View" },
 				{ "app/components[1]/[2]_component_controller.js", "JS" },
+				{ "app/javascript/controllers[1]/[2]_controller.js", "JS", true },
+				{ "spec/components[1]/[2]_component_spec.rb", "Test", true },
 			},
 		},
 		{
@@ -140,6 +142,8 @@ function M.get_rails_full_stack_mappings()
 			{
 				{ "app/components[1]/[2]_component.rb", "Component" },
 				{ "app/components[1]/[2]_component_controller.js", "JS" },
+				{ "app/javascript/controllers[1]/[2]_controller.js", "JS", true },
+				{ "spec/components[1]/[2]_component_spec.rb", "Test", true },
 			},
 		},
 		{
@@ -147,6 +151,23 @@ function M.get_rails_full_stack_mappings()
 			{
 				{ "app/components[1]/[2]_component.rb", "Component" },
 				{ "app/components[1]/[2]_component.html.erb", "View" },
+				{ "spec/components[1]/[2]_component_spec.rb", "Test", true },
+			},
+		},
+		{
+			"app/javascript/controllers(.*)/(.*)_controller.js",
+			{
+				{ "app/components[1]/[2]_component.rb", "Component", true },
+				{ "app/components[1]/[2]_component.html.erb", "View", true },
+			},
+		},
+		{
+			"spec/components(.*)/(.*)_component_spec.rb",
+			{
+				{ "app/components[1]/[2]_component.rb", "Component" },
+				{ "app/components[1]/[2]_component.html.erb", "View" },
+				{ "app/components[1]/[2]_component_controller.js", "JS" },
+				{ "app/javascript/controllers[1]/[2]_controller.js", "JS", true },
 			},
 		},
 		{

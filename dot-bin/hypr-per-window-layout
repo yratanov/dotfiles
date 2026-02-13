@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Switch keyboard layout based on focused window
+# Layout 0 = us, Layout 1 = ru
+# Uses Hyprland IPC socket instead of polling
+
+handle_event() {
+    local line="$1"
+    # activewindow event format: activewindow>>class,title
+    if [[ "$line" == activewindow\>\>* ]]; then
+        local class="${line#activewindow>>}"
+        class="${class%%,*}"
+
+        if [[ "$class" == "com.mitchellh.ghostty" ]]; then
+            hyprctl switchxkblayout all 0
+        fi
+    fi
+}
+
+socat -U - UNIX-CONNECT:"$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" | while read -r line; do
+    handle_event "$line"
+done

@@ -9,7 +9,7 @@ yay -Syu --noconfirm \
   \
   swappy hyprshot wl-screenrec wf-recorder slurp \
   \
-  alacritty ghostty nautilus nextcloud-client fzf starship fd man stow tmux fzf-tmux rip-grep bc unzip usbutils gum zip smbclient	gvfs-smb postgresql-libs git-delta wget\
+  alacritty ghostty nautilus nextcloud-client fzf starship fd man stow tmux fzf-tmux rip-grep bc unzip usbutils gum zip smbclient	gvfs-smb postgresql-libs git-delta wget socat\
   \
   firefox chromium thunderbird \
   \

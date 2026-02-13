@@ -8,10 +8,18 @@ return {
 			local ruby_fs_mappings = ruby_mappings.get_rails_full_stack_mappings()
 			local ember_mappings = require("helpers.ember_mappings").get_ember_mappings()
 
+			local ts_js_mappings = {
+				{ "(.*)/(.*)%.ts", { { "[1]/[2].test.ts", "Test" } } },
+				{ "(.*)/(.*)%.test%.ts", { { "[1]/[2].ts", "Source" } } },
+				{ "(.*)/(.*)%.tsx", { { "[1]/[2].test.tsx", "Test" } } },
+				{ "(.*)/(.*)%.test%.tsx", { { "[1]/[2].tsx", "Source" } } },
+			}
+
 			local all_mappings = {
 				ruby_api = ruby_api_mappings,
 				ruby_fs = ruby_fs_mappings,
 				ember = ember_mappings,
+				["TS/JS"] = ts_js_mappings,
 			}
 
 			local project_config = require("project_config")
