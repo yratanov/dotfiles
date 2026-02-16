@@ -1,2 +1,15 @@
 #!/bin/bash
 stow --dotfiles --adopt --target=$HOME .
+
+# generate platform-specific ghostty config
+if [[ "$(uname)" == "Darwin" ]]; then
+  cat > ~/.config/ghostty/platform <<'EOF'
+font-size = 14
+background-opacity = 1
+macos-titlebar-style = hidden
+window-height = 9999
+window-width = 9999
+EOF
+else
+  rm -f ~/.config/ghostty/platform
+fi
