@@ -3,11 +3,6 @@ HISTSIZE=10000
 SAVEHIST=10000
 setopt SHARE_HISTORY
 
-export PATH="/opt/homebrew/opt/postgresql@12/bin:$PATH"
-export LDFLAGS="-L/opt/homebrew/opt/postgresql@12/lib"
-export PKG_CONFIG_PATH="/opt/homebrew/opt/postgresql@12/lib/pkgconfig"
-export CPPFLAGS="-I/opt/homebrew/opt/postgresql@12/include"
-
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#878ede"
 
 # Ember aliases
@@ -45,48 +40,46 @@ alias tt="~/.bin/new-tmux-session.sh"
 alias nb="~/.bin/feature-branch.sh"
 alias gpr="gh pr create -f -r drosam,pikislabis,Nerian"
 alias tw="tw --theme catppuccin"
-alias SatchelVPN="~/.bin/toggle_service.sh openvpn-client@satchelcloud"
 
 alias lg="lazygit"
-
-alias ll="ls -lAhF --color=auto --group-directories-first"
 
 # Docker aliases
 alias dcw="docker compose exec web"
 alias dcd="docker compose down"
 alias dcu="docker compose up -d"
 
-# Pacman aliases
-alias pas="sudo pacman -S"
-alias pad="sudo pacman -R"
-
-# yay aliases
-alias yas="yay -S"
-alias yad="yay -R"
-
-alias rofi-refresh='update-desktop-database ~/.local/share/applications && rm -f ~/.cache/rofi-drun-desktop.cache'
-
-
 alias git-rev="git restore --source=HEAD^ --staged --worktree"
 alias gcnv="git commit --no-verify"
 
 if [[ "$(uname)" == "Linux" ]]; then
+  alias ll="ls -lAhF --color=auto --group-directories-first"
   alias open='xdg-open'
+  alias SatchelVPN="~/.bin/toggle_service.sh openvpn-client@satchelcloud"
+
+  # Pacman/yay aliases
+  alias pas="sudo pacman -S"
+  alias pad="sudo pacman -R"
+  alias yas="yay -S"
+  alias yad="yay -R"
+  alias rofi-refresh='update-desktop-database ~/.local/share/applications && rm -f ~/.cache/rofi-drun-desktop.cache'
+
   source <(fzf --zsh)
   source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-else
-  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-fi
 
-# source "$HOME/.cargo/env"
-export PATH="$HOME/.bin:/opt/homebrew/opt/openjdk/bin:$PATH:/var/lib/snapd/snap/bin"
+  export PATH="$HOME/.bin:$PATH:/var/lib/snapd/snap/bin"
+else
+  alias ll="ls -lAhG"
+
+  export PATH="/opt/homebrew/opt/postgresql@12/bin:$HOME/.bin:/opt/homebrew/opt/openjdk/bin:$PATH"
+  export LDFLAGS="-L/opt/homebrew/opt/postgresql@12/lib"
+  export PKG_CONFIG_PATH="/opt/homebrew/opt/postgresql@12/lib/pkgconfig"
+  export CPPFLAGS="-I/opt/homebrew/opt/postgresql@12/include"
+
+  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+  source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
 export EDITOR='nvim'
 alias dfl='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-
-# export FZF_DEFAULT_OPTS=" \
-# --color=bg+:#414559,bg:#303446,spinner:#f2d5cf,hl:#e78284 \
-# --color=fg:#c6d0f5,header:#e78284,info:#ca9ee6,pointer:#f2d5cf \
-# --color=marker:#f2d5cf,fg+:#c6d0f5,prompt:#ca9ee6,hl+:#e78284"
 
 
 eval "$(starship init zsh)"

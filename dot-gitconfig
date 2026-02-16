@@ -24,8 +24,6 @@
     colorMoved = default
 [rerere]
 	enabled = true
-[maintenance]
-	repo = /Users/yuri/projects/pulse-app
 [alias]
 	co = checkout
 	br = branch
