@@ -8,6 +8,9 @@ background-blur = true
 cursor-text="#000000"
 mouse-scroll-multiplier=0.5
 
+keybind = super+o=unbind
+keybind = super+]=unbind
+keybind = super+[=unbind
 keybind = super+o=text:\x13S
 keybind = super+]=text:\x13|
 keybind = super+[=text:\x13-
