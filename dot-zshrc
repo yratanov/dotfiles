@@ -98,3 +98,4 @@ bindkey '^E' end-of-line
 autoload -Uz compinit
 compinit
 source ~/.config/zsh/gh
+export PATH="$HOME/.local/bin:$PATH"
