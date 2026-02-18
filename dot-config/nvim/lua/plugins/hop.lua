@@ -1,13 +1,11 @@
 return {
 	{
 		"phaazon/hop.nvim",
-		init = function()
-			local hop = require("hop")
-			hop.setup({})
-
-			vim.keymap.set("n", "<Leader>j", function()
-				hop.hint_words()
-			end)
+		keys = {
+			{ "<Leader>j", function() require("hop").hint_words() end, desc = "[HOP] Jump to word" },
+		},
+		config = function()
+			require("hop").setup({})
 		end,
 	},
 }

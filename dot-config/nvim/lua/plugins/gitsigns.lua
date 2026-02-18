@@ -91,12 +91,18 @@ return {
 					map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "[GIT] Select hunk" })
 
 					vim.keymap.set({ "n", "v" }, "<leader>go", function()
-						-- git repo root
-						local repo_root = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
-						if not repo_root or repo_root == "" then
-							print("Not a git repository")
+						-- Batch git info in single call
+						local git_info = vim.fn.systemlist(
+							"git rev-parse --show-toplevel --abbrev-ref HEAD 2>/dev/null && git remote get-url origin 2>/dev/null"
+						)
+						if #git_info < 3 then
+							print("Not a git repository or no remote origin")
 							return
 						end
+
+						local repo_root = git_info[1]
+						local branch = git_info[2]
+						local remote_url = git_info[3]
 
 						-- full path of current file
 						local filepath = vim.fn.expand("%:p")
@@ -104,38 +110,21 @@ return {
 						-- path relative to git root
 						local relpath = filepath:sub(#repo_root + 2) -- +2 for trailing "/"
 
-						-- get remote url
-						local remote_url = vim.fn.systemlist("git remote get-url origin")[1]
-						if not remote_url or remote_url == "" then
-							print("No remote origin")
-							return
-						end
-
 						-- normalize GitHub URLs (SSH → HTTPS)
 						remote_url = remote_url:gsub("^git@github.com:", "https://github.com/"):gsub("%.git$", "")
 
-						-- get branch or commit
-						local branch = vim.fn.systemlist("git rev-parse --abbrev-ref HEAD")[1]
+						-- handle detached HEAD
 						if branch == "HEAD" then
-							branch = vim.fn.systemlist("git rev-parse HEAD")[1] -- detached HEAD → commit hash
+							branch = vim.fn.systemlist("git rev-parse HEAD")[1]
 						end
 
-						-- check if branch exists locally under origin, else fallback
-						local origin_branches =
-							vim.fn.systemlist("git for-each-ref --format='%(refname:short)' refs/remotes/origin")
-						local exists = false
-						for _, b in ipairs(origin_branches) do
-							if b == "origin/" .. branch then
-								exists = true
-								break
-							end
-						end
-						if not exists then
-							if vim.fn.index(origin_branches, "origin/master") >= 0 then
-								branch = "master"
-							else
-								branch = "main"
-							end
+						-- check if branch exists on remote, fallback to main/master
+						local remote_check = vim.fn.systemlist(
+							"git ls-remote --heads origin " .. branch .. " 2>/dev/null"
+						)
+						if #remote_check == 0 or remote_check[1] == "" then
+							local has_master = vim.fn.systemlist("git ls-remote --heads origin master 2>/dev/null")
+							branch = (#has_master > 0 and has_master[1] ~= "") and "master" or "main"
 						end
 
 						-- build URL (single line or visual range)
@@ -165,7 +154,7 @@ return {
 
 						vim.fn.jobstart({ opener, url }, { detach = true })
 						print("Opening " .. url)
-					end, { desc = "Open current line/range on GitHub" })
+					end, { desc = "[GIT] Open on GitHub" })
 				end,
 			})
 		end,

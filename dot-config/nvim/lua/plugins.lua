@@ -36,7 +36,7 @@ return {
 	{
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
-		opts = {}, -- this is equalent to setup({}) function
+		opts = {},
 	},
 	{
 		"kdheepak/lazygit.nvim",
@@ -44,13 +44,9 @@ return {
 	},
 	{
 		"nvim-pack/nvim-spectre",
-		init = function()
-			vim.keymap.set("n", "<leader>S", '<cmd>lua require("spectre").toggle()<CR>', {
-				desc = "Toggle Spectre",
-			})
-		end,
-		config = function()
-			require("spectre").setup({})
-		end,
+		keys = {
+			{ "<leader>S", function() require("spectre").toggle() end, desc = "[SPECTRE] Toggle search/replace" },
+		},
+		opts = {},
 	},
 }

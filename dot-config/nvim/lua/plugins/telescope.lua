@@ -167,7 +167,7 @@ return {
 				local ft = vim.bo.filetype
 
 				if ft == "ruby" then
-					local handle = io.popen("ruby -e 'print Gem.default_dir'")
+					local handle = io.popen("ruby -e 'print Gem.default_dir' 2>/dev/null")
 					if handle then
 						local dir = handle:read("*a")
 						handle:close()
