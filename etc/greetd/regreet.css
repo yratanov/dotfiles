@@ -1,0 +1,78 @@
+/* Everforest Dark theme for ReGreet */
+
+/* Main window */
+window {
+  background-color: #272e33;
+}
+
+/* All text */
+label {
+  color: #d3c6aa;
+}
+
+/* Entries (username/password fields) */
+entry {
+  background-color: #2d353b;
+  color: #d3c6aa;
+  border: 1px solid #4f5b58;
+  border-radius: 6px;
+  padding: 8px 12px;
+}
+
+entry:focus {
+  border-color: #a7c080;
+}
+
+/* Buttons */
+button {
+  background-color: #2d353b;
+  color: #d3c6aa;
+  border: 1px solid #4f5b58;
+  border-radius: 6px;
+  padding: 8px 16px;
+}
+
+button:hover {
+  background-color: #3d484d;
+  border-color: #a7c080;
+}
+
+button:active {
+  background-color: #a7c080;
+  color: #272e33;
+}
+
+/* Suggested action button (login) */
+button.suggested-action {
+  background-color: #a7c080;
+  color: #272e33;
+  border: none;
+}
+
+button.suggested-action:hover {
+  background-color: #83c092;
+}
+
+/* Dropdown menus */
+dropdown button {
+  background-color: #2d353b;
+  color: #d3c6aa;
+}
+
+/* Combo boxes */
+combobox button {
+  background-color: #2d353b;
+  color: #d3c6aa;
+}
+
+/* Clock/time label */
+.clock {
+  color: #7fbbb3;
+  font-size: 24px;
+}
+
+/* Greeting message */
+.greeting {
+  color: #a7c080;
+  font-size: 20px;
+}

@@ -165,7 +165,7 @@
   "custom/power": {
     "format": "⏻ ",
     "tooltip": false,
-    "on-click": "~/.bin/menu-power",
+    "on-click": "rofi -show p -modi p:rofi-power-menu",
   },
   "custom/satchel-vpn": {
     "name": "vpn",

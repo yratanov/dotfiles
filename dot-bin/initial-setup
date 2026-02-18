@@ -4,8 +4,8 @@
 sudo pacman -Syu --needed git base-devel && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si
 
 yay -Syu --noconfirm \
-  hyprland waybar hyprlock hypridle hyprpaper wl-clipboard pavucontrol clipse sddm wl-clip-persist hyprland-per-window-layout swaync qt5-wayland qt6-wayland noto-fonts noto-fonts-extra noto-fonts-emoji woff2-font-awesome xdg-desktop-portal-gtk xdg-desktop-portal-hyprland plymouth plymouth-theme-catppuccin-mocha uwsm hyprpicker\
-  gnome-calculator gnome-weather fontconfig gnome-keyring gnome-themes-extra noto-fonts-cjk noto-fonts-emoji noto-fonts-extra yaru-icon-theme libqalculate sushi\
+  hyprland waybar hyprlock hypridle hyprpaper wl-clipboard pavucontrol clipse greetd greetd-regreet cage wl-clip-persist hyprland-per-window-layout swaync qt5-wayland qt6-wayland noto-fonts noto-fonts-extra noto-fonts-emoji woff2-font-awesome xdg-desktop-portal-gtk xdg-desktop-portal-hyprland plymouth plymouth-theme-catppuccin-mocha uwsm hyprpicker\
+  gnome-calculator gnome-weather fontconfig gnome-keyring gnome-themes-extra noto-fonts-cjk noto-fonts-emoji noto-fonts-extra yaru-icon-theme libqalculate sushi everforest-gtk-theme-git\
   \
   swappy hyprshot wl-screenrec wf-recorder slurp \
   \
@@ -129,6 +129,15 @@ sudo systemctl mask systemd-networkd-wait-online.service
 dot-bin/sync-dotfiles
 
 bat cache --build
+
+# Configure greetd with regreet and gnome-keyring PAM integration
+sudo cp etc/greetd/config.toml /etc/greetd/config.toml
+sudo cp etc/greetd/regreet.toml /etc/greetd/regreet.toml
+sudo cp etc/greetd/regreet.css /etc/greetd/regreet.css
+sudo cp etc/pam.d/greetd /etc/pam.d/greetd
+sudo mkdir -p /usr/share/backgrounds
+sudo cp ~/wallpapers/forest.jpg /usr/share/backgrounds/greeter.jpg
+sudo systemctl enable greetd.service
 
 # Autologin
 sudo plymouth-set-default-theme -R catppuccin-mocha
