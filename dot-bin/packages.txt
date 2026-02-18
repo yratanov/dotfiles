@@ -33,7 +33,7 @@ wf-recorder
 slurp
 
 # Launcher & Menus
-rofi
+rofi-wayland
 rofi-calc
 rofi-power-menu
 rofi-emoji

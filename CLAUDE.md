@@ -16,6 +16,8 @@ dot-bin/sync-dotfiles
 dot-bin/initial-setup
 ```
 
+IMPORTANT! Make sure to update initial-setup on changes
+
 The sync script runs: `stow --dotfiles --adopt --target=$HOME .`
 
 This converts `dot-` prefixed files to dotfiles (e.g., `dot-zshrc` → `~/.zshrc`).
