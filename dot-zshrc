@@ -5,22 +5,27 @@ setopt SHARE_HISTORY
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#878ede"
 
-# Ember aliases
+# --- SSH Bastions ---
+bastion() {
+  local key="${3:-~/.ssh/aws_id_ed25519}"
+  ssh -i "$key" "$1@bastion$2.satchel.cloud"
+}
+
+alias qa="bastion pulse-rw qa"
+alias prod="bastion pulse-rw prod"
+alias ukprod="bastion pulse-uk-rw prod"
+alias ukqa="bastion pulse-uk-rw qa"
+alias thrqa="bastion satchel-thrive-rw qa ~/.ssh/id_rsa"
+alias caprod="bastion pulse-ca-rw prod"
+alias caqa="bastion pulse-ca-rw qa"
+alias ccqa="bastion career-clutch-rw qa"
+alias ccprod="bastion career-clutch-rw prod"
+
+# --- Ember ---
 alias es="ember s --proxy=http://localhost:3000"
 alias exam="ember exam --split=10 --parallel > log/test.log"
 
-alias qa="ssh -i ~/.ssh/aws_id_ed25519 pulse-rw@bastionqa.satchel.cloud"
-alias prod="ssh -i ~/.ssh/aws_id_ed25519 pulse-rw@bastionprod.satchel.cloud"
-alias ukprod="ssh -i ~/.ssh/aws_id_ed25519 pulse-uk-rw@bastionprod.satchel.cloud"
-alias ukqa="ssh -i ~/.ssh/aws_id_ed25519 pulse-uk-rw@bastionqa.satchel.cloud"
-alias thrqa="ssh -i .ssh/id_rsa satchel-thrive-rw@bastionqa.satchel.cloud"
-alias caprod="ssh -i ~/.ssh/aws_id_ed25519 pulse-ca-rw@bastionprod.satchel.cloud"
-alias caqa="ssh -i ~/.ssh/aws_id_ed25519 pulse-ca-rw@bastionqa.satchel.cloud"
-
-
-alias ccqa="ssh -i ~/.ssh/aws_id_ed25519 career-clutch-rw@bastionqa.satchel.cloud"
-alias ccprod="ssh -i ~/.ssh/aws_id_ed25519 career-clutch-rw@bastionprod.satchel.cloud"
-
+# --- Rails ---
 alias rc="rails console"
 alias rdm="rake db:migrate"
 alias rdr="rake db:rollback"
@@ -29,27 +34,27 @@ alias test-db-reset="rake db:drop RAILS_ENV=test && rake db:create RAILS_ENV=tes
 alias src="spring rails c"
 alias bi="bundle install"
 alias bsq="bundle exec sidekiq -C config/sidekiq.yml"
-alias bsqc="bundle exec sidekiq -C config/sidekiq.sel_calculations.yml"
-alias bsqb="bundle exec sidekiq -C config/sidekiq.skills_benchmarks.yml"
 alias ber="bundle exec rspec"
 alias psp="COVERAGE=true bundle exec rake parallel:spec"
+
+# --- Docker ---
+alias dcw="docker compose exec web"
+alias dcd="docker compose down"
+alias dcu="docker compose up -d"
+
+# --- Git ---
+alias git-rev="git restore --source=HEAD^ --staged --worktree"
+alias gcnv="git commit --no-verify"
+alias lg="lazygit"
+alias gpr="gh pr create -f -r drosam,pikislabis,Nerian"
+
+# --- Tools ---
 alias mux="tmuxinator"
 alias nv="nvim"
 alias merge_qa="~/.config/nvim/scripts/git_merge_current_to_qa.sh"
 alias tt="~/.bin/new-tmux-session.sh"
 alias nb="~/.bin/feature-branch.sh"
-alias gpr="gh pr create -f -r drosam,pikislabis,Nerian"
-alias tw="tw --theme catppuccin"
-
-alias lg="lazygit"
-
-# Docker aliases
-alias dcw="docker compose exec web"
-alias dcd="docker compose down"
-alias dcu="docker compose up -d"
-
-alias git-rev="git restore --source=HEAD^ --staged --worktree"
-alias gcnv="git commit --no-verify"
+alias taskwarrior="command tw --theme catppuccin"
 
 if [[ "$(uname)" == "Linux" ]]; then
   alias ll="ls -lAhF --color=auto --group-directories-first"
@@ -78,9 +83,9 @@ else
   [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
   source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
+
 export EDITOR='nvim'
 alias dfl='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-
 
 eval "$(starship init zsh)"
 eval "$(mise activate zsh)"
