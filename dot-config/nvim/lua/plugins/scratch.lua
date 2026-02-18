@@ -15,5 +15,5 @@ return {
 				filetypes = { "rb", "js", "sh", "ts" }, -- you can simply put filetype here
 			})
 		end,
-	}, -- save sinppets of code :Scratch
+	}, -- save snippets of code :Scratch
 }

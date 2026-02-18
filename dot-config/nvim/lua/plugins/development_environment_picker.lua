@@ -1,7 +1,7 @@
 return {
 	dir = "~/.config/nvim/lua/plugins/development_environment",
 	dependencies = { "nvim-telescope/telescope.nvim" },
-	lazy = false,
+	event = "VeryLazy",
 	config = function()
 		local project_config = require("project_config")
 		local simple_picker = require("simple_picker")
@@ -52,7 +52,7 @@ return {
 		end
 
 		vim.api.nvim_create_user_command("SelectDevelopmentEnvironment", function()
-			simple_picker.simple_piker(all_mappings, function(key, value)
+			simple_picker.simple_picker(all_mappings, function(key, value)
 				project_config.set_project_config("development_environment", key)
 				assign_rails_mappings(value)
 			end)

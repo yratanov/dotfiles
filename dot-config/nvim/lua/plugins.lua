@@ -3,7 +3,7 @@ return {
 	{ "tpope/vim-rhubarb", event = "VeryLazy" }, -- Open in GitHub
 	{
 		"mg979/vim-visual-multi",
-		lazy = false,
+		event = "VeryLazy",
 		init = function()
 			vim.schedule(function()
 				vim.g.VM_maps = {
@@ -40,10 +40,7 @@ return {
 	},
 	{
 		"kdheepak/lazygit.nvim",
-		-- optional for floating window border decoration
-		requires = {
-			"nvim-lua/plenary.nvim",
-		},
+		dependencies = { "nvim-lua/plenary.nvim" },
 	},
 	{
 		"nvim-pack/nvim-spectre",

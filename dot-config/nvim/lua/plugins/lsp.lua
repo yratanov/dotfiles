@@ -3,7 +3,7 @@ return {
 	{ "williamboman/mason-lspconfig.nvim" },
 	{
 		"neovim/nvim-lspconfig",
-		init = function()
+		config = function()
 			require("mason").setup({})
 			require("mason-lspconfig").setup({
 				ensure_installed = {
@@ -20,11 +20,13 @@ return {
 					"gopls",
 				},
 			})
-			local nvim_lsp = require("lspconfig")
+
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities.textDocument.completion.completionItem.snippetSupport = true
 
+			-- Lua LSP
 			vim.lsp.config.lua_ls = {
+				capabilities = capabilities,
 				settings = {
 					Lua = {
 						diagnostics = {
@@ -33,27 +35,54 @@ return {
 					},
 				},
 			}
+			vim.lsp.enable("lua_ls")
 
-			vim.lsp.enable("ruby_lsp")
+			-- Get current folder ruby version with mise
+			local function get_ruby_version()
+				local handle = io.popen("mise current 2>/dev/null")
+				if not handle then
+					return "3.4.5"
+				end
+				local result = handle:read("*a")
+				handle:close()
 
-			--
-			-- get current folder ruby version with mise (mise can have ruby and node, we need only ruby)
-			local handle = io.popen("mise current")
-			local result = handle:read("*a")
-			handle:close()
-
-			local ruby_version = result:match("ruby (%d+%.%d+%.%d+)")
-			if ruby_version == nil then
-				ruby_version = "3.4.5" -- default to 3.4.5 if no version found
+				local ruby_version = result:match("ruby (%d+%.%d+%.%d+)")
+				return ruby_version or "3.4.5"
 			end
 
-			vim.lsp.config.ruby_lsp = {
-				cmd = {
-					os.getenv("HOME") .. "/.local/share/mise/installs/ruby/" .. ruby_version .. "/bin/ruby-lsp",
-				},
-				filetypes = { "ruby", "eruby" },
-				root_markers = { "Gemfile", ".git", "." },
-			}
+			local ruby_version = get_ruby_version()
+			local ruby_lsp_path = os.getenv("HOME")
+				.. "/.local/share/mise/installs/ruby/"
+				.. ruby_version
+				.. "/bin/ruby-lsp"
+
+			-- Ruby LSP
+			if vim.fn.executable(ruby_lsp_path) == 1 then
+				vim.lsp.config.ruby_lsp = {
+					cmd = { ruby_lsp_path },
+					capabilities = capabilities,
+					filetypes = { "ruby", "eruby" },
+					root_markers = { "Gemfile", ".git" },
+				}
+			else
+				vim.lsp.config.ruby_lsp = {
+					capabilities = capabilities,
+					filetypes = { "ruby", "eruby" },
+					root_markers = { "Gemfile", ".git" },
+				}
+			end
+			vim.lsp.enable("ruby_lsp")
+
+			-- Enable other mason-installed servers
+			vim.lsp.enable("ts_ls")
+			vim.lsp.enable("eslint")
+			vim.lsp.enable("tailwindcss")
+			vim.lsp.enable("ember")
+			vim.lsp.enable("rust_analyzer")
+			vim.lsp.enable("emmet_ls")
+			vim.lsp.enable("elixirls")
+			vim.lsp.enable("clangd")
+			vim.lsp.enable("gopls")
 
 			vim.api.nvim_create_autocmd("LspAttach", {
 				callback = function(ev)
@@ -118,10 +147,10 @@ return {
 			})
 
 			local signs = {
-				Error = " ",
-				Warn = " ",
-				Hint = " ",
-				Info = " ",
+				Error = " ",
+				Warn = " ",
+				Hint = " ",
+				Info = " ",
 			}
 
 			for type, icon in pairs(signs) do

@@ -6,7 +6,7 @@ local conf = require("telescope.config").values
 local actions = require("telescope.actions")
 local action_state = require("telescope.actions.state")
 
-function M.simple_piker(options, callback)
+function M.simple_picker(options, callback)
 	local keys = {}
 	for key, _ in pairs(options) do
 		table.insert(keys, key)

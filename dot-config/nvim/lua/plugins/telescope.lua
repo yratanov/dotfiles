@@ -216,13 +216,13 @@ return {
 			end
 
 			vim.keymap.set("n", "<leader>fl", search_lib_files, { desc = "Search in libraries" })
-			vim.keymap.set({ "n", "v" }, "<leader>fg", search_lib_text, { desc = "Search text in libraries" })
+			vim.keymap.set({ "n", "v" }, "<leader>fL", search_lib_text, { desc = "Search text in libraries" })
 
 			vim.keymap.set("n", "<leader>fr", builtin.lsp_references, { desc = "[TELESCOPE] LSP references" })
 
 			vim.keymap.set("n", "<leader>gm", function()
 				local buf = vim.api.nvim_get_current_buf()
-				local ft = vim.api.nvim_buf_get_option(buf, "filetype")
+				local ft = vim.bo[buf].filetype
 				if ft == "ruby" then
 					local filepath = "app/models/" .. singularize(vim.fn.expand("<cword>")) .. ".rb"
 					if vim.fn.filereadable(filepath) == 1 then
@@ -244,7 +244,7 @@ return {
 
 			vim.keymap.set("n", "<leader>gf", function()
 				local buf = vim.api.nvim_get_current_buf()
-				local ft = vim.api.nvim_buf_get_option(buf, "filetype")
+				local ft = vim.bo[buf].filetype
 				if ft == "ruby" then
 					local filepath = "spec/factories/" .. decamelize(vim.fn.expand("<cword>")) .. "s.rb"
 					if vim.fn.filereadable(filepath) == 1 then
