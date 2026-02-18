@@ -1,0 +1,168 @@
+# Hyprland & Wayland
+hyprland
+waybar
+hyprlock
+hypridle
+hyprpaper
+hyprpicker
+hyprland-per-window-layout
+wl-clipboard
+wl-clip-persist
+qt5-wayland
+qt6-wayland
+xdg-desktop-portal-gtk
+xdg-desktop-portal-hyprland
+uwsm
+
+# Greeter & Login
+greetd
+greetd-regreet
+cage
+plymouth
+plymouth-theme-catppuccin-mocha
+
+# Notifications & OSD
+swaync
+swayosd
+
+# Screenshot & Recording
+swappy
+hyprshot
+wl-screenrec
+wf-recorder
+slurp
+
+# Launcher & Menus
+rofi
+rofi-calc
+rofi-power-menu
+rofi-emoji
+wtype
+
+# Terminals
+alacritty
+ghostty
+
+# File Manager
+nautilus
+sushi
+gvfs-smb
+
+# Fonts
+noto-fonts
+noto-fonts-extra
+noto-fonts-emoji
+noto-fonts-cjk
+woff2-font-awesome
+ttf-jetbrains-mono-nerd
+
+# Themes & Appearance
+gnome-themes-extra
+yaru-icon-theme
+everforest-gtk-theme-git
+
+# Desktop Utilities
+gnome-calculator
+gnome-weather
+gnome-keyring
+gnome-disk-utility
+libqalculate
+fontconfig
+pavucontrol
+clipse
+
+# Browsers
+firefox
+chromium
+
+# Email
+thunderbird
+
+# Password Managers
+bitwarden
+1password-cli
+1password-beta
+
+# Cloud & Sync
+nextcloud-client
+
+# Development - Core
+neovim
+git
+git-delta
+github-cli
+lazygit
+mise
+stylua
+clang
+ansible-core
+shellcheck
+
+# Development - Containers
+docker
+docker-compose
+lazydocker
+
+# Development - Hardware
+arduino-cli
+
+# Shell & Terminal Tools
+fzf
+fzf-tmux
+starship
+fd
+rip-grep
+bc
+unzip
+zip
+wget
+socat
+stow
+tmux
+man
+usbutils
+smbclient
+gum
+
+# Database
+postgresql-libs
+dbeaver
+
+# Media - Video
+mpv
+vlc
+vlc-plugin-gstreamer
+vlc-plugin-ffmpeg
+
+# Media - Audio
+youtube-music
+pipewire
+pipewire-pulse
+pipewire-jack
+wireplumber
+
+# Media - Images
+imv
+imagemagick
+
+# Communication
+discord
+telegram-desktop
+slack-desktop-wayland
+zoom
+
+# System Monitoring
+neofetch
+btop
+
+# VPN
+openvpn
+openvpn-update-systemd-resolved
+
+# Office & Productivity
+libreoffice
+
+# 3D Printing & CAD
+freecad
+bambustudio-bin
+prusa-slicer
