@@ -1,0 +1,54 @@
+#!/bin/bash
+# Rofi drun wrapper: Shift+Enter opens app on next empty workspace
+
+CACHE_FILE="/tmp/rofi-drun-cache.txt"
+
+# Build cache: name|icon|desktop-file
+build_cache() {
+    find /usr/share/applications ~/.local/share/applications -name "*.desktop" 2>/dev/null | while read -r desktop; do
+        if grep -q "^NoDisplay=true" "$desktop" 2>/dev/null; then
+            continue
+        fi
+        name=$(grep -m1 "^Name=" "$desktop" | cut -d= -f2)
+        icon=$(grep -m1 "^Icon=" "$desktop" | cut -d= -f2)
+        if [[ -n "$name" ]]; then
+            echo "${name}|${icon}|${desktop}"
+        fi
+    done | sort -u -t'|' -k1,1 > "$CACHE_FILE"
+}
+
+# Build cache if missing or older than 5 minutes
+if [[ ! -f "$CACHE_FILE" ]] || [[ $(find "$CACHE_FILE" -mmin +5 2>/dev/null) ]]; then
+    build_cache
+fi
+
+# Show rofi with icons
+SELECTION=$(awk -F'|' '{printf "%s\0icon\x1f%s\n", $1, $2}' "$CACHE_FILE" | rofi -dmenu -i \
+    -show-icons \
+    -kb-accept-alt "" \
+    -kb-custom-1 "Shift+Return" \
+    -p "app")
+
+EXIT_CODE=$?
+
+# Find the desktop file for the selection
+if [[ -n "$SELECTION" ]]; then
+    DESKTOP_FILE=$(grep "^${SELECTION}|" "$CACHE_FILE" | head -1 | cut -d'|' -f3)
+fi
+
+case $EXIT_CODE in
+    0)
+        # Normal Enter
+        if [[ -n "$DESKTOP_FILE" ]]; then
+            uwsm app -- gio launch "$DESKTOP_FILE"
+        fi
+        ;;
+    10)
+        # Shift+Enter - launch on new empty workspace
+        if [[ -n "$DESKTOP_FILE" ]]; then
+            ~/.bin/hypr-next-empty-workspace
+            sleep 0.05
+            uwsm app -- gio launch "$DESKTOP_FILE"
+        fi
+        ;;
+esac
