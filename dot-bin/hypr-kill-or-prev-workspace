@@ -1,0 +1,10 @@
+#!/bin/bash
+# Kill active window, or if no windows on workspace, go to previous workspace on current monitor
+
+WINDOW_COUNT=$(hyprctl activeworkspace -j | jq '.windows')
+
+if [[ "$WINDOW_COUNT" -eq 0 ]]; then
+    hyprctl dispatch workspace m-1
+else
+    hyprctl dispatch killactive
+fi
