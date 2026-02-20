@@ -1,0 +1,22 @@
+#!/bin/bash
+# Find and switch to the next empty workspace (excluding reserved ones)
+
+# Reserved workspaces (bound to specific apps in windows-workspaces.conf)
+RESERVED=(2 3 4 11 12 13 14)
+
+# Get all active workspace IDs
+ACTIVE=$(hyprctl workspaces -j | jq -r '.[].id')
+
+# Find the next empty workspace starting from 1
+for i in {1..100}; do
+    # Skip reserved workspaces
+    if [[ " ${RESERVED[*]} " =~ " ${i} " ]]; then
+        continue
+    fi
+
+    # Check if workspace is not active
+    if ! echo "$ACTIVE" | grep -qx "$i"; then
+        hyprctl dispatch workspace "$i"
+        exit 0
+    fi
+done
