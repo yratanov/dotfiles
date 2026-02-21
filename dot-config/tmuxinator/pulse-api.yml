@@ -46,6 +46,7 @@ root: ~/projects/pulse-app/api
 
 windows:
   - editor: nvim .
+  - ai: claude
   - server:
       layout: main-vertical
       panes: 

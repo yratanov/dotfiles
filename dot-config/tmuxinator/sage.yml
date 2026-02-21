@@ -46,6 +46,7 @@ root: ~/projects/sage
 
 windows:
   - editor: nvim .
+  - ai: claude
   - server:
       layout: main-vertical
       panes: 

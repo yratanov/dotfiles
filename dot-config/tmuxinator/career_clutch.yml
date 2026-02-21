@@ -46,6 +46,7 @@ root: ~/projects/career_clutch
 
 windows:
   - editor: nvim .
+  - ai: claude
   - server:
       layout: main-vertical
       panes: 

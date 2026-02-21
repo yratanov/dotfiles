@@ -52,3 +52,4 @@ windows:
       # synchronize: after
       panes:
         - nvim .
+  - ai: claude

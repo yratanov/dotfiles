@@ -46,6 +46,7 @@ root: ~/projects/satchel-thrive
 
 windows:
   - editor: nvim .
+  - ai: claude
   - server:
       layout: main-vertical
       panes: 
