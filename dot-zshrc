@@ -54,6 +54,7 @@ alias mux="tmuxinator"
 alias nv="nvim"
 alias merge_qa="~/.config/nvim/scripts/git_merge_current_to_qa.sh"
 alias tt="~/.bin/new-tmux-session.sh"
+alias to="~/.bin/tmux-attach-session.sh"
 alias nb="~/.bin/feature-branch.sh"
 alias taskwarrior="command tw --theme catppuccin"
 
