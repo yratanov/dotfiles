@@ -9,6 +9,11 @@ background-opacity = 1
 macos-titlebar-style = hidden
 window-height = 9999
 window-width = 9999
+
+# macOS intercepts super+[ and super+] at the system level
+keybind = super+backslash=text:\x13|
+keybind = super+minus=unbind
+keybind = super+minus=text:\x13-
 EOF
 else
   rm -f ~/.config/ghostty/platform

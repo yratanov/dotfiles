@@ -6,9 +6,10 @@ setopt SHARE_HISTORY
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#878ede"
 
 # --- SSH Bastions ---
+alias ssh="TERM=xterm-256color ssh"
 bastion() {
   local key="${3:-~/.ssh/aws_id_ed25519}"
-  ssh -i "$key" "$1@bastion$2.satchel.cloud"
+  TERM=xterm-256color ssh -i "$key" "$1@bastion$2.satchel.cloud"
 }
 
 alias qa="bastion pulse-rw qa"
