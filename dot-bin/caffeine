@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if pgrep -x hypridle > /dev/null; then
+  killall hypridle
+else
+  uwsm app -- hypridle &
+  disown
+fi
+
+pkill -RTMIN+8 waybar

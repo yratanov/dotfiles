@@ -7,7 +7,7 @@
     "custom/satchel-vpn",
     "custom/satchel-prs",
   ],
-  "modules-center": ["custom/weather", "clock"],
+  "modules-center": ["custom/weather", "clock", "custom/caffeine"],
   "modules-right": [
     "pulseaudio",
     "custom/mouse-battery",
@@ -161,6 +161,15 @@
     "escape": true,
     "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null", // Script in resources folder
     // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+  },
+  "custom/caffeine": {
+    "exec": "~/.bin/caffeine-status",
+    "interval": 1,
+    "signal": 8,
+    "return-type": "json",
+    "format": "{}",
+    "on-click": "~/.bin/caffeine",
+    "tooltip": true
   },
   "custom/power": {
     "format": "⏻ ",

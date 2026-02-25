@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Wrapper around rofi-power-menu that adds a caffeine toggle entry.
+# Used as: rofi -show p -modi p:rofi-power-menu-wrapper
+
+if pgrep -x hypridle > /dev/null; then
+  caffeine_label="󰅶  caffeine on"
+else
+  caffeine_label="󰛊  caffeine off"
+fi
+
+if [ -z "${1-}" ]; then
+  # No argument: print menu entries (caffeine first, then power menu)
+  echo "$caffeine_label"
+  rofi-power-menu "$@"
+elif [ "$1" = "$caffeine_label" ] || [[ "$1" == *"caffeine"* ]]; then
+  setsid ~/.bin/caffeine &>/dev/null &
+else
+  rofi-power-menu "$1"
+fi

@@ -80,3 +80,11 @@ window#waybar {
 #custom-satchel-vpn.service-error {
   color: orange;
 }
+
+#custom-caffeine {
+  margin-top: 5px;
+}
+
+#custom-caffeine.caffeine-on {
+  color: #dbbc7f;
+}

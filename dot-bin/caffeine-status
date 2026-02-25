@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if pgrep -x hypridle > /dev/null; then
+  echo '{"text": "󰛊", "tooltip": "Caffeine: OFF", "class": "caffeine-off"}'
+else
+  echo '{"text": "󰅶", "tooltip": "Caffeine: ON", "class": "caffeine-on"}'
+fi
