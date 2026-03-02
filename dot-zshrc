@@ -92,6 +92,7 @@ alias dfl='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 eval "$(starship init zsh)"
 eval "$(mise activate zsh)"
 
+bindkey -e
 bindkey '^A' beginning-of-line
 bindkey '^E' end-of-line
 

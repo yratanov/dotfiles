@@ -1,6 +1,6 @@
 require("remap")
 require("set")
-require("rspec")
+require("ruby_tests")
 require("helpers/highlight_yank")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
