@@ -37,40 +37,25 @@ return {
 			}
 			vim.lsp.enable("lua_ls")
 
-			-- Get current folder ruby version with mise
-			local function get_ruby_version()
-				local handle = io.popen("mise current 2>/dev/null")
-				if not handle then
-					return "3.4.5"
+			-- Ruby LSP (resolve path from project's mise ruby version)
+			local function ruby_lsp_cmd()
+				local handle = io.popen("mise where ruby 2>/dev/null")
+				if handle then
+					local ruby_dir = handle:read("*l")
+					handle:close()
+					if ruby_dir and ruby_dir ~= "" then
+						return { ruby_dir .. "/bin/ruby-lsp" }
+					end
 				end
-				local result = handle:read("*a")
-				handle:close()
-
-				local ruby_version = result:match("ruby (%d+%.%d+%.%d+)")
-				return ruby_version or "3.4.5"
+				return { "ruby-lsp" }
 			end
 
-			local ruby_version = get_ruby_version()
-			local ruby_lsp_path = os.getenv("HOME")
-				.. "/.local/share/mise/installs/ruby/"
-				.. ruby_version
-				.. "/bin/ruby-lsp"
-
-			-- Ruby LSP
-			if vim.fn.executable(ruby_lsp_path) == 1 then
-				vim.lsp.config.ruby_lsp = {
-					cmd = { ruby_lsp_path },
-					capabilities = capabilities,
-					filetypes = { "ruby", "eruby" },
-					root_markers = { "Gemfile", ".git" },
-				}
-			else
-				vim.lsp.config.ruby_lsp = {
-					capabilities = capabilities,
-					filetypes = { "ruby", "eruby" },
-					root_markers = { "Gemfile", ".git" },
-				}
-			end
+			vim.lsp.config.ruby_lsp = {
+				cmd = ruby_lsp_cmd(),
+				capabilities = capabilities,
+				filetypes = { "ruby", "eruby" },
+				root_markers = { "Gemfile", ".git" },
+			}
 			vim.lsp.enable("ruby_lsp")
 
 			-- Enable other mason-installed servers
