@@ -48,9 +48,10 @@ windows:
   - editor: nvim .
   - ai: claude
   - server:
-      layout: main-vertical
-      panes: 
+      layout: "main-vertical,200x50,0,0{160x50,0,0[160x25,0,0,3,160x24,0,26,4],39x50,160,0[39x25,160,0,5,39x24,160,26,6]}"
+      panes:
         - docker compose up -d && rails s
+        - bundle exec sidekiq -C config/sidekiq.yml
         - rails tailwindcss:watch
         - yarn build --watch
   - console: rails c
