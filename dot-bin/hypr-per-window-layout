@@ -13,8 +13,6 @@ handle_event() {
 
         if [[ "$class" == "com.mitchellh.ghostty" || "$class" == "Slack" ]]; then
             hyprctl switchxkblayout all 0
-        elif [[ "$class" == "org.telegram.desktop" || "$class" == "TelegramDesktop" ]]; then
-            hyprctl switchxkblayout all 1
         fi
     fi
 }

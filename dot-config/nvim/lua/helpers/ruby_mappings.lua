@@ -7,13 +7,20 @@ function M.generate_spec_mapping(base_path, mapping)
 		{
 			base_path .. "/" .. mapping .. "/(.*).rb",
 			{
-				{ "spec/" .. mapping .. "/[1]_spec.rb", "Test", true },
+				{ "spec/" .. mapping .. "/[1]_spec.rb", "Test (RSpec)", true },
+				{ "test/" .. mapping .. "/[1]_test.rb", "Test (Minitest)", true },
 			},
 		},
 		{
 			"spec/" .. mapping .. "/(.*)_spec.rb",
 			{
-				{ base_path .. "/" .. mapping .. "/[1].rb", "Model", true },
+				{ base_path .. "/" .. mapping .. "/[1].rb", "Source", true },
+			},
+		},
+		{
+			"test/" .. mapping .. "/(.*)_test.rb",
+			{
+				{ base_path .. "/" .. mapping .. "/[1].rb", "Source", true },
 			},
 		},
 	}
@@ -46,7 +53,8 @@ function M.get_rails_api_mappings()
 			{
 				{ "app/models/[2:singularize].rb", "Model" },
 				{ "app/serializers/[2:singularize]_serializer.rb", "Serializer", true },
-				{ "spec/controllers[1]/[2]_controller_spec.rb", "Test", true },
+				{ "spec/controllers[1]/[2]_controller_spec.rb", "Test (RSpec)", true },
+				{ "test/controllers[1]/[2]_controller_test.rb", "Test (Minitest)", true },
 			},
 		},
 		{
@@ -56,14 +64,27 @@ function M.get_rails_api_mappings()
 			},
 		},
 		{
+			"test/controllers(.*)/(.*)_test.rb",
+			{
+				{ "app/controllers[1]/[2].rb", "Controller" },
+			},
+		},
+		{
 			"app/mailers(.*)/(.*)_mailer.rb",
 			{
 				{ "app/views/[1][2]_mailer/*.html.erb", "View", true },
-				{ "spec/mailers[1]/[2]_mailer_spec.rb", "Test", true },
+				{ "spec/mailers[1]/[2]_mailer_spec.rb", "Test (RSpec)", true },
+				{ "test/mailers[1]/[2]_mailer_test.rb", "Test (Minitest)", true },
 			},
 		},
 		{
 			"spec/mailers(.*)/(.*)_spec.rb",
+			{
+				{ "app/mailers[1]/[2].rb", "Mailer" },
+			},
+		},
+		{
+			"test/mailers(.*)/(.*)_test.rb",
 			{
 				{ "app/mailers[1]/[2].rb", "Mailer" },
 			},
@@ -80,17 +101,26 @@ function M.get_rails_api_mappings()
 		{
 			"lib/tasks/(.*).thor",
 			{
-				{ "spec/tasks/[1]_spec.rb", "Test", true },
+				{ "spec/tasks/[1]_spec.rb", "Test (RSpec)", true },
+				{ "test/tasks/[1]_test.rb", "Test (Minitest)", true },
 			},
 		},
 		{
 			"lib/tasks/(.*).rake",
 			{
-				{ "spec/tasks/[1]_spec.rb", "Test", true },
+				{ "spec/tasks/[1]_spec.rb", "Test (RSpec)", true },
+				{ "test/tasks/[1]_test.rb", "Test (Minitest)", true },
 			},
 		},
 		{
 			"spec/tasks/(.*)_spec.rb",
+			{
+				{ "lib/tasks/[1].rake", "Rake", true },
+				{ "lib/tasks/[1].thor", "THOR", true },
+			},
+		},
+		{
+			"test/tasks/(.*)_test.rb",
 			{
 				{ "lib/tasks/[1].rake", "Rake", true },
 				{ "lib/tasks/[1].thor", "THOR", true },
@@ -110,7 +140,8 @@ function M.get_rails_full_stack_mappings()
 				{ "app/views/[1][2]/*.html.erb", "View" },
 				{ "app/helpers/**/*[2]_helper.rb", "Helper" },
 				{ "app/serializers/[2:singularize]_serializer.rb", "Serializer", true },
-				{ "spec/controllers[1]/[2]_controller_spec.rb", "Test", true },
+				{ "spec/controllers[1]/[2]_controller_spec.rb", "Test (RSpec)", true },
+				{ "test/controllers[1]/[2]_controller_test.rb", "Test (Minitest)", true },
 				{ "spec/requests[1]/[2]_spec.rb", "Request", true },
 				{ "app/views[1]/[2]/*.turbo_stream.erb", "TS View", true },
 				{ "app/views[1]/[2]/*.html.erb", "View", true },
@@ -119,11 +150,18 @@ function M.get_rails_full_stack_mappings()
 		{
 			"app/services/(.*).rb",
 			{
-				{ "spec/services/[1]_spec.rb", "Test", true },
+				{ "spec/services/[1]_spec.rb", "Test (RSpec)", true },
+				{ "test/services/[1]_test.rb", "Test (Minitest)", true },
 			},
 		},
 		{
 			"spec/services/(.*)_spec.rb",
+			{
+				{ "app/services/[1].rb", "Service", true },
+			},
+		},
+		{
+			"test/services/(.*)_test.rb",
 			{
 				{ "app/services/[1].rb", "Service", true },
 			},
@@ -134,7 +172,8 @@ function M.get_rails_full_stack_mappings()
 				{ "app/components[1]/[2]_component.html.erb", "View" },
 				{ "app/components[1]/[2]_component_controller.js", "JS" },
 				{ "app/javascript/controllers[1]/[2]_controller.js", "JS", true },
-				{ "spec/components[1]/[2]_component_spec.rb", "Test", true },
+				{ "spec/components[1]/[2]_component_spec.rb", "Test (RSpec)", true },
+				{ "test/components[1]/[2]_component_test.rb", "Test (Minitest)", true },
 			},
 		},
 		{
@@ -143,7 +182,8 @@ function M.get_rails_full_stack_mappings()
 				{ "app/components[1]/[2]_component.rb", "Component" },
 				{ "app/components[1]/[2]_component_controller.js", "JS" },
 				{ "app/javascript/controllers[1]/[2]_controller.js", "JS", true },
-				{ "spec/components[1]/[2]_component_spec.rb", "Test", true },
+				{ "spec/components[1]/[2]_component_spec.rb", "Test (RSpec)", true },
+				{ "test/components[1]/[2]_component_test.rb", "Test (Minitest)", true },
 			},
 		},
 		{
@@ -151,7 +191,8 @@ function M.get_rails_full_stack_mappings()
 			{
 				{ "app/components[1]/[2]_component.rb", "Component" },
 				{ "app/components[1]/[2]_component.html.erb", "View" },
-				{ "spec/components[1]/[2]_component_spec.rb", "Test", true },
+				{ "spec/components[1]/[2]_component_spec.rb", "Test (RSpec)", true },
+				{ "test/components[1]/[2]_component_test.rb", "Test (Minitest)", true },
 			},
 		},
 		{
@@ -171,7 +212,22 @@ function M.get_rails_full_stack_mappings()
 			},
 		},
 		{
+			"test/components(.*)/(.*)_component_test.rb",
+			{
+				{ "app/components[1]/[2]_component.rb", "Component" },
+				{ "app/components[1]/[2]_component.html.erb", "View" },
+				{ "app/components[1]/[2]_component_controller.js", "JS" },
+				{ "app/javascript/controllers[1]/[2]_controller.js", "JS", true },
+			},
+		},
+		{
 			"spec/controllers(.*)/(.*)_spec.rb",
+			{
+				{ "app/controllers[1]/[2].rb", "Controller" },
+			},
+		},
+		{
+			"test/controllers(.*)/(.*)_test.rb",
 			{
 				{ "app/controllers[1]/[2].rb", "Controller" },
 			},
@@ -180,11 +236,18 @@ function M.get_rails_full_stack_mappings()
 			"app/mailers(.*)/(.*)_mailer.rb",
 			{
 				{ "app/views/[1][2]_mailer/*.html.erb", "View", true },
-				{ "spec/mailers[1]/[2]_mailer_spec.rb", "Test", true },
+				{ "spec/mailers[1]/[2]_mailer_spec.rb", "Test (RSpec)", true },
+				{ "test/mailers[1]/[2]_mailer_test.rb", "Test (Minitest)", true },
 			},
 		},
 		{
 			"spec/mailers(.*)/(.*)_spec.rb",
+			{
+				{ "app/mailers[1]/[2].rb", "Mailer" },
+			},
+		},
+		{
+			"test/mailers(.*)/(.*)_test.rb",
 			{
 				{ "app/mailers[1]/[2].rb", "Mailer" },
 			},
@@ -207,17 +270,26 @@ function M.get_rails_full_stack_mappings()
 		{
 			"lib/tasks/(.*).thor",
 			{
-				{ "spec/tasks/[1]_spec.rb", "Test", true },
+				{ "spec/tasks/[1]_spec.rb", "Test (RSpec)", true },
+				{ "test/tasks/[1]_test.rb", "Test (Minitest)", true },
 			},
 		},
 		{
 			"lib/tasks/(.*).rake",
 			{
-				{ "spec/tasks/[1]_spec.rb", "Test", true },
+				{ "spec/tasks/[1]_spec.rb", "Test (RSpec)", true },
+				{ "test/tasks/[1]_test.rb", "Test (Minitest)", true },
 			},
 		},
 		{
 			"spec/tasks/(.*)_spec.rb",
+			{
+				{ "lib/tasks/[1].rake", "Rake", true },
+				{ "lib/tasks/[1].thor", "THOR", true },
+			},
+		},
+		{
+			"test/tasks/(.*)_test.rb",
 			{
 				{ "lib/tasks/[1].rake", "Rake", true },
 				{ "lib/tasks/[1].thor", "THOR", true },

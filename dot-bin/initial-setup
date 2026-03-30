@@ -189,6 +189,26 @@ configure_gtk() {
     success "GTK configured"
 }
 
+configure_ssh() {
+    info "Configuring SSH..."
+    sudo cp "$REPO_DIR/etc/ssh/sshd_config.d/10-hardened.conf" /etc/ssh/sshd_config.d/10-hardened.conf
+
+    # Set up authorized_keys with user's public key
+    mkdir -p "$HOME/.ssh"
+    chmod 700 "$HOME/.ssh"
+    if [[ -f "$HOME/.ssh/id_ed25519.pub" ]]; then
+        if ! grep -qf "$HOME/.ssh/id_ed25519.pub" "$HOME/.ssh/authorized_keys" 2>/dev/null; then
+            cat "$HOME/.ssh/id_ed25519.pub" >> "$HOME/.ssh/authorized_keys"
+        fi
+        chmod 600 "$HOME/.ssh/authorized_keys"
+    else
+        warn "No ed25519 public key found, skipping authorized_keys"
+    fi
+
+    sudo systemctl enable sshd
+    success "SSH configured"
+}
+
 configure_network_services() {
     info "Configuring network services..."
     sudo systemctl enable iwd.service
@@ -270,6 +290,7 @@ main() {
     configure_docker
     configure_user_groups
     configure_gtk
+    configure_ssh
     configure_network_services
 
     sync_dotfiles
