@@ -98,7 +98,7 @@ return {
 				},
 			})
 
-			-- Fix nvim-treesitter downcase! directive for Neovim 0.12+
+			-- Fix nvim-treesitter directives for Neovim 0.12+
 			-- match[id] now returns a table of nodes instead of a single node
 			vim.treesitter.query.add_directive("downcase!", function(match, _, bufnr, pred, metadata)
 				local id = pred[2]
@@ -115,6 +115,33 @@ return {
 				end
 				metadata[id].text = string.lower(text)
 			end, { force = true, all = false })
+
+			local markdown_lang_aliases = {
+				ex = "elixir",
+				pl = "perl",
+				sh = "bash",
+				uxn = "uxntal",
+				ts = "typescript",
+			}
+			vim.treesitter.query.add_directive(
+				"set-lang-from-info-string!",
+				function(match, _, bufnr, pred, metadata)
+					local capture_id = pred[2]
+					local node = match[capture_id]
+					if not node then
+						return
+					end
+					if type(node) == "table" then
+						node = node[#node]
+					end
+					local alias = vim.treesitter.get_node_text(node, bufnr):lower()
+					local resolved = vim.filetype.match({ filename = "a." .. alias })
+						or markdown_lang_aliases[alias]
+						or alias
+					metadata["injection.language"] = resolved
+				end,
+				{ force = true, all = false }
+			)
 		end,
 	},
 }

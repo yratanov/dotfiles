@@ -4,7 +4,7 @@
   "modules-left": [
     "hyprland/workspaces",
     "custom/media",
-    "custom/satchel-vpn",
+    "custom/zerotier",
     "custom/satchel-prs",
   ],
   "modules-center": ["custom/weather", "clock", "custom/caffeine"],
@@ -177,14 +177,14 @@
     "tooltip": false,
     "on-click": "rofi -show p -modi p:rofi-power-menu",
   },
-  "custom/satchel-vpn": {
-    "name": "vpn",
-    "exec": "~/.bin/check_service.sh openvpn-client@satchelcloud SatchelVPN",
+  "custom/zerotier": {
+    "name": "zerotier",
+    "exec": "~/.bin/check_zerotier.sh 154a350c86d19a94 SatchelVPN",
     "interval": 10,
     "return-type": "json",
     "format": "{}",
-    "tooltip": false,
-    "on-click": "~/.bin/toggle_service.sh openvpn-client@satchelcloud",
+    "tooltip": true,
+    "on-click": "~/.bin/toggle_zerotier.sh 154a350c86d19a94",
   },
   "custom/satchel-prs": {
     "exec": "~/.bin/check-gh-review-requests mysencare/pulse-app",

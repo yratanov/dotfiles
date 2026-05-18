@@ -52,7 +52,7 @@ window#waybar {
 #clock,
 .modules-right,
 #custom-satchel-prs,
-#custom-satchel-vpn {
+#custom-zerotier {
   /* background-color: rgba(30, 30, 46, 0.5); */
   background-color: #414b50;
   padding: 0 10px;
@@ -69,15 +69,15 @@ window#waybar {
   font-family: "Noto Emoji";
 }
 
-#custom-satchel-vpn.service-on {
+#custom-zerotier.service-on {
   color: #a6e3a1;
 }
 
-#custom-satchel-vpn.service-off {
+#custom-zerotier.service-off {
   color: #e17c7e;
 }
 
-#custom-satchel-vpn.service-error {
+#custom-zerotier.service-error {
   color: orange;
 }
 

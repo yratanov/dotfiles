@@ -156,8 +156,7 @@ neofetch
 btop
 
 # VPN
-openvpn
-openvpn-update-systemd-resolved
+zerotier-one
 
 # Office & Productivity
 libreoffice

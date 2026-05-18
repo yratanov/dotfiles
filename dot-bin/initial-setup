@@ -219,6 +219,37 @@ configure_network_services() {
     success "Network services configured"
 }
 
+configure_zerotier() {
+    info "Configuring ZeroTier..."
+
+    sudo systemctl enable --now zerotier-one.service
+
+    # Wait briefly for the service to generate its authtoken
+    for _ in {1..10}; do
+        [[ -f /var/lib/zerotier-one/authtoken.secret ]] && break
+        sleep 1
+    done
+
+    # Give the user passwordless access to zerotier-cli by exposing the
+    # authtoken in their home directory (recommended by ZeroTier docs).
+    if [[ -f /var/lib/zerotier-one/authtoken.secret ]]; then
+        sudo install -m 0600 -o "$USERNAME" -g "$USERNAME" \
+            /var/lib/zerotier-one/authtoken.secret \
+            "$HOME/.zeroTierOneAuthToken"
+    else
+        warn "ZeroTier authtoken not found, skipping user token install"
+    fi
+
+    # Join the SatchelVPN network
+    local network_id="154a350c86d19a94"
+    if ! zerotier-cli listnetworks 2>/dev/null | grep -q "$network_id"; then
+        zerotier-cli join "$network_id" >/dev/null && \
+            info "Joined ZeroTier network $network_id (approval may be required)"
+    fi
+
+    success "ZeroTier configured"
+}
+
 configure_greetd() {
     info "Configuring greetd..."
     sudo cp "$REPO_DIR/etc/greetd/config.toml" /etc/greetd/config.toml
@@ -292,6 +323,7 @@ main() {
     configure_gtk
     configure_ssh
     configure_network_services
+    configure_zerotier
 
     sync_dotfiles
     build_bat_cache
