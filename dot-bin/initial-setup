@@ -247,6 +247,14 @@ configure_zerotier() {
             info "Joined ZeroTier network $network_id (approval may be required)"
     fi
 
+    # Pin the SatchelVPN DNS server to the zerotier interface via systemd-resolved.
+    # The unit binds to the auto-generated interface name (deterministic per network).
+    sudo cp "$REPO_DIR/etc/systemd/system/zerotier-dns-satchel.service" \
+        /etc/systemd/system/zerotier-dns-satchel.service
+    sudo systemctl daemon-reload
+    sudo systemctl enable --now zerotier-dns-satchel.service || \
+        warn "zerotier-dns-satchel will activate once the zerotier interface comes up"
+
     success "ZeroTier configured"
 }
 

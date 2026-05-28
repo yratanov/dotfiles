@@ -58,6 +58,36 @@ return {
 			}
 			vim.lsp.enable("ruby_lsp")
 
+			-- Only start tailwindcss-language-server when it can actually function.
+			-- The lspconfig default falls back to .git / Gemfile.lock-containing-"tailwind",
+			-- which makes it attach in tailwindcss-rails projects that don't have the npm
+			-- `tailwindcss` package installed, where it spins forever trying to resolve
+			-- `tailwindcss/package.json`. Require either a JS-side config or an installed
+			-- npm tailwindcss (v4 CSS-config setups need the npm package too).
+			vim.lsp.config.tailwindcss = {
+				capabilities = capabilities,
+				root_dir = function(bufnr, on_dir)
+					local fname = vim.api.nvim_buf_get_name(bufnr)
+					local js_config = vim.fs.find({
+						"tailwind.config.js",
+						"tailwind.config.cjs",
+						"tailwind.config.mjs",
+						"tailwind.config.ts",
+					}, { path = fname, upward = true })[1]
+					if js_config then
+						on_dir(vim.fs.dirname(js_config))
+						return
+					end
+					local pkg = vim.fs.find(
+						"node_modules/tailwindcss/package.json",
+						{ path = fname, upward = true }
+					)[1]
+					if pkg then
+						on_dir(vim.fs.dirname(pkg):gsub("/node_modules/tailwindcss$", ""))
+					end
+				end,
+			}
+
 			-- Enable other mason-installed servers
 			vim.lsp.enable("ts_ls")
 			vim.lsp.enable("eslint")

@@ -1,0 +1,13 @@
+[Unit]
+Description=Apply DNS for ZeroTier Team Satchel VPN (154a350c86d19a94)
+BindsTo=sys-subsystem-net-devices-ztdhgojfqs.device
+After=sys-subsystem-net-devices-ztdhgojfqs.device systemd-resolved.service zerotier-one.service
+Requires=systemd-resolved.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/resolvectl dns ztdhgojfqs 172.16.0.2
+
+[Install]
+WantedBy=sys-subsystem-net-devices-ztdhgojfqs.device
