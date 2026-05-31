@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+# Trigger Jenkins deploy jobs with no-param-change "Build" semantics.
+# Credentials come from ~/.netrc (chmod 600).
+#
+# Usage:
+#   deploy <project> <env>
+#     project: cc | pulse
+#     env:     prod | qa
+#
+# Examples:
+#   deploy cc prod
+#   deploy pulse qa
+
+set -euo pipefail
+
+JENKINS="https://jenkins-prod.satchel.cloud"
+
+# project env -> Jenkins job name
+declare -A JOBS=(
+  ["cc prod"]="career-clutch-prod-deployment"
+  ["cc qa"]="career-clutch-qa-deployment"
+  ["pulse prod"]="pulse-prod-deployment"
+  ["pulse qa"]="pulse-qa-deployment"
+)
+
+usage() {
+  echo "usage: deploy <project> <env>" >&2
+  echo "  project: cc | pulse" >&2
+  echo "  env:     prod | qa" >&2
+  exit 2
+}
+
+project="${1:-}"
+env="${2:-}"
+[[ -z "$project" || -z "$env" ]] && usage
+
+job="${JOBS["$project $env"]:-}"
+if [[ -z "$job" ]]; then
+  echo "unknown target: $project $env" >&2
+  usage
+fi
+
+read -r -p "Trigger Jenkins job '$job'? [y/N] " confirm
+[[ "$confirm" =~ ^[Yy]$ ]] || { echo "aborted."; exit 1; }
+
+# Jenkins returns 201 Created with a Location header pointing at the queue item.
+queue_url=$(
+  curl -fsS -n -X POST \
+    -o /dev/null -D - \
+    "$JENKINS/job/$job/buildWithParameters" \
+  | awk 'tolower($1) == "location:" { sub(/\r$/, "", $2); print $2 }'
+)
+
+echo "✓ triggered: $job"
+[[ -n "${queue_url:-}" ]] && echo "  queue:   $queue_url"
+echo "  console: $JENKINS/job/$job/"

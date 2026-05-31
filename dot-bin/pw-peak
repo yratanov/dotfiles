@@ -1,0 +1,77 @@
+#!/usr/bin/env python3
+"""Print PipeWire peak amplitude for a node, one float (0..1) per ~50 ms.
+
+Usage:
+    pw-peak <target>
+
+<target> is anything pw-cat's --target accepts:
+    - node name, e.g. `alsa_output.pci-0000_00_1f.3.analog-stereo`
+    - numeric serial / id
+    - `@DEFAULT_AUDIO_SINK@` / `@DEFAULT_AUDIO_SOURCE@`
+
+Sinks are recorded via their automatically-created monitor source, so this
+works equally for outputs (post-volume bus) and inputs (microphones).
+
+Designed to be spawned from Quickshell's `Process` element. Exits cleanly on
+SIGTERM/SIGINT so the layer-shell menu can tear down N of these on close.
+"""
+
+import os
+import struct
+import subprocess
+import sys
+import signal
+
+
+def main() -> int:
+    if len(sys.argv) != 2:
+        print("usage: pw-peak <target>", file=sys.stderr)
+        return 2
+
+    target = sys.argv[1]
+    rate = 8000          # plenty for peak detection; keeps CPU negligible
+    frame_samples = 400  # 50 ms windows at 8 kHz
+    frame_bytes = frame_samples * 2  # s16 = 2 bytes/sample
+
+    cmd = [
+        "pw-cat", "--record",
+        "--target", target,
+        "--rate", str(rate),
+        "--channels", "1",
+        "--format", "s16",
+        "--raw",
+        "-",
+    ]
+    proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+
+    def shutdown(*_):
+        try:
+            proc.terminate()
+        finally:
+            sys.exit(0)
+
+    signal.signal(signal.SIGTERM, shutdown)
+    signal.signal(signal.SIGINT, shutdown)
+
+    assert proc.stdout is not None
+    try:
+        while True:
+            buf = proc.stdout.read(frame_bytes)
+            if not buf:
+                break
+            n = len(buf) // 2
+            if n == 0:
+                continue
+            samples = struct.unpack(f"<{n}h", buf[: n * 2])
+            peak = max(abs(s) for s in samples) / 32768.0
+            sys.stdout.write(f"{peak:.3f}\n")
+            sys.stdout.flush()
+    except BrokenPipeError:
+        pass
+    finally:
+        proc.terminate()
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

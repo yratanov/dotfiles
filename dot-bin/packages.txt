@@ -23,7 +23,9 @@ plymouth-theme-catppuccin-mocha
 
 # Notifications & OSD
 swaync
-swayosd
+
+# Shell framework (QML/Wayland) — also provides volume/mic OSD
+quickshell
 
 # Screenshot & Recording
 swappy
